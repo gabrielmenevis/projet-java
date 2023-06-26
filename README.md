@@ -3,5 +3,5 @@
 
 Lucas Leroux @lucaslrx  
 Gabriel Ménévis @gabrielmenevis  
-solene lumbroso @Lensopalin
+Solene Lumbroso @Lensopalin
 Poornima hettiara @htr11
