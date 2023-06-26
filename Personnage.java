@@ -6,7 +6,6 @@ public class Personnage {
     public Personnage(String nom, int pv, int pc) {
         this.nom = nom;
         this.pv = pv;
-        this.pc = pc;
     }
 
 
