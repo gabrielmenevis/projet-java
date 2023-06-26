@@ -1,5 +1,5 @@
 # projet-java
 
 
-Lucas Leroux @lucaslrx
+Lucas Leroux @lucaslrx  
 Gabriel Ménévis @gabrielmenevis
