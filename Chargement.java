@@ -57,17 +57,5 @@ public class Chargement {
 
         return listeSalles;
     }
-
-    public static void main(String args[]) throws IOException{
-
-        ArrayList<Salle> listeSalles;
-
-        listeSalles = chargerSalles();
-
-        for(Salle s: listeSalles){
-            s.descriptionLongue();
-            System.out.println("----------------------");
-        }
-    }
     
 }
