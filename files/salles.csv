@@ -1,5 +1,5 @@
-index;nom;prefixe;salles_adjacentes
-0;cuisine;la; 
-1;salle de bain;la;0
-2;hammam;le;1
-3;salle de sport;la;0,2
+index;nom;prefixe;salles_adjacentes;description
+0;cuisine;la;;C'est une magnifique cuisine de style américain. Vive l'Amérique, hein (l'américain).
+1;salle de bain;la;0;On remarque surtout la double vasque.
+2;hammam;le;1;Qu'il fait chaud dans le hammam !
+3;salle de sport;la;0,2;Une salle de sport sans vélo elliptique... Bizarre...
