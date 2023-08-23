@@ -104,17 +104,16 @@ public class combats {
         Random random = new Random();
         int chance = random.nextInt(100) + charmeur.getPCharisme() - adversaire.getPCharisme();
 
+        String catchphrase = catchphrases.get(random.nextInt(catchphrases.size()));
         if (chance > 90) {
-            String catchphrase = catchphrases.get(random.nextInt(catchphrases.size()));
             System.out.println(charmeur.getNom() + " utilise son charme sur " + adversaire.getNom() + " et dit : " + catchphrase);
             adversaire.setCharme(true);
         } else {
-            String catchphrase = catchphrases.get(random.nextInt(catchphrases.size()));
             System.out.println(charmeur.getNom() + " dit à " + adversaire.getNom() + " : " + catchphrase);
             System.out.println(adversaire.getNom() + " n'est guère convaincu..");
         }
 
-        if (adversaire.isCharme() == true){
+        if (adversaire.isCharme()){
             System.out.println((adversaire.getNom() + " est envouté par votre charme et abandonne le combat !"));
         }
     }
