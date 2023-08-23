@@ -1,6 +1,8 @@
-import Personnages.Personnage;
+
+import java.io.IOException;
+
 public class testcombat {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Création de deux personnages
         Personnages.Artiste artiste = new Personnages.Artiste("Leonardo", 100, 100, 20, 15);
         Personnages.Courgette courgette = new Personnages.Courgette("Cory", 80, 80, 25, 10);
