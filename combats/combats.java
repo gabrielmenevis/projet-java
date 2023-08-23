@@ -14,17 +14,13 @@ public class combats {
     private Personnage combatant2;
     private List<String> catchphrases;
 
-    public combats(Personnage combatant1, Personnage combatant2) {
+    public combats(Personnage combatant1, Personnage combatant2) throws IOException {
         this.combatant1 = combatant1;
         this.combatant2 = combatant2;
         //
         catchphrases = new ArrayList<>();
-        try {
-            List<String> lines = Files.readAllLines(Paths.get("catchphrases.csv"));
-            catchphrases.addAll(lines);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        List<String> lines = Files.readAllLines(Paths.get("catchphrases.csv"));
+        catchphrases.addAll(lines);
     }
 
     public void lancerCombat() {
@@ -87,8 +83,8 @@ public class combats {
         } else if (chance < 90) { // 15% de chance d'un coup raté
             System.out.println(attaquant.getNom() + " a raté son attaque !");
             if (random.nextInt(2) == 0) { // 50% de chance de glisser sur une banane
-                System.out.println(attaquant.getNom() + " glisse sur une peau de banane et se blesse !");
-                attaquant.perdrePV(5); // 5 est un exemple de dégâts que le personnage pourrait subir
+                System.out.println(attaquant.getNom() + " glisse sur une peau de banane, se blesse et perd 5 PVs.");
+                attaquant.perdrePV(5);
                 System.out.println(attaquant.getNom() + " : " + attaquant.getPV() + "/" + attaquant.getMaxPV() + "PVs.");
             }
         } else { // 10% de chance d'un coup critique
