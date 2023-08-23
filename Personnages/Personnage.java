@@ -1,6 +1,6 @@
 package Personnages;
 
-abstract class Personnage {
+public abstract class Personnage {
 
     private String nom;
     private int pv = 0;
