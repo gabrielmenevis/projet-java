@@ -19,8 +19,9 @@ public class Chargement {
 
         try{
 
-            // on ignore la première ligne
+            // on compte le nombre de colonnes
             ligne = r.readLine();
+            int nombreColonnes = ligne.split(";").length;
 
             // on parcourt les lignes
             ligne = r.readLine();
@@ -30,13 +31,13 @@ public class Chargement {
                 String[] donnees = ligne.split(";");
 
                 // s'il a trop ou pas assez de champs sur une ligne
-                if(donnees.length != 4){
+                if(donnees.length != nombreColonnes){
                     throw new IOException("Erreur dans le chargement des salles.");
                 }
 
-                s = new Salle(donnees[1], donnees[2]);
+                s = new Salle(donnees[1], donnees[2], donnees[4]);
 
-                if(donnees[3].compareTo(" ") != 0){
+                if(donnees[3].compareTo("") != 0){
                     String[] numeros = donnees[3].split(",");
                     for(String numero: numeros){
                         noSalleAdjacente = Integer.parseInt(numero);

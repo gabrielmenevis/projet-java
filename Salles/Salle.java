@@ -7,6 +7,7 @@ public class Salle {
 
     private String nom;
     private String article;
+    private String description;
     private ArrayList<Salle> sallesAdjacentes;
     private ArrayList<Personnage> listePNJ; // à remplacer éventuellement par une liste d'objets PNJ
     // liste d'objets
@@ -14,20 +15,23 @@ public class Salle {
     public Salle(String nom, String article){
         this.nom = nom;
         this.article = article;
+        this.description = "Rien de particulier à noter sur cette salle";
         this.listePNJ = new ArrayList<Personnage>();
         this.sallesAdjacentes = new ArrayList<Salle>();
     }
 
-    public Salle(String nom, String article, ArrayList<Salle> sallesAdjacentes){
+    public Salle(String nom, String article, String description){
         this.nom = nom;
         this.article = article;
-        this.sallesAdjacentes = sallesAdjacentes;
+        this.description = description;
+        this.sallesAdjacentes = new ArrayList<Salle>();
         this.listePNJ = new ArrayList<Personnage>();
     }
     
-    public Salle(String nom, String article, ArrayList<Salle> sallesAdjacentes, ArrayList<Personnage> listePNJ){
+    public Salle(String nom, String article, String description, ArrayList<Salle> sallesAdjacentes, ArrayList<Personnage> listePNJ){
         this.nom = nom;
         this.article = article;
+        this.description = description;
         this.sallesAdjacentes = sallesAdjacentes;
         this.listePNJ = listePNJ;
     }
@@ -38,6 +42,10 @@ public class Salle {
 
     public String getArticle(){
         return this.article;
+    }
+
+    public String getDescription(){
+        return this.description;
     }
 
     public ArrayList<Salle> getSallesAdjacentes(){
@@ -56,6 +64,10 @@ public class Salle {
         this.article = article;
     }
 
+    public void setDescription(String description){
+        this.description = description;
+    }
+
     public void setSallesAdjacentes(ArrayList<Salle> sallesAdjacentes){
         this.sallesAdjacentes = sallesAdjacentes;
     }
@@ -72,6 +84,7 @@ public class Salle {
 
     public void descriptionCourte(){
         System.out.println("Vous êtes dans " + this.article + " " + this.nom);
+        System.out.println(this.description);
     }
 
     public void descriptionLongue(){
