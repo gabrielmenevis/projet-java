@@ -1,11 +1,7 @@
 package Personnages;
 
-<<<<<<< Updated upstream
-public class PNJ {
+    
 
-    
-    
-=======
 public class PNJ extends Personnage {
     private String indice;
     
@@ -23,6 +19,4 @@ public class PNJ extends Personnage {
         
     }
     
-
->>>>>>> Stashed changes
 }
