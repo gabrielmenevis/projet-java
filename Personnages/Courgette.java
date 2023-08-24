@@ -7,8 +7,8 @@ public class Courgette extends Personnage {
     }
 
     public void presentation() {
-        System.out.println("nom courgette " + getNom() + ", " + getPV() + " points de vie, " + getPAttaque() + 
-        " points d'attaque et " + getPCharisme() + " points de charisme.");
+        System.out.println("nom courgette " + getNom() + ", " + getPV() + " points de vie sur " + getMaxPV() + ", " + getPAttaque() + 
+        " point d'attaque et " + getPCharisme() + " points de charisme.");
     }
 
     public static void main(String[] args) {
