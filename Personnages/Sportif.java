@@ -7,10 +7,17 @@ public class Sportif extends Personnage {
     }
         
     public void presentation() {
-        System.out.println("Sportif " + getNom() + ", " + getPV() + " points de vie, " + getPAttaque() + 
-        " points d'attaque et " + getPCharisme() + " points de charisme.");
+        System.out.println(getNom() + ", " + getPV() + " points de vie sur " + getMaxPV() + ", " + getPAttaque() + 
+        " points d'attaque et " + getPCharisme() + " point de charisme.");
+
     }
 
+    public static void main(String[] args) {
+
+        Sportif sportif = new Sportif("Sam?", 5, 10, 10, 1);
+
+        sportif.presentation();
+    }
 
 }
 
