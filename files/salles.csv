@@ -1,5 +1,11 @@
 index;nom;prefixe;salles_adjacentes;description
-0;cuisine;la;;C'est une magnifique cuisine de style américain. Vive l'Amérique, hein (l'américain).
-1;salle de bain;la;0;On remarque surtout la double vasque.
-2;hammam;le;1;Qu'il fait chaud dans le hammam !
-3;salle de sport;la;0,2;Une salle de sport sans vélo elliptique... Bizarre...
+0;infirmerie;l';;Si vous vous reveillez ici, c'est que quelque chose ne s'est pas très bien passé...
+1;salle de reception;la;0;Il fait frais ici
+2;cuisine;la;1;C'est une magnifique cuisine de style américain. Vive l'Amérique, hein (l'américain).
+3;salle des fêtes;la;1;Cette boule a facette brille de mille feux...Les soirées doivent être magiques ici
+4;salle de musique;la;3;Vous savez faire de la guitare ? Moi non...
+5;piscine;la;1;Parfait pour bronzer ou se rafraichir, attention au coup de soleil!
+6;bar exterieur;le;1,5;Vous vous laisserez bien tenter pour un petit cocktail n'est-ce pas? 
+7;salle de sport;la;5,6;Une salle de sport sans vélo elliptique... Bizarre...
+8;hammam;le;5,7;Qu'il fait chaud dans le hammam !
+9;salle de bain;la;7,8;On remarque surtout la double vasque.
