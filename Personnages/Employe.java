@@ -7,8 +7,15 @@ public class Employe extends Personnage {
     }
 
     public void presentation() {
-        System.out.println("Employé " + getNom() + ", j'ai " + getPV() + " points de vie, " + getPAttaque() + 
+        System.out.println("Employé " + getNom() + ", " + getPV() + " points de vie sur " + getMaxPV() + ", " + getPAttaque() + 
         " points d'attaque et " + getPCharisme() + " points de charisme.");
+    }
+
+    public static void main(String[] args) {
+
+        Employe employe = new Employe("à définir",2, 8, 4, 3);
+
+        employe.presentation();
     }
     
     }

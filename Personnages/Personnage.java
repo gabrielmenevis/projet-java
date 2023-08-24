@@ -1,6 +1,6 @@
 package Personnages;
 
-import Objets.Objet;
+//import Objets.Objet;
 // import Salle;
 
 
@@ -45,38 +45,25 @@ public abstract class Personnage {
         return p_charisme;
     }
 
-
-    public void se_deplacer() {
-
-    }
-
-    public void prendre_objet(Objet objet) {
-        System.out.println(this.nom + " trouve un objet : " + objet.getNom());
-        
-        if (objet.estBonus()) {
-            // Si l'objet est un bonus, le personnage gagne un point de vie.
-            this.pv++;
-            System.out.println(this.nom + " gagne un point de vie !");
-        }
-        else if (objet.estMalus()) {
-            // Si l'objet est un malus, le personnage meurt et est envoyé à l'infirmerie.
-            this.pv = 0;
-            System.out.println(this.nom + " meurt !");
-        }
-        else {
-            // Si l'objet n'est ni un bonus ni un malus, il peut être ajouté à l'inventaire du personnage.
-            //this.inventaire.ajouterObjet(objet);
-            System.out.println(this.nom + " ajoute " + objet.getNom() + " à son inventaire.");
-        }
-
-
-
-
-    }
     // méthode perte de PV à utiliser dans la fonction combats
     public void perdrePV(int degats) {
         this.pv -= degats;
         if (this.pv < 0) this.pv = 0; // Assure que les PV ne tombent pas en dessous de 0
+    }
+
+    public void gagnerPA(int ajout_pa) {;
+        this.p_attaque += ajout_pa;
+        if (this.p_attaque < 0) this.p_attaque = 1;
+    }
+
+    public void gagnerPV(int ajout_pv) {
+        this.pv += ajout_pv;
+        if (this.pv < 0) this.pv = 1;
+    }
+
+    public void gagnerPC(int ajout_pc) {
+        this.p_charisme += ajout_pc;
+        if (this.p_charisme < 0) this.p_charisme = 1;
     }
 
     public boolean isCharme() {
@@ -87,11 +74,6 @@ public abstract class Personnage {
         this.charme = charme;
     }
 
-
-    /* //     Pour verifier dans le terminal
-    public void presentation() {
-        System.out.println("Personnage " + this.nom + ", " + this.pv + " points de vie, " + this.p_attaque + " points d'attaque et " + this.p_charisme + " points de charisme.");
-     */
 }
 
 
