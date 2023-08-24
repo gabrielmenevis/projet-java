@@ -16,11 +16,11 @@ public class Objet {
         return nom;
     }
     
-    public boolean objet_bonus() {
+    public boolean estBonus() {
         return objet_bonus;
     }
     
-    public boolean objet_malus() {
+    public boolean estMalus() {
         return objet_malus;
     }
 }
