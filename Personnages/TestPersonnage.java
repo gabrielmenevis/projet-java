@@ -9,11 +9,6 @@ public class TestPersonnage {
 
         Artiste a1 = new Artiste("toto", 5, 20, 10, 3);
         a1.presentation();
-
-        PNJ pnj1 = new PNJ("Hervé le plongueur", "Mon troisième est xxx");
-        pnj1.presentation();
-
-    
     }
     
 }
