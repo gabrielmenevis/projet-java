@@ -38,10 +38,6 @@ public abstract class Personnage {
         return p_charisme;
     }
 
-    //     Pour verifier dans le terminal
-    public void presentation() {
-        System.out.println("Je suis le personnage " + this.nom + ", j'ai " + this.pv + " points de vie, " + this.p_attaque + " points d'attaque et " + this.p_charisme + " points de charisme.");
-    }
     // méthode perte de PV à utiliser dans la fonction combats
     public void perdrePV(int degats) {
         this.pv -= degats;
