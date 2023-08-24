@@ -1,6 +1,6 @@
 package Personnages;
 
-import Objets.Objet;
+//import Objets.Objet;
 // import Salle;
 
 
@@ -45,34 +45,6 @@ public abstract class Personnage {
         return p_charisme;
     }
 
-
-    public void se_deplacer() {
-
-    }
-
-    public void prendre_objet(Objet objet) {
-        System.out.println(this.nom + " trouve un objet : " + objet.getNom());
-        
-        if (objet.estBonus()) {
-            // Si l'objet est un bonus, le personnage gagne un point de vie.
-            this.pv++;
-            System.out.println(this.nom + " gagne un point de vie !");
-        }
-        else if (objet.estMalus()) {
-            // Si l'objet est un malus, le personnage meurt et est envoyé à l'infirmerie.
-            this.pv = 0;
-            System.out.println(this.nom + " meurt !");
-        }
-        else {
-            // Si l'objet n'est ni un bonus ni un malus, il peut être ajouté à l'inventaire du personnage.
-            //this.inventaire.ajouterObjet(objet);
-            System.out.println(this.nom + " ajoute " + objet.getNom() + " à son inventaire.");
-        }
-
-
-
-
-    }
     // méthode perte de PV à utiliser dans la fonction combats
     public void perdrePV(int degats) {
         this.pv -= degats;
