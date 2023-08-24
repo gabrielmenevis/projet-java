@@ -1,5 +1,8 @@
 package Personnages;
 
+import Objets.Objet;
+//import Salle;
+
 abstract class Personnage {
 
     private String nom;
@@ -7,6 +10,7 @@ abstract class Personnage {
     private int max_pv = 0;
     private int p_attaque = 0;
     private int p_charisme = 0;
+    //private Inventaire inventaire = 0;
 
     public Personnage(String nom, int pv, int max_pv, int p_attaque, int p_charisme) {
         super();
@@ -15,6 +19,8 @@ abstract class Personnage {
         this.max_pv = max_pv;
         this.p_attaque = p_attaque;
         this.p_charisme = p_charisme;
+        //this.inventaire = new Inventaire();
+
     }
 
     public String getNom() {
@@ -37,9 +43,39 @@ abstract class Personnage {
         return p_charisme;
     }
 
-    //     Pour verifier dans le terminal
-    public void presentation() {
-        System.out.println("Je suis le personnage " + this.nom + ", j'ai " + this.pv + " points de vie, " + this.p_attaque + " points d'attaque et " + this.p_charisme + " points de charisme.");
+
+    public void se_deplacer() {
+
     }
 
+    public void prendre_objet(Objet objet) {
+        System.out.println(this.nom + " trouve un objet : " + objet.getNom());
+        
+        if (objet.estBonus()) {
+            // Si l'objet est un bonus, le personnage gagne un point de vie.
+            this.pv++;
+            System.out.println(this.nom + " gagne un point de vie !");
+        }
+        else if (objet.estMalus()) {
+            // Si l'objet est un malus, le personnage meurt et est envoyé à l'infirmerie.
+            this.pv = 0;
+            System.out.println(this.nom + " meurt !");
+        }
+        else {
+            // Si l'objet n'est ni un bonus ni un malus, il peut être ajouté à l'inventaire du personnage.
+            //this.inventaire.ajouterObjet(objet);
+            System.out.println(this.nom + " ajoute " + objet.getNom() + " à son inventaire.");
+        }
+
+
+
+
+    }
+
+    /* //     Pour verifier dans le terminal
+    public void presentation() {
+        System.out.println("Personnage " + this.nom + ", " + this.pv + " points de vie, " + this.p_attaque + " points d'attaque et " + this.p_charisme + " points de charisme.");
+     */
 }
+
+
