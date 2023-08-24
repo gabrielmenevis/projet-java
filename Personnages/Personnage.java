@@ -1,6 +1,6 @@
 package Personnages;
 
-import Objets.Objet;
+//import Objets.Objet;
 // import Salle;
 
 
