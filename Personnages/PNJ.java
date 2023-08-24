@@ -1,7 +1,5 @@
 package Personnages;
 
-    
-
 public class PNJ extends Personnage {
     private String indice;
     
