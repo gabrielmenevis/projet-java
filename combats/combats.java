@@ -102,21 +102,31 @@ public class combats {
 
     private void flirt(Personnage charmeur, Personnage adversaire) {
         Random random = new Random();
-        int chance = random.nextInt(100) + charmeur.getPCharisme() - adversaire.getPCharisme();
 
+        // points de base pour le succès du flirt
+        int BASE_CHANCE = 60;
+
+        // bonus de chance de réussite si le charmeur a moins de pv (par pitié)
+        if (charmeur.getPV() < adversaire.getPV()) {
+            BASE_CHANCE += 10;
+        }
+
+        // calcul final de la chance de réussite du flirt
+        int chance = BASE_CHANCE + charmeur.getPCharisme() - adversaire.getPCharisme();
+
+        // petite catchphrase qui va bien
         String catchphrase = catchphrases.get(random.nextInt(catchphrases.size()));
-        if (chance > 90) {
-            System.out.println(charmeur.getNom() + " utilise son charme sur " + adversaire.getNom() + " et dit : " + catchphrase);
+        System.out.println(charmeur.getNom() + " dit à " + adversaire.getNom() + " : " + catchphrase);
+
+        if (random.nextInt(100) < chance) { // on peut changer le calcul de la limite de chance
+            System.out.println(adversaire.getNom() + " est charmé par " + charmeur.getNom() + " et abandonne.");
             adversaire.setCharme(true);
         } else {
-            System.out.println(charmeur.getNom() + " dit à " + adversaire.getNom() + " : " + catchphrase);
-            System.out.println(adversaire.getNom() + " n'est guère convaincu..");
-        }
-
-        if (adversaire.isCharme()){
-            System.out.println((adversaire.getNom() + " est envouté par votre charme et abandonne le combat !"));
+            System.out.println(adversaire.getNom() + " n'est pas du tout charmé et est motivé pour riposter !");
+            // Petit boost pour que l'adversaire riposte plus efficacement s'il n'est pas réceptif au charme
         }
     }
+
 
 }
 
