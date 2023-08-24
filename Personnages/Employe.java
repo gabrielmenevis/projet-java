@@ -7,7 +7,7 @@ public class Employe extends Personnage {
     }
 
     public void presentation() {
-        System.out.println("Je suis l'employé " + getNom() + ", j'ai " + getPV() + " points de vie, " + getPAttaque() + 
+        System.out.println("Employé " + getNom() + ", j'ai " + getPV() + " points de vie, " + getPAttaque() + 
         " points d'attaque et " + getPCharisme() + " points de charisme.");
     }
     

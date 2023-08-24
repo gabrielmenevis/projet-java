@@ -7,7 +7,7 @@ public class Artiste extends Personnage{
     }
 
     public void presentation() {
-        System.out.println("Je suis l'artiste " + getNom() + ", j'ai " + getPV() + " points de vie, " + getPAttaque() + 
+        System.out.println("Artiste " + getNom() + ", " + getPV() + " points de vie, " + getPAttaque() + 
         " points d'attaque et " + getPCharisme() + " points de charisme.");
     }
 
