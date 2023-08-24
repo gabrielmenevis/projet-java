@@ -45,12 +45,25 @@ public abstract class Personnage {
         return p_charisme;
     }
 
-
-
     // méthode perte de PV à utiliser dans la fonction combats
     public void perdrePV(int degats) {
         this.pv -= degats;
         if (this.pv < 0) this.pv = 0; // Assure que les PV ne tombent pas en dessous de 0
+    }
+
+    public void gagnerPA(int ajout_pa) {;
+        this.p_attaque += ajout_pa;
+        if (this.p_attaque < 0) this.p_attaque = 1;
+    }
+
+    public void gagnerPV(int ajout_pv) {
+        this.pv += ajout_pv;
+        if (this.pv < 0) this.pv = 1;
+    }
+
+    public void gagnerPC(int ajout_pc) {
+        this.p_charisme += ajout_pc;
+        if (this.p_charisme < 0) this.p_charisme = 1;
     }
 
     public boolean isCharme() {
@@ -61,11 +74,6 @@ public abstract class Personnage {
         this.charme = charme;
     }
 
-
-    /* //     Pour verifier dans le terminal
-    public void presentation() {
-        System.out.println("Personnage " + this.nom + ", " + this.pv + " points de vie, " + this.p_attaque + " points d'attaque et " + this.p_charisme + " points de charisme.");
-     */
 }
 
 
