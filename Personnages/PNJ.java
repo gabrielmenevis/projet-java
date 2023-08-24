@@ -42,20 +42,5 @@ public class PNJ extends Personnage {
         PNJ pnj6 = new PNJ("Igor."," idk", " idk");
         pnj6.presentation();
 
-
-
-        /*L’homme nu à la barbe 
-lieu : le hammam
-indice : non 
-texte :” Bonjour jeune “courgette/artiste/sportif etcc, quelle est votre réponse?”
-Si bonne réponse : vous donne la clé
-Le Barman
-lieu : le bar exterieur
-Igor le Sportif relou
-lieu : salle de sport
-
- */
-
-
     }
 }
