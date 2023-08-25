@@ -1,6 +1,7 @@
 package combats;
 
 import Personnages.Personnage;
+import Personnages.PNJ;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -11,10 +12,10 @@ import java.io.IOException;
 public class combats {
 
     private Personnage combatant1;
-    private Personnage combatant2;
+    private PNJ combatant2;
     private List<String> catchphrases;
 
-    public combats(Personnage combatant1, Personnage combatant2) throws IOException {
+    public combats(Personnage combatant1, PNJ combatant2) throws IOException {
         this.combatant1 = combatant1;
         this.combatant2 = combatant2;
         //
@@ -42,6 +43,7 @@ public class combats {
                 flirt(combatant1, combatant2);
                 if (!combatant2.isCharme()) {
                     attaquer(combatant2, combatant1);
+                    combatant2.resetPAttaque();
                 }
             } else { // "fuir"
                 System.out.println(combatant1.getNom() + " a fui le combat. " + combatant2.getNom() + " est le vainqueur!");
@@ -102,21 +104,24 @@ public class combats {
 
     private void flirt(Personnage charmeur, Personnage adversaire) {
         Random random = new Random();
-        int chance = random.nextInt(100) + charmeur.getPCharisme() - adversaire.getPCharisme();
+        int baseChance = 75;
+        int chance = random.nextInt(80) + charmeur.getPCharisme() - adversaire.getPCharisme();
 
         String catchphrase = catchphrases.get(random.nextInt(catchphrases.size()));
-        if (chance > 90) {
-            System.out.println(charmeur.getNom() + " utilise son charme sur " + adversaire.getNom() + " et dit : " + catchphrase);
-            adversaire.setCharme(true);
-        } else {
-            System.out.println(charmeur.getNom() + " dit à " + adversaire.getNom() + " : " + catchphrase);
-            System.out.println(adversaire.getNom() + " n'est guère convaincu..");
-        }
+        System.out.println(charmeur.getNom() + " tente de charmer " + adversaire.getNom() + " en disant : " + catchphrase);
 
-        if (adversaire.isCharme()){
-            System.out.println((adversaire.getNom() + " est envouté par votre charme et abandonne le combat !"));
+        if (chance > baseChance + 15) { // Grand succès
+            System.out.println(adversaire.getNom() + " est totalement envouté par votre charme !");
+            adversaire.setCharme(true);
+        } else if (chance > baseChance) { // Succès partiel
+            System.out.println(adversaire.getNom() + " semble décontenancé et sa prochaine attaque sera moins efficace.");
+            adversaire.gagnerPA(-5);  // on ajoute le malus d'attaque
+        } else { // Échec
+            System.out.println(adversaire.getNom() + " n'est guère convaincu... Il vous frappera plus fort à sa prochaine attaque");
+            adversaire.gagnerPA(5); // bonus d'attaque
         }
     }
+
 
 }
 

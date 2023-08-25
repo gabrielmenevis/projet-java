@@ -56,9 +56,8 @@ public class Objet {
             //rajouter méthode gagnerPA, gagnerPV, gagnerPC dans personnage
             // rajouter aussi "mourir" ou "se reveiller à l'infirmerie" --> se reveiller avec les pv redevenus normaux, dans la salle de l'infirmerie
         }
-        
 
-    }
+
     public void laisserObjet(){
         // si dans le menuObjet on fait le choix de laisser l'objet, on revient au menu de la salle
 
