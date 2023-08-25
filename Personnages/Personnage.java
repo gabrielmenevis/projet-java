@@ -1,5 +1,6 @@
 package Personnages;
 
+import Objets.Inventaire;
 import Objets.Objet;
 
 public abstract class Personnage {

@@ -1,9 +1,7 @@
-package Personnages;
+package Objets;
 
 import java.util.HashMap;
 import java.util.Scanner;
-
-import Objets.Objet;
 
 public class Inventaire {
 
