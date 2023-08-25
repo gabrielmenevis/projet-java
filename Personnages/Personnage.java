@@ -1,5 +1,6 @@
 package Personnages;
 
+import Objets.Objet;
 
 public abstract class Personnage {
 
@@ -84,7 +85,20 @@ public abstract class Personnage {
     }
 
     public void ouvrirInventaire(){
-        this.inventaire.menuInventaire();
+        Objet objetChoisi;
+        objetChoisi = this.inventaire.menuInventaire();
+        // utiliser l'objet si le joueur en a fait le choix
+        if(objetChoisi != null){
+            boolean restant;
+            objetChoisi.utilisationObjet(this);
+            System.out.println();
+            restant = this.inventaire.enleverObjet(objetChoisi);
+            if(!restant){
+                System.out.println("Vous n'avez plus de " + objetChoisi.getNom() + "...");
+                System.out.println("J'espère que vous en avez bien profité.");
+                System.out.println();
+            }
+        }
     }
 }
 
