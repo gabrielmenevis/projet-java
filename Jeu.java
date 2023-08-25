@@ -3,8 +3,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import javax.sound.midi.Soundbank;
-
 import Objets.Objet;
 import Salles.Salle;
 import Personnages.*;
