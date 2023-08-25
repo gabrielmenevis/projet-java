@@ -22,14 +22,15 @@ public class Jeu {
         listeSalles = Chargement.chargerSalles();
         salleActuelle = listeSalles.get(r.nextInt(listeSalles.size()));
 
-        listeObjets.add(new Objet("steack", false));
-        listeObjets.add(new Objet("clé", false));
+        // TODO: changer l'initialisation des objets
+        // listeObjets.add(new Objet("steack", false));
+        // listeObjets.add(new Objet("clé", false));
 
-        for(Salle s: listeSalles){
-            s.setListeObjets(listeObjets);
-        }
+        // for(Salle s: listeSalles){
+        //     s.setListeObjets(listeObjets);
+        // }
 
-        while(menuAction());
+        // while(menuAction());
     }
 
     public static boolean menuAction(){
