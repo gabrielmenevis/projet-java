@@ -49,6 +49,6 @@ public class PNJ extends Personnage {
     }
 
     public void resetPAttaque(){
-        this.p_attaque = this.base_p_attaque;
+        setP_attaque(this.base_p_attaque);
     }
 }

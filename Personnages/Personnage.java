@@ -9,7 +9,7 @@ public abstract class Personnage {
     private String nom;
     private int pv;
     private int max_pv;
-    protected int p_attaque;
+    private int p_attaque;
     private int p_charisme;
     private boolean charme;
     //private Inventaire inventaire = 0;
@@ -39,6 +39,9 @@ public abstract class Personnage {
 
     public int getPAttaque() {
         return p_attaque;
+    }
+    public void setP_attaque(int p_attaque) {
+        this.p_attaque = p_attaque;
     }
 
     public int getPCharisme() {

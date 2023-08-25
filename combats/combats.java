@@ -20,7 +20,7 @@ public class combats {
         this.combatant2 = combatant2;
         //
         catchphrases = new ArrayList<>();
-        List<String> lines = Files.readAllLines(Paths.get("catchphrases.csv"));
+        List<String> lines = Files.readAllLines(Paths.get("files/catchphrases.csv"));
         catchphrases.addAll(lines);
     }
 
