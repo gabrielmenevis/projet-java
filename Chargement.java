@@ -67,7 +67,7 @@ public class Chargement {
     }
 
 
-    public static ArrayList<Objet> chargerObjets(ArrayList<Salle> listeSalles) throws IOException{
+    public static void chargerObjets(ArrayList<Salle> listeSalles) throws IOException{
 
         ArrayList<Objet> listeObjets = new ArrayList<Objet>();
         Objet o;
@@ -129,8 +129,6 @@ public class Chargement {
         } catch(IOException e){
             System.out.println(e);
         }
-
-        return listeObjets;
     }
     
 }

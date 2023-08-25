@@ -13,7 +13,7 @@ public class Salle {
     private String description;
     private ArrayList<Salle> sallesAdjacentes;
     private ArrayList<PNJ> listePNJ;
-    private ArrayList<Objet> listeObjets; // liste d'objets (changer le type)
+    private ArrayList<Objet> listeObjets;
     private boolean fouille;
 
     public Salle(String nom, String article){
@@ -121,7 +121,7 @@ public class Salle {
 
         if(this.listePNJ.size() > 0){
             System.out.println("Vous regardez autour de vous. Vous voyez : ");
-            for(PNJ p: this.listePNJ){ // attendre la classe PNJ
+            for(PNJ p: this.listePNJ){ // TODO: attendre la classe PNJ
                 // System.out.println(p.getNom());
             }
         }
@@ -226,7 +226,7 @@ public class Salle {
 
     public PNJ choisirPNJ(){
         if(!this.listePNJ.isEmpty()){
-            // afficher la liste de PNJ et retourner le PNJ choisi
+            // TODO: afficher la liste de PNJ et retourner le PNJ choisi
             return null;
         }
         else{

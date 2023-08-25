@@ -18,33 +18,13 @@ public class Jeu {
     public static void main(String[] args) throws IOException {
 
         Random r = new Random();
-        ArrayList<Objet> listeObjets = new ArrayList<Objet>();
-        Objet champi;
 
         joueur = new Courgette("josé", 0, 0, 0, 0);
         listeSalles = Chargement.chargerSalles();
-        listeObjets = Chargement.chargerObjets(listeSalles);
+        Chargement.chargerObjets(listeSalles);
         salleActuelle = listeSalles.get(r.nextInt(listeSalles.size()));
 
-        // TODO: changer l'initialisation des objets
-        // listeObjets.add(new Objet("steack", false));
-        // listeObjets.add(new Objet("clé", false));
-
-        // for(Salle s: listeSalles){
-        //     s.setListeObjets(listeObjets);
-        // }
-        // System.out.println(joueur.getPV());
-
-        // String rep;
-        // listeObjets = Chargement.chargerObjets(listeSalles);
-        // champi = listeObjets.get(1);
-        // rep = champi.menuObjet();
-        // switch (rep){
-        //     case "2" : champi.utilisationObjet(joueur);
-        //     break;
-        // }
-
-
+        // lancement de la boucle principale
         while(menuAction());
     }
 
@@ -103,7 +83,7 @@ public class Jeu {
             case "3":
                 pnj = salleActuelle.choisirPNJ();
                 if(pnj != null){
-                    // interagir
+                    // TODO: interagir
                 }
                 break;
 
