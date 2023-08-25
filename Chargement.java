@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Objets.Objet;
+import Objets.ObjetConsommable;
+import Objets.ObjetUnique;
 import Salles.Salle;
 
 public class Chargement {
@@ -67,7 +69,7 @@ public class Chargement {
     }
 
 
-    public static ArrayList<Objet> chargerObjets() throws IOException{
+    public static void chargerObjets(ArrayList<Salle> listeSalles) throws IOException{
 
         ArrayList<Objet> listeObjets = new ArrayList<Objet>();
         Objet o;
@@ -78,10 +80,9 @@ public class Chargement {
 
         // variables pour stocker les données des objets lus
         String nom, articleDefini, articleIndefini, attributTouche, utilisation, effet;
-        int valeurAjoutee;
+        int valeurAjoutee, indexSalle, probaSpawn;
+        // boolean consommable;
 
-
-        //TODO: dire dans quelle salle se trouve l'objet -> prendre la liste de salles en paramètre
 
         try {
 
@@ -109,7 +110,29 @@ public class Chargement {
                 attributTouche = donnees[4];
                 utilisation = donnees[5];
                 effet = donnees[6];
-                o = new Objet(nom, articleDefini, articleIndefini, valeurAjoutee, attributTouche, utilisation, effet);
+                probaSpawn = Integer.parseInt(donnees[9]);
+                if(donnees[8].equals("1")){
+                    o = new ObjetConsommable(nom, articleDefini, articleIndefini, valeurAjoutee, attributTouche, utilisation, effet, probaSpawn);
+                }
+                else{
+                    o = new ObjetUnique(nom, articleDefini, articleIndefini, valeurAjoutee, attributTouche, utilisation, effet);
+                }
+                // if(donnees[8].equals("0")){
+                //     consommable = false;
+                // } else{
+                //     consommable = true;
+                // }
+                // probaSpawn = Integer.parseInt(donnees[9]);
+                // o = new Objet(nom, articleDefini, articleIndefini, valeurAjoutee, attributTouche, utilisation, effet, consommable, probaSpawn);
+
+                // ajout à la liste des objets de la salle
+                indexSalle = Integer.parseInt(donnees[7]);
+                if((indexSalle >= listeSalles.size()) || (indexSalle < 0)){ // index invalide
+                    System.out.println("Problème au chargement des objets. Salle introuvable pour " + o.getNom());
+                }
+                else{
+                    listeSalles.get(indexSalle).ajouterObjet(o);
+                }
 
                 // ajout du nouvel objet à la liste
                 listeObjets.add(o);
@@ -121,8 +144,6 @@ public class Chargement {
         } catch(IOException e){
             System.out.println(e);
         }
-
-        return listeObjets;
     }
     
 }
