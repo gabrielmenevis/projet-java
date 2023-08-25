@@ -23,6 +23,7 @@ public class Jeu {
 
         joueur = new Courgette("josé", 0, 0, 0, 0);
         listeSalles = Chargement.chargerSalles();
+        listeObjets = Chargement.chargerObjets(listeSalles);
         salleActuelle = listeSalles.get(r.nextInt(listeSalles.size()));
 
         // TODO: changer l'initialisation des objets
@@ -32,18 +33,19 @@ public class Jeu {
         // for(Salle s: listeSalles){
         //     s.setListeObjets(listeObjets);
         // }
-        System.out.println(joueur.getPV());
-        String rep;
-        listeObjets = Chargement.chargerObjets();
-        champi = listeObjets.get(1);
-        rep = champi.menuObjet();
-        switch (rep){
-            case "2" : champi.utilisationObjet(joueur);
-            break;
-        }
+        // System.out.println(joueur.getPV());
+
+        // String rep;
+        // listeObjets = Chargement.chargerObjets(listeSalles);
+        // champi = listeObjets.get(1);
+        // rep = champi.menuObjet();
+        // switch (rep){
+        //     case "2" : champi.utilisationObjet(joueur);
+        //     break;
+        // }
 
 
-        // while(menuAction());
+        while(menuAction());
     }
 
     public static boolean menuAction(){
@@ -53,7 +55,6 @@ public class Jeu {
         PNJ pnj;
         Salle prochaineSalle;
         Objet o;
-        String r;
 
         salleActuelle.descriptionCourte();
 
@@ -68,7 +69,7 @@ public class Jeu {
             System.out.println("10 - Arrêter");
             choix = sc.nextLine();
 
-            // ajouter des événements quand trop d'erreurs d'affilée
+            // TODO: ajouter des événements quand trop d'erreurs d'affilée
             if(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") && !choix.equals("4") && !choix.equals("5") && !choix.equals("10")){
                 System.out.println("à venir");
             }
@@ -77,26 +78,28 @@ public class Jeu {
 
         switch(choix){
 
+            // décrire la salle
             case "1":
                 System.out.println();
                 salleActuelle.descriptionLongue();
                 System.out.println();
                 break;
 
+            // fouiller la salle pour dénicher des objets
             case "2":
-                o = salleActuelle.fouiller(joueur); // c'est ici qu'on pourra dénicher des objets
+                System.out.println();
+                o = salleActuelle.fouiller(joueur);
+                // menu d'action de l'objet choisi
                 if(o != null){
-                    System.out.println(o.getNom());
-                    o.menuObjet();
-
-                    r = o.menuObjet();
-                    switch (r){
+                    choix = o.menuObjet();
+                    switch (choix){
                         case "2" : o.utilisationObjet(joueur);
                         break;
                     }
                 }
                 break;
 
+            // interagir avec les PNJ
             case "3":
                 pnj = salleActuelle.choisirPNJ();
                 if(pnj != null){
@@ -104,6 +107,7 @@ public class Jeu {
                 }
                 break;
 
+            // changer de salle
             case "4":
                 prochaineSalle = salleActuelle.choisirSalle();
                 if(prochaineSalle != null){
@@ -111,10 +115,12 @@ public class Jeu {
                 }
                 break;
 
+            // attendre
             case "5":
                 System.out.println("à venir");
                 break;
 
+            // arrêter le jeu (temporaire)
             case "10":
                 return false;
         }

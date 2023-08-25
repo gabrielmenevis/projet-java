@@ -1,3 +1,6 @@
-nom;article_defini;article_indefini;valeur_ajoutee;attribut_touche;utilisation;effet
-verre à moitié vide;le;un;5;PC;boire cul sec;C'est du costaud !Vous vous sentez étrangement bien.
-champignon multicolore;le;un;-10;PV;grignoter;Oula, quel gout bizarre...
+nom;article_defini;article_indefini;valeur_ajoutee;attribut_touche;utilisation;effet;index_salle
+verre d'alcool à moitié vide;le;un;5;PC;boire cul sec;C'est du costaud ! Vous vous sentez étrangement bien.;0
+champignon multicolore;le;un;-10;PV;grignoter;Oula, quel gout bizarre...;4
+lunettes de soleil;les;des;5;PC;porter;La classe 8) --> c'est le smiley des lunettes de soleil;2
+parfum;le;du;-5;PC;mettre sur vous;Oh non ! C'était en fait du désodorisant pour WC... Votre crédibilité en prend un sacré coup.;1
+steack;le;un;5;PA;dévorer;Hmmmmm, un steack vraiment délicieux... Vous vous sentez plus puissant désormais.;7

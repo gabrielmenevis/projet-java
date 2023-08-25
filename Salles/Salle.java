@@ -104,6 +104,12 @@ public class Salle {
         }
     }
 
+    public void ajouterObjet(Objet objet){
+        if(this.listeObjets.contains(objet) == false){
+            this.listeObjets.add(objet);
+        }
+    }
+
     public void descriptionCourte(){
         System.out.println("Vous êtes dans " + this.article + " " + this.nom);
     }
@@ -149,9 +155,6 @@ public class Salle {
         // la pièce n'a jamais été fouillée ou il n'y a aucun PNJ pour vous attraper
         if((!this.fouille) || this.listePNJ.isEmpty()){
 
-            // la pièce est maintenant fouillée
-            this.fouille = true;
-
             // il y a des objets dans la pièce
             if(!this.listeObjets.isEmpty()){
 
@@ -172,6 +175,7 @@ public class Salle {
                     choix = sc.nextLine();
                     // si le joueur a choisi annuler
                     if(Integer.parseInt(choix) == (this.listeObjets.size() + 1)){
+                        this.fouille = true;
                         return null;
                     }
                     else{
@@ -206,6 +210,9 @@ public class Salle {
 
                 objetChoisi = null;
             }
+
+            // la pièce est maintenant fouillée
+            this.fouille = true;
 
             return objetChoisi;
         }

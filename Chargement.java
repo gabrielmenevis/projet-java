@@ -67,7 +67,7 @@ public class Chargement {
     }
 
 
-    public static ArrayList<Objet> chargerObjets() throws IOException{
+    public static ArrayList<Objet> chargerObjets(ArrayList<Salle> listeSalles) throws IOException{
 
         ArrayList<Objet> listeObjets = new ArrayList<Objet>();
         Objet o;
@@ -78,10 +78,8 @@ public class Chargement {
 
         // variables pour stocker les données des objets lus
         String nom, articleDefini, articleIndefini, attributTouche, utilisation, effet;
-        int valeurAjoutee;
+        int valeurAjoutee, indexSalle;
 
-
-        //TODO: dire dans quelle salle se trouve l'objet -> prendre la liste de salles en paramètre
 
         try {
 
@@ -110,6 +108,16 @@ public class Chargement {
                 utilisation = donnees[5];
                 effet = donnees[6];
                 o = new Objet(nom, articleDefini, articleIndefini, valeurAjoutee, attributTouche, utilisation, effet);
+
+                // ajout à la liste des objets de la salle
+                indexSalle = Integer.parseInt(donnees[7]);
+                if((indexSalle >= listeSalles.size()) || (indexSalle < 0)){ // index invalide
+                    System.out.println("Problème au chargement des objets. Salle introuvable pour " + o.getNom());
+                }
+                else{
+                    listeSalles.get(indexSalle).ajouterObjet(o);
+                    System.out.println(o.getNom() + " dans " + listeSalles.get(indexSalle).getNom());
+                }
 
                 // ajout du nouvel objet à la liste
                 listeObjets.add(o);
