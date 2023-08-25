@@ -13,9 +13,11 @@ public class Objet {
     private String articleIndefini;
     private String utilisation;
     private String effet;
+    private boolean consommable;
+    private int probaSpawn;
 
     
-    public Objet(String nom, String articleDefini, String articleIndefini, int valeurAjoutee, String attributTouche, String utilisation, String effet) {
+    public Objet(String nom, String articleDefini, String articleIndefini, int valeurAjoutee, String attributTouche, String utilisation, String effet, boolean consommable, int probaSpawn) {
         this.nom = nom;
         this.articleDefini = articleDefini;
         this.articleIndefini = articleIndefini;
@@ -23,6 +25,8 @@ public class Objet {
         this.attributTouche = attributTouche;
         this.utilisation = utilisation;
         this.effet = effet;
+        this.consommable = consommable;
+        this.probaSpawn = probaSpawn;
     }
     
     public String getNom() {
@@ -53,6 +57,14 @@ public class Objet {
         return this.effet;
     }
 
+    public boolean getConsommable(){
+        return this.consommable;
+    }
+
+    public int getProbaSpawn(){
+        return this.probaSpawn;
+    }
+
     public void setNom(String nom){
         this.nom = nom;
     }
@@ -75,6 +87,18 @@ public class Objet {
 
     public void setUtilisation(String utilisation){
         this.utilisation = utilisation;
+    }
+
+    public void setEffet(String effet){
+        this.effet = effet;
+    }
+
+    public void setConsommable(boolean consommable){
+        this.consommable = consommable;
+    }
+
+    public void setProbaSpawn(int probaSpawn){
+        this.probaSpawn = probaSpawn;
     }
 
     public void utilisationObjet(Personnage perso){
@@ -140,10 +164,11 @@ public class Objet {
         Scanner s = new Scanner(System.in);
         String rep;
 
-        System.out.println("Vous avez trouvé " +this.articleIndefini+ " " + this.nom + ". Que voulez vous en faire ? ");
+        System.out.println("Vous avez trouvé " + this.articleIndefini + " " + this.nom + ". Que voulez vous en faire ? ");
         System.out.println ("1 - " + this.articleDefini + " laisser par terre.");
         System.out.println("2 - "+ this.articleDefini +" " + this.utilisation);// 
         System.out.println("3 - " + this.articleDefini + " ranger dans l'inventaire");
+        System.out.println("4 - Annuler");
         
         rep=s.nextLine();
         return rep;

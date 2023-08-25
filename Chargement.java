@@ -78,7 +78,8 @@ public class Chargement {
 
         // variables pour stocker les données des objets lus
         String nom, articleDefini, articleIndefini, attributTouche, utilisation, effet;
-        int valeurAjoutee, indexSalle;
+        int valeurAjoutee, indexSalle, probaSpawn;
+        boolean consommable;
 
 
         try {
@@ -107,7 +108,13 @@ public class Chargement {
                 attributTouche = donnees[4];
                 utilisation = donnees[5];
                 effet = donnees[6];
-                o = new Objet(nom, articleDefini, articleIndefini, valeurAjoutee, attributTouche, utilisation, effet);
+                if(donnees[8].equals("0")){
+                    consommable = false;
+                } else{
+                    consommable = true;
+                }
+                probaSpawn = Integer.parseInt(donnees[9]);
+                o = new Objet(nom, articleDefini, articleIndefini, valeurAjoutee, attributTouche, utilisation, effet, consommable, probaSpawn);
 
                 // ajout à la liste des objets de la salle
                 indexSalle = Integer.parseInt(donnees[7]);
@@ -116,7 +123,6 @@ public class Chargement {
                 }
                 else{
                     listeSalles.get(indexSalle).ajouterObjet(o);
-                    System.out.println(o.getNom() + " dans " + listeSalles.get(indexSalle).getNom());
                 }
 
                 // ajout du nouvel objet à la liste

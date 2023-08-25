@@ -168,7 +168,7 @@ public class Salle {
                     i = 1;
                     // liste des objets
                     for(Objet o: this.listeObjets){
-                        System.out.println((i++) + " - " + o.getNom());
+                        System.out.println((i++) + " - " + o.getNom() + " " + o.getProbaSpawn());
                     }
                     System.out.println(i + " - Annuler");
 
