@@ -1,10 +1,11 @@
 package Objets;
 
+
 import java.util.Scanner;
 
 import Personnages.Personnage;
 
-public class Objet {
+public abstract class Objet {
     
     private String nom;
     private int valeurAjoutee;
@@ -14,8 +15,8 @@ public class Objet {
     private String utilisation;
     private String effet;
 
-    
-    public Objet(String nom, String articleDefini, String articleIndefini, int valeurAjoutee, String attributTouche, String utilisation, String effet) {
+
+    public Objet(String nom, String articleDefini, String articleIndefini, int valeurAjoutee, String attributTouche, String utilisation, String effet){
         this.nom = nom;
         this.articleDefini = articleDefini;
         this.articleIndefini = articleIndefini;
@@ -77,6 +78,10 @@ public class Objet {
         this.utilisation = utilisation;
     }
 
+    public void setEffet(String effet){
+        this.effet = effet;
+    }
+
     public void utilisationObjet(Personnage perso){
 
         System.out.println(this.effet);
@@ -106,15 +111,15 @@ public class Objet {
 
                 case "PV" : perso.gagnerPV(this.valeurAjoutee);
                 System.out.println("Bravo ! Vous avez gagné "+ this.valeurAjoutee + " PV ");
-                System.out.println("vous êtes maintenant à "+ perso.getPV()+ " PV");
+                System.out.println("Vous êtes maintenant à "+ perso.getPV()+ " PV");
                 break;
                 case "PA" : perso.gagnerPA(this.valeurAjoutee);
                 System.out.println("Bravo ! Vous avez gagné "+ this.valeurAjoutee + " point(s) d'attaque ");
-                System.out.println("vous êtes maintenant à "+ perso.getPAttaque()+ " point(s) d'attaque");
+                System.out.println("Vous êtes maintenant à "+ perso.getPAttaque()+ " point(s) d'attaque");
                 break;
                 case "PC" : perso.gagnerPC(this.valeurAjoutee);
                 System.out.println("Bravo ! Vous avez gagné "+ this.valeurAjoutee + " point(s) de charisme ");
-                System.out.println("vous êtes maintenant à "+ perso.getPCharisme()+ " point(s) de charisme");
+                System.out.println("Vous êtes maintenant à "+ perso.getPCharisme()+ " point(s) de charisme");
                 break;
 
             }
@@ -125,7 +130,7 @@ public class Objet {
 
             //rajouter méthode gagnerPA, gagnerPV, gagnerPC dans personnage
             // rajouter aussi "mourir" ou "se reveiller à l'infirmerie" --> se reveiller avec les pv redevenus normaux, dans la salle de l'infirmerie
-        }
+    }
 
 
     public void laisserObjet(){
@@ -140,30 +145,20 @@ public class Objet {
         Scanner s = new Scanner(System.in);
         String rep;
 
-        System.out.println("Vous avez trouvé " +this.articleIndefini+ " " + this.nom + ". Que voulez vous en faire ? ");
+        System.out.println("Vous avez trouvé " + this.articleIndefini + " " + this.nom + ". Que voulez vous en faire ? ");
         System.out.println ("1 - " + this.articleDefini + " laisser par terre.");
         System.out.println("2 - "+ this.articleDefini +" " + this.utilisation);// 
         System.out.println("3 - " + this.articleDefini + " ranger dans l'inventaire");
+        System.out.println("4 - Annuler");
         
         rep=s.nextLine();
         return rep;
         
     }
 
+    public abstract boolean apparaitre();
 
-
-    
-
-    
-  
-    }
-    // methode : 1. Laisser tomber 
-  //  2. Manger
-    //3. Ranger dans inventaire
-    //4. Porter 
-
-    // menu : 
-
+}
     
 
 
