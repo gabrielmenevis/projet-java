@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.sound.midi.Soundbank;
+
 import Objets.Objet;
 import Salles.Salle;
 import Personnages.*;
@@ -17,6 +19,7 @@ public class Jeu {
 
         Random r = new Random();
         ArrayList<Objet> listeObjets = new ArrayList<Objet>();
+        Objet champi;
 
         joueur = new Courgette("josé", 0, 0, 0, 0);
         listeSalles = Chargement.chargerSalles();
@@ -29,6 +32,16 @@ public class Jeu {
         // for(Salle s: listeSalles){
         //     s.setListeObjets(listeObjets);
         // }
+        System.out.println(joueur.getPV());
+        String rep;
+        listeObjets = Chargement.chargerObjets();
+        champi = listeObjets.get(1);
+        rep = champi.menuObjet();
+        switch (rep){
+            case "2" : champi.utilisationObjet(joueur);
+            break;
+        }
+
 
         // while(menuAction());
     }
@@ -40,6 +53,7 @@ public class Jeu {
         PNJ pnj;
         Salle prochaineSalle;
         Objet o;
+        String r;
 
         salleActuelle.descriptionCourte();
 
@@ -73,6 +87,13 @@ public class Jeu {
                 o = salleActuelle.fouiller(joueur); // c'est ici qu'on pourra dénicher des objets
                 if(o != null){
                     System.out.println(o.getNom());
+                    o.menuObjet();
+
+                    r = o.menuObjet();
+                    switch (r){
+                        case "2" : o.utilisationObjet(joueur);
+                        break;
+                    }
                 }
                 break;
 

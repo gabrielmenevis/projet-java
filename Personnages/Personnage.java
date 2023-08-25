@@ -50,6 +50,14 @@ public abstract class Personnage {
         this.pv -= degats;
         if (this.pv < 0) this.pv = 0; // Assure que les PV ne tombent pas en dessous de 0
     }
+     public void perdrePA(int degats) {
+        this.p_attaque -= degats;
+        if (this.p_attaque < 0) this.p_attaque = 0;
+     }
+      public void perdrePC(int degats) {
+        this.p_charisme -= degats;
+        if (this.p_charisme < 0) this.p_charisme = 0;
+      }
 
     public void gagnerPA(int ajout_pa) {
         this.p_attaque += ajout_pa;
