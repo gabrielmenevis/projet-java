@@ -36,19 +36,20 @@ public class Jeu {
 
         salleActuelle.descriptionCourte();
 
-        while(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") && !choix.equals("4") && !choix.equals("5") && !choix.equals("10")){
+        while(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") && !choix.equals("4") && !choix.equals("5") && !choix.equals("6") && !choix.equals("10")){
 
             System.out.println("Que faire ?");
             System.out.println("1 - Regarder autour de vous");
             System.out.println("2 - Fouiller la pièce");
             System.out.println("3 - Parler à un personnage");
             System.out.println("4 - Se déplacer");
-            System.out.println("5 - Attendre");
+            System.out.println("5 - Ouvrir l'inventaire");
+            System.out.println("6 - Attendre");
             System.out.println("10 - Arrêter");
             choix = sc.nextLine();
 
             // TODO: ajouter des événements quand trop d'erreurs d'affilée
-            if(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") && !choix.equals("4") && !choix.equals("5") && !choix.equals("10")){
+            if(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") && !choix.equals("4") && !choix.equals("5") && !choix.equals("6") && !choix.equals("10")){
                 System.out.println("à venir");
             }
 
@@ -73,6 +74,8 @@ public class Jeu {
                     switch (choix){
                         case "2" : o.utilisationObjet(joueur);
                         break;
+                        case "3": joueur.getInventaire().rangerObjet(o);
+                        break;
                     }
                 }
                 break;
@@ -93,8 +96,12 @@ public class Jeu {
                 }
                 break;
 
-            // attendre
+            // ouvrir l'inventaire
             case "5":
+                joueur.ouvrirInventaire();
+                break;
+
+            case "6":
                 System.out.println("à venir");
                 break;
 

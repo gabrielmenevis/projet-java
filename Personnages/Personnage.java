@@ -1,8 +1,5 @@
 package Personnages;
 
-//import Objets.Objet;
-// import Salle;
-
 
 public abstract class Personnage {
 
@@ -12,7 +9,7 @@ public abstract class Personnage {
     protected int p_attaque;
     private int p_charisme;
     private boolean charme;
-    //private Inventaire inventaire = 0;
+    private Inventaire inventaire;
 
     public Personnage(String nom, int pv, int max_pv, int p_attaque, int p_charisme) {
         super();
@@ -22,27 +19,31 @@ public abstract class Personnage {
         this.p_attaque = p_attaque;
         this.p_charisme = p_charisme;
         this.charme = false;
-        //this.inventaire = new Inventaire();
+        this.inventaire = new Inventaire();
     }
 
     public String getNom() {
-        return nom;
+        return this.nom;
     }
 
     public int getPV() {
-        return pv;
+        return this.pv;
     }
 
     public int getMaxPV() {
-        return max_pv;
+        return this.max_pv;
     }
 
     public int getPAttaque() {
-        return p_attaque;
+        return this.p_attaque;
     }
 
     public int getPCharisme() {
-        return p_charisme;
+        return this.p_charisme;
+    }
+
+    public Inventaire getInventaire(){
+        return this.inventaire;
     }
 
     // méthode perte de PV à utiliser dans la fonction combats
@@ -80,6 +81,10 @@ public abstract class Personnage {
 
     public void setCharme(boolean charme) {
         this.charme = charme;
+    }
+
+    public void ouvrirInventaire(){
+        this.inventaire.menuInventaire();
     }
 }
 
