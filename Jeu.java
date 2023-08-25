@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Objets.Objet;
+import Objets.ObjetUnique;
 import Salles.Salle;
 import Personnages.*;
 

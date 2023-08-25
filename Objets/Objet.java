@@ -1,11 +1,11 @@
 package Objets;
 
-import java.util.Random;
+
 import java.util.Scanner;
 
 import Personnages.Personnage;
 
-public class Objet {
+public abstract class Objet {
     
     private String nom;
     private int valeurAjoutee;
@@ -14,11 +14,9 @@ public class Objet {
     private String articleIndefini;
     private String utilisation;
     private String effet;
-    private boolean consommable;
-    private int probaSpawn;
 
-    
-    public Objet(String nom, String articleDefini, String articleIndefini, int valeurAjoutee, String attributTouche, String utilisation, String effet, boolean consommable, int probaSpawn) {
+
+    public Objet(String nom, String articleDefini, String articleIndefini, int valeurAjoutee, String attributTouche, String utilisation, String effet){
         this.nom = nom;
         this.articleDefini = articleDefini;
         this.articleIndefini = articleIndefini;
@@ -26,8 +24,6 @@ public class Objet {
         this.attributTouche = attributTouche;
         this.utilisation = utilisation;
         this.effet = effet;
-        this.consommable = consommable;
-        this.probaSpawn = probaSpawn;
     }
     
     public String getNom() {
@@ -58,14 +54,6 @@ public class Objet {
         return this.effet;
     }
 
-    public boolean getConsommable(){
-        return this.consommable;
-    }
-
-    public int getProbaSpawn(){
-        return this.probaSpawn;
-    }
-
     public void setNom(String nom){
         this.nom = nom;
     }
@@ -92,14 +80,6 @@ public class Objet {
 
     public void setEffet(String effet){
         this.effet = effet;
-    }
-
-    public void setConsommable(boolean consommable){
-        this.consommable = consommable;
-    }
-
-    public void setProbaSpawn(int probaSpawn){
-        this.probaSpawn = probaSpawn;
     }
 
     public void utilisationObjet(Personnage perso){
@@ -131,15 +111,15 @@ public class Objet {
 
                 case "PV" : perso.gagnerPV(this.valeurAjoutee);
                 System.out.println("Bravo ! Vous avez gagné "+ this.valeurAjoutee + " PV ");
-                System.out.println("vous êtes maintenant à "+ perso.getPV()+ " PV");
+                System.out.println("Vous êtes maintenant à "+ perso.getPV()+ " PV");
                 break;
                 case "PA" : perso.gagnerPA(this.valeurAjoutee);
                 System.out.println("Bravo ! Vous avez gagné "+ this.valeurAjoutee + " point(s) d'attaque ");
-                System.out.println("vous êtes maintenant à "+ perso.getPAttaque()+ " point(s) d'attaque");
+                System.out.println("Vous êtes maintenant à "+ perso.getPAttaque()+ " point(s) d'attaque");
                 break;
                 case "PC" : perso.gagnerPC(this.valeurAjoutee);
                 System.out.println("Bravo ! Vous avez gagné "+ this.valeurAjoutee + " point(s) de charisme ");
-                System.out.println("vous êtes maintenant à "+ perso.getPCharisme()+ " point(s) de charisme");
+                System.out.println("Vous êtes maintenant à "+ perso.getPCharisme()+ " point(s) de charisme");
                 break;
 
             }
@@ -150,7 +130,7 @@ public class Objet {
 
             //rajouter méthode gagnerPA, gagnerPV, gagnerPC dans personnage
             // rajouter aussi "mourir" ou "se reveiller à l'infirmerie" --> se reveiller avec les pv redevenus normaux, dans la salle de l'infirmerie
-        }
+    }
 
 
     public void laisserObjet(){
@@ -176,27 +156,9 @@ public class Objet {
         
     }
 
-    public boolean apparaitre(){
-        Random r = new Random();
-        if(r.nextInt(10) >= probaSpawn){
-            return false;
-        } else return true;
-    }
+    public abstract boolean apparaitre();
 
-
-
-    
-
-    
-  
-    }
-    // methode : 1. Laisser tomber 
-  //  2. Manger
-    //3. Ranger dans inventaire
-    //4. Porter 
-
-    // menu : 
-
+}
     
 
 

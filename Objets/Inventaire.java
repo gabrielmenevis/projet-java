@@ -20,24 +20,40 @@ public class Inventaire {
     }
 
     public void rangerObjet(Objet objet){
-        int quantiteObjet;
-        // l'inventaire contient déjà l'objet, on incrémente la quantité
-        if(this.listeObjets.containsKey(objet)){
-            quantiteObjet = this.listeObjets.get(objet) + 1;
-            this.listeObjets.replace(objet, quantiteObjet);
-            System.out.println();
-            System.out.println("Et hop ! " + objet.getArticleIndefini() + " " + objet.getNom() + " de plus !");
-            System.out.println("Vous en avez maintenant " + quantiteObjet);
-            System.out.println();
+
+        // si l'objet est consommable on peut en avoir de 0 à n
+        if(objet instanceof ObjetConsommable){
+
+            int quantiteObjet;
+
+            // l'inventaire contient déjà l'objet, on incrémente la quantité
+            if(this.listeObjets.containsKey(objet)){
+                quantiteObjet = this.listeObjets.get(objet) + 1;
+                this.listeObjets.replace(objet, quantiteObjet);
+                System.out.println();
+                System.out.println("Et hop ! " + objet.getArticleIndefini() + " " + objet.getNom() + " de plus !");
+                System.out.println("Vous en avez maintenant " + quantiteObjet);
+                System.out.println();
+            }
+            // l'inventaire ne contient pas l'objet, la quantité est 1
+            else{
+                quantiteObjet = 1;
+                this.listeObjets.put(objet, quantiteObjet);
+                System.out.println();
+                System.out.println("Vous rangez " + objet.getArticleDefini() + " " + objet.getNom() + " dans votre inventaire.");
+                System.out.println("Le début d'une longue série ?");
+                System.out.println();
+            }
         }
-        // l'inventaire ne contient pas l'objet, la quantité est 1
+
+        // l'objet est unique, si on le range dans l'inventaire c'est qu'il n'y est pas déjà 
         else{
-            quantiteObjet = 1;
-            this.listeObjets.put(objet, quantiteObjet);
+            this.listeObjets.put(objet, 1);
             System.out.println();
             System.out.println("Vous rangez " + objet.getArticleDefini() + " " + objet.getNom() + " dans votre inventaire.");
-            System.out.println("Le début d'une longue série ?");
+            System.out.println("Gardez " + objet.getArticleDefini() + " précieusement, ça ne court pas les rues...");
             System.out.println();
+            ((ObjetUnique) objet).setDejaPris(true); // on retient que l'objet a été pris
         }
     }
 

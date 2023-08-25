@@ -180,7 +180,7 @@ public class Salle {
                     // liste des objets
                     for(Objet o: listeObjetsTemp){
                         choixObjet.put(String.valueOf(i), o); // dictionnaire de choix possibles
-                        System.out.println((i++) + " - " + o.getNom() + " " + o.getProbaSpawn());
+                        System.out.println((i++) + " - " + o.getArticleDefini() + " " + o.getNom());
                     }
                     // choix "Annuler" pour retourner null
                     choixObjet.put(String.valueOf(i), null);
