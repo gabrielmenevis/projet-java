@@ -7,39 +7,74 @@ import Personnages.Personnage;
 public class Objet {
     
     private String nom;
-    private int valeurAjoute;
+    private int valeurAjoutee;
     private String attributTouche;
-    private String article;
+    private String articleDefini;
+    private String articleIndefini;
     private String utilisation;
+    private String effet;
 
     
-    public Objet(String nom, String article, int valeurAjoute, String utilisation, String attributTouche) {
+    public Objet(String nom, String articleDefini, String articleIndefini, int valeurAjoutee, String attributTouche, String utilisation, String effet) {
         this.nom = nom;
-        this.article = article;
-        this.valeurAjoute = valeurAjoute;
-        this.utilisation = utilisation;
+        this.articleDefini = articleDefini;
+        this.articleIndefini = articleIndefini;
+        this.valeurAjoutee = valeurAjoutee;
         this.attributTouche = attributTouche;
-
+        this.utilisation = utilisation;
+        this.effet = effet;
     }
-    
     
     public String getNom() {
-        return nom;
+        return this.nom;
     }
 
+    public String getArticleDefini(){
+        return this.articleDefini;
+    }
 
-    public int getValeurAjoute() {
-        return valeurAjoute;
+    public String getArticleIndefini(){
+        return this.articleIndefini;
     }
-    public String getArticle(){
-        return article;
 
+    public int getValeurAjoutee() {
+        return this.valeurAjoutee;
     }
-    public String getUtilisation(){
-        return utilisation;
-    }
+
     public String attributTouche(){
-        return attributTouche;
+        return this.attributTouche;
+    }
+
+    public String getUtilisation(){
+        return this.utilisation;
+    }
+
+    public String getEffet(){
+        return this.effet;
+    }
+
+    public void setNom(String nom){
+        this.nom = nom;
+    }
+
+    public void setArticleDefini(String articleDefini){
+        this.articleDefini = articleDefini;
+    }
+
+    public void setArticleIndefini(String articleIndefini){
+        this.articleIndefini = articleIndefini;
+    }
+
+    public void setValeurAjoutee(int valeurAjoutee){
+        this.valeurAjoutee = valeurAjoutee;
+    }
+
+    public void setAttributTouche(String attributTouche){
+        this.attributTouche = attributTouche;
+    }
+
+    public void setUtilisation(String utilisation){
+        this.utilisation = utilisation;
     }
 
     public void utilisationObjet(Personnage perso){
@@ -70,10 +105,10 @@ public class Objet {
         Scanner s = new Scanner(System.in);
         String rep;
 
-        System.out.println("vous avez trouve" +this.article+ " " + this.nom + "Que voulez vous en faire ? ");
-        System.out.println ("1 - " + this.article + " laisser par terre.");
-        System.out.println("2 - "+ this.article +" " + this.utilisation);// 
-        System.out.println("3 - " + this.article+ " ranger dans l'inventaire");
+        System.out.println("vous avez trouve" +this.articleIndefini+ " " + this.nom + "Que voulez vous en faire ? ");
+        System.out.println ("1 - " + this.articleDefini + " laisser par terre.");
+        System.out.println("2 - "+ this.articleDefini +" " + this.utilisation);// 
+        System.out.println("3 - " + this.articleDefini + " ranger dans l'inventaire");
         
         rep=s.nextLine();
         
