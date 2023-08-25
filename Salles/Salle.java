@@ -1,6 +1,7 @@
 package Salles;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import Personnages.*;
@@ -144,11 +145,12 @@ public class Salle {
 
     public Objet fouiller(Personnage perso){
 
-        int i, indexObjetChoisi = -1;
+        int i;
         Objet objetChoisi = null;
         Scanner sc = new Scanner(System.in);
         String choix;
         boolean continuer = true;
+        HashMap<String, Objet> choixObjet = new HashMap<String, Objet>();
 
         System.out.println("Vous fouillez " + this.article + " " + this.nom + " dans ses moindres recoins.");
 
@@ -168,31 +170,18 @@ public class Salle {
                     i = 1;
                     // liste des objets
                     for(Objet o: this.listeObjets){
+                        choixObjet.put(String.valueOf(i), o); // dictionnaire de choix possibles
                         System.out.println((i++) + " - " + o.getNom() + " " + o.getProbaSpawn());
                     }
+                    // choix "Annuler" pour retourner null
+                    choixObjet.put(String.valueOf(i), null);
                     System.out.println(i + " - Annuler");
 
                     choix = sc.nextLine();
-                    // si le joueur a choisi annuler
-                    if(Integer.parseInt(choix) == (this.listeObjets.size() + 1)){
-                        this.fouille = true;
-                        return null;
-                    }
-                    else{
-                        for(i = 1 ; i <= this.listeObjets.size() ; i++){
-                            if(Integer.parseInt(choix) == i){
-                                indexObjetChoisi = i - 1;
-                            }
-                        }
-                    }
-
-                    // si le choix n'est pas valide
-                    if(indexObjetChoisi == -1){
-                        continuer = true;
-                    }
-                    else{
-                        objetChoisi = this.listeObjets.get(indexObjetChoisi);
+                    // si le choix est valide
+                    if(choixObjet.containsKey(choix)){
                         continuer = false;
+                        objetChoisi = choixObjet.get(choix);
                     }
                 }
             }
@@ -218,6 +207,7 @@ public class Salle {
         }
 
         // la pièce a été fouillée et il y a au moins un PNJ
+        // TODO: ajouter ce qui se passe
         else{
             System.out.println("malheur ! machin vous a attrapé");
             return null;
@@ -240,8 +230,9 @@ public class Salle {
         Scanner sc = new Scanner(System.in);
         Salle prochaineSalle = null;
         String choix;
-        int i, indexProchaineSalle = -1;
+        int i;
         boolean continuer = true;
+        HashMap<String, Salle> choixSalle = new HashMap<String, Salle>();
 
         if(!this.sallesAdjacentes.isEmpty()){
 
@@ -250,30 +241,18 @@ public class Salle {
                 // liste des salles adjacentes
                 i = 1;
                 for(Salle s: this.sallesAdjacentes){
+                    choixSalle.put(String.valueOf(i), s); // dictionnaire des choix possibles
                     System.out.println((i++) + " - Dans " + s.getArticle() + " " + s.getNom());
                 }
+                // choix "Annuler" retourne null
+                choixSalle.put(String.valueOf(i), null);
                 System.out.println(i + " - Annuler");
 
                 choix = sc.nextLine();
-                // si le joueur a choisi annuler
-                if(Integer.parseInt(choix) == (this.sallesAdjacentes.size() + 1)){
-                    return null;
-                }
-                else{
-                    for(i = 1 ; i <= this.sallesAdjacentes.size() ; i++){
-                        if(Integer.parseInt(choix) == i){
-                            indexProchaineSalle = i - 1;
-                        }
-                    }
-                }
-
-                // si le choix n'est pas valide
-                if(indexProchaineSalle == -1){
-                    continuer = true;
-                }
-                else{
-                    prochaineSalle = this.sallesAdjacentes.get(indexProchaineSalle);
+                // si le choix est valide
+                if(choixSalle.containsKey(choix)){
                     continuer = false;
+                    prochaineSalle = choixSalle.get(choix);
                 }
             }
 
