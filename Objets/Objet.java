@@ -78,15 +78,50 @@ public class Objet {
     }
 
     public void utilisationObjet(Personnage perso){
-        // switch (this.attributTouche) {
-        //     case "-pv" : perso.perdrePV(this.valeurAjoute);
-        //     break;
-        //     case "p_attaque" : perso.gagnerPA(this.valeurAjoute);
-        //     break;
-        //     case "p_charisme" : perso.gagnerPC(this.valeurAjoute);
-        //     break;
-        //     case "+pv" : perso.gagnerPV(this.valeurAjoute);
-        //     break;
+
+        System.out.println(this.effet);
+        if (this.valeurAjoutee < 0 ){
+        
+             switch (this.attributTouche) {
+            
+                case "PV" : perso.perdrePV(this.valeurAjoutee*-1);
+                System.out.println("Oups ! Vous avez perdu "+ this.valeurAjoutee*-1 + " PV ");
+                System.out.println("vous êtes maintenant à "+ perso.getPV() + " PV");
+                break;
+                case "PA" : perso.perdrePA(this.valeurAjoutee*-1);
+                System.out.println("Oups ! Vous avez perdu "+ this.valeurAjoutee*-1 + " point(s) d'attaque ");
+                System.out.println("vous êtes maintenant à "+ perso.getPAttaque()+ " point(s) d'attaque");
+                break;
+                case "PC" : perso.perdrePC(this.valeurAjoutee*-1);
+                System.out.println("Oups ! Vous avez perdu "+ this.valeurAjoutee*-1 + " point(s) de charisme ");
+                System.out.println("vous êtes maintenant à "+ perso.getPCharisme()+ " point(s) de charisme");
+                break;
+            
+
+            } 
+
+        } 
+        else {
+            switch (this.attributTouche){
+
+                case "PV" : perso.gagnerPV(this.valeurAjoutee);
+                System.out.println("Bravo ! Vous avez gagné "+ this.valeurAjoutee + " PV ");
+                System.out.println("vous êtes maintenant à "+ perso.getPV()+ " PV");
+                break;
+                case "PA" : perso.gagnerPA(this.valeurAjoutee);
+                System.out.println("Bravo ! Vous avez gagné "+ this.valeurAjoutee + " point(s) d'attaque ");
+                System.out.println("vous êtes maintenant à "+ perso.getPAttaque()+ " point(s) d'attaque");
+                break;
+                case "PC" : perso.gagnerPC(this.valeurAjoutee);
+                System.out.println("Bravo ! Vous avez gagné "+ this.valeurAjoutee + " point(s) de charisme ");
+                System.out.println("vous êtes maintenant à "+ perso.getPCharisme()+ " point(s) de charisme");
+                break;
+
+            }
+
+        } 
+       
+        //     
 
             //rajouter méthode gagnerPA, gagnerPV, gagnerPC dans personnage
             // rajouter aussi "mourir" ou "se reveiller à l'infirmerie" --> se reveiller avec les pv redevenus normaux, dans la salle de l'infirmerie
@@ -101,16 +136,17 @@ public class Objet {
         // ajouter à l'inventaire du perso et retirer de la liste objet de la salle
     }
 
-    public void menuObjet(){
+    public String menuObjet(){
         Scanner s = new Scanner(System.in);
         String rep;
 
-        System.out.println("vous avez trouve" +this.articleIndefini+ " " + this.nom + "Que voulez vous en faire ? ");
+        System.out.println("Vous avez trouvé " +this.articleIndefini+ " " + this.nom + ". Que voulez vous en faire ? ");
         System.out.println ("1 - " + this.articleDefini + " laisser par terre.");
         System.out.println("2 - "+ this.articleDefini +" " + this.utilisation);// 
         System.out.println("3 - " + this.articleDefini + " ranger dans l'inventaire");
         
         rep=s.nextLine();
+        return rep;
         
     }
 
