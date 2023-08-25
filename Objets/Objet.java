@@ -1,5 +1,6 @@
 package Objets;
 
+import java.util.Random;
 import java.util.Scanner;
 
 import Personnages.Personnage;
@@ -173,6 +174,13 @@ public class Objet {
         rep=s.nextLine();
         return rep;
         
+    }
+
+    public boolean apparaitre(){
+        Random r = new Random();
+        if(r.nextInt(10) >= probaSpawn){
+            return false;
+        } else return true;
     }
 
 

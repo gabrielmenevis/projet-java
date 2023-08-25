@@ -2,6 +2,7 @@ package Salles;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
 
 import Personnages.*;
@@ -151,14 +152,22 @@ public class Salle {
         String choix;
         boolean continuer = true;
         HashMap<String, Objet> choixObjet = new HashMap<String, Objet>();
+        ArrayList<Objet> listeObjetsTemp = new ArrayList<Objet>();
 
         System.out.println("Vous fouillez " + this.article + " " + this.nom + " dans ses moindres recoins.");
 
         // la pièce n'a jamais été fouillée ou il n'y a aucun PNJ pour vous attraper
         if((!this.fouille) || this.listePNJ.isEmpty()){
 
-            // il y a des objets dans la pièce
-            if(!this.listeObjets.isEmpty()){
+            // constitution de la liste des objets apparus
+            for(Objet o: this.listeObjets){
+                if(o.apparaitre()){
+                    listeObjetsTemp.add(o);
+                }
+            }
+
+            // des objets sont apparus dans la pièce
+            if(!listeObjetsTemp.isEmpty()){
 
                 System.out.println("Hourra ! Ce que vous avez trouvé pourrait bien vous être utile...");
 
@@ -169,7 +178,7 @@ public class Salle {
 
                     i = 1;
                     // liste des objets
-                    for(Objet o: this.listeObjets){
+                    for(Objet o: listeObjetsTemp){
                         choixObjet.put(String.valueOf(i), o); // dictionnaire de choix possibles
                         System.out.println((i++) + " - " + o.getNom() + " " + o.getProbaSpawn());
                     }
@@ -188,15 +197,7 @@ public class Salle {
 
             // la pièce est vide
             else{
-                // et elle a déjà été fouillée
-                if(fouille){
-                    System.out.println("À quoi vous attendiez-vous ? Il n'y avait rien la première fois, ça n'a pas changé.");
-                }
-                // ou pas
-                else{
-                    System.out.println("Vous ne trouvez rien. Était-ce vraiment nécessaire de passer tout ce temps à fouiller une pièce... vide ?");
-                }
-
+                System.out.println("Vous ne trouvez rien. Était-ce vraiment nécessaire de passer tout ce temps à fouiller une pièce... vide ?");
                 objetChoisi = null;
             }
 
