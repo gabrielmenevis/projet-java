@@ -1,6 +1,10 @@
 package Personnages;
 
 public class Employe extends Personnage {
+
+    public Employe(String nom){
+        super(nom,5,10,4,4);
+    }
     
     public Employe(String nom, int pv, int max_pv, int p_attaque, int p_charisme) {
         super(nom, pv, max_pv, p_attaque, p_charisme);
