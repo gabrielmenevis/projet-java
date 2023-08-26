@@ -117,13 +117,6 @@ public class Chargement {
                 else{
                     o = new ObjetUnique(nom, articleDefini, articleIndefini, valeurAjoutee, attributTouche, utilisation, effet);
                 }
-                // if(donnees[8].equals("0")){
-                //     consommable = false;
-                // } else{
-                //     consommable = true;
-                // }
-                // probaSpawn = Integer.parseInt(donnees[9]);
-                // o = new Objet(nom, articleDefini, articleIndefini, valeurAjoutee, attributTouche, utilisation, effet, consommable, probaSpawn);
 
                 // ajout à la liste des objets de la salle
                 indexSalle = Integer.parseInt(donnees[7]);
