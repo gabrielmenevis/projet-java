@@ -40,6 +40,11 @@ public abstract class Personnage {
     public int getPAttaque() {
         return this.p_attaque;
     }
+
+    public void setNom(String nom){
+        this.nom = nom;
+    }
+
     public void setP_attaque(int p_attaque) {
         this.p_attaque = p_attaque;
     }

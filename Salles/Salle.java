@@ -112,6 +112,12 @@ public class Salle {
         }
     }
 
+    public void ajouterPNJ(PNJ pnj){
+        if(this.listePNJ.contains(pnj) == false){
+            this.listePNJ.add(pnj);
+        }
+    }
+
     public void descriptionCourte(){
         System.out.println("Vous êtes dans " + this.article + " " + this.nom);
     }
@@ -123,8 +129,8 @@ public class Salle {
 
         if(this.listePNJ.size() > 0){
             System.out.println("Vous regardez autour de vous. Vous voyez : ");
-            for(PNJ p: this.listePNJ){ // TODO: attendre la classe PNJ
-                // System.out.println(p.getNom());
+            for(PNJ p: this.listePNJ){
+                System.out.println(p.getNom() + " " + p.getType());
             }
         }
 

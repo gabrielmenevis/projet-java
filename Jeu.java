@@ -4,7 +4,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Objets.Objet;
-import Objets.ObjetUnique;
 import Salles.Salle;
 import Personnages.*;
 
@@ -18,16 +17,20 @@ public class Jeu {
 
         Random r = new Random();
 
+        listeSalles = Chargement.chargerSalles();
+        Chargement.chargerObjets(listeSalles);
+        Chargement.chargerPNJ(listeSalles);
+        salleActuelle = listeSalles.get(0);
+
         joueur = creationPersonnage();
         joueur.presentation();
         System.out.println("Bonjour "+ joueur.getNom()+ " bien ou bien ?  ");
-        listeSalles = Chargement.chargerSalles();
-        Chargement.chargerObjets(listeSalles);
-        salleActuelle = listeSalles.get(0);
 
         // lancement de la boucle principale
         while(menuAction());
     }
+
+    // affichage de la map
     public static void ouvrirMap(){
         System.out.println("      _____________                                         _______________");
         System.out.println("     |   Salle de  |                                       |   Salle des   |");
