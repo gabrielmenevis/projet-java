@@ -6,6 +6,7 @@ import java.util.Scanner;
 import Objets.Objet;
 import Salles.Salle;
 import Personnages.*;
+import combats.combats;
 
 public class Jeu {
 
@@ -91,13 +92,15 @@ public class Jeu {
     }
         
 
-    public static boolean menuAction(){
+    // l'IOException peut venir du combat
+    public static boolean menuAction() throws IOException{
 
         Scanner sc = new Scanner(System.in);
         String choix = "";
         PNJ pnj;
         Salle prochaineSalle;
         Objet o;
+        combats combat;
 
         System.out.println();
         salleActuelle.descriptionCourte();
@@ -151,15 +154,26 @@ public class Jeu {
             case "3":
                 pnj = salleActuelle.choisirPNJ();
                 if(pnj != null){
-                    System.out.println("Vous avez choisi " + pnj.getNom());
+                    choix = pnj.menuPNJ();
+                    switch(choix){
+                        // TODO: parler encore au PNJ
+                        case "1": System.out.println("deux secondes");
+                        break;
+                        case "2":
+                        combat = new combats(joueur, pnj);
+                        combat.lancerCombat();
+                        break;
+                    }
                 }
                 break;
 
             // changer de salle
             case "4":
                 prochaineSalle = salleActuelle.choisirSalle();
-                if(prochaineSalle != null){
+                if(prochaineSalle != null){ // le joueur a choisi une salle, sinon il ne se passe rien
+                    salleActuelle.viderPNJ();
                     salleActuelle = prochaineSalle;
+                    salleActuelle.genererPNJ();
                 }
                 break;
 

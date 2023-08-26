@@ -72,7 +72,6 @@ public class Chargement {
 
     public static void chargerObjets(ArrayList<Salle> listeSalles) throws IOException{
 
-        ArrayList<Objet> listeObjets = new ArrayList<Objet>();
         Objet o;
         String fichier = ".\\files\\objets.csv";
         FileReader f = new FileReader(fichier);
@@ -139,15 +138,14 @@ public class Chargement {
 
     public static void chargerPNJ(ArrayList<Salle> listeSalles) throws IOException{
 
-        ArrayList<PNJSpecial> listePNJ = new ArrayList<PNJSpecial>();
         PNJSpecial pnj;
-        String fichier = ".\\files\\pnj.csv";
+        String fichier = ".\\files\\pnjspecial.csv";
         FileReader f = new FileReader(fichier);
         BufferedReader r = new BufferedReader(f);
         String ligne;
 
         // variables pour stocker les données des objets lus
-        String nom, type, replique, indice;
+        String nom, article, type, replique, indice;
         int max_pv, pa, pc, indexSalle;
 
         try{
@@ -171,16 +169,17 @@ public class Chargement {
 
                 // appel au constructeur avec tous les arguments requis
                 nom = donnees[0];
-                type = donnees[1];
-                max_pv = Integer.parseInt(donnees[2]);
-                pa = Integer.parseInt(donnees[3]);
-                pc = Integer.parseInt(donnees[4]);
-                replique = donnees[5];
-                indice = donnees[6];
-                pnj = new PNJSpecial(nom, type, indice, replique, max_pv, pa, pc);
+                article = donnees[1];
+                type = donnees[2];
+                max_pv = Integer.parseInt(donnees[3]);
+                pa = Integer.parseInt(donnees[4]);
+                pc = Integer.parseInt(donnees[5]);
+                replique = donnees[6];
+                indice = donnees[7];
+                pnj = new PNJSpecial(nom, type, article, indice, replique, max_pv, pa, pc);
 
                 // ajout à la liste des PNJ de la salle
-                indexSalle = Integer.parseInt(donnees[7]);
+                indexSalle = Integer.parseInt(donnees[8]);
                 if((indexSalle >= listeSalles.size()) || (indexSalle < 0)){ // index invalide
                     System.out.println("Problème au chargement des PNJ. Salle introuvable pour " + pnj.getNom());
                 }

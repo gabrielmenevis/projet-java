@@ -1,7 +1,11 @@
 package Salles;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -130,7 +134,7 @@ public class Salle {
         if(this.listePNJ.size() > 0){
             System.out.println("Vous regardez autour de vous. Vous voyez : ");
             for(PNJ p: this.listePNJ){
-                System.out.println(p.getNom() + " " + p.getType());
+                System.out.println(p.getNom() + " " + p.getArticle() + " " + p.getType());
             }
         }
 
@@ -148,6 +152,46 @@ public class Salle {
         else{
             System.out.println("Vous ne pouvez aller nulle part. Ce tombeau sera votre tombeau !");
         }
+    }
+
+    // génére de 0 à 3 PNJ aléatoirement
+    public void genererPNJ() throws IOException {
+
+        Random r = new Random();
+        int tirage, tirage2;
+        List<String> donnees;
+        String nom, article, type, replique;
+        PNJ pnj;
+
+        // 3/4 de générer au moins un PNJ, 2/4 d'en générer au moins deux, 1/4 d'en générer 3
+        tirage = r.nextInt(4);
+        for(int i = 0 ; i < tirage ; i++){
+
+            // tirage du nom et article
+            donnees = Files.readAllLines(Paths.get(".\\files\\pnj_hasard\\nom_pnj.csv"));
+            tirage2 = r.nextInt(donnees.size());
+            nom = donnees.get(tirage2).split(";")[0];
+            article = donnees.get(tirage2).split(";")[1];
+
+            // tirage du type
+            donnees = Files.readAllLines(Paths.get(".\\files\\pnj_hasard\\type_pnj.csv"));
+            tirage2 = r.nextInt(donnees.size());
+            type = donnees.get(tirage2);
+
+            // tirage de la réplique
+            donnees = Files.readAllLines(Paths.get(".\\files\\pnj_hasard\\phrase_pnj.csv"));
+            tirage2 = r.nextInt(donnees.size());
+            replique = donnees.get(tirage2);
+
+            // génération et ajout du pnj
+            pnj = new PNJ(nom, type, article, replique, 100, 40, 40);
+            this.listePNJ.add(pnj);
+        }
+    }
+
+    // vide la liste de PNJ des PNJ générés aléatoirement
+    public void viderPNJ(){
+        this.listePNJ.removeIf(pnj -> !(pnj instanceof PNJSpecial));
     }
 
     public Objet fouiller(Personnage perso){
@@ -239,7 +283,7 @@ public class Salle {
                 System.out.println("À qui voulez-vous parler ?");
                 for(PNJ pnj: this.listePNJ){
                     choixPNJ.put(String.valueOf(i), pnj); // dictionnaire de choix possibles
-                    System.out.println((i++) + " - " + pnj.getNom() + " " + pnj.getType());
+                    System.out.println((i++) + " - " + pnj.getNom() + " " + pnj.getArticle() + " " + pnj.getType());
                 }
                 // choix "Annuler" pour retourner null
                 choixPNJ.put(String.valueOf(i), null);
