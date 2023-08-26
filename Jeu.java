@@ -151,7 +151,7 @@ public class Jeu {
             case "3":
                 pnj = salleActuelle.choisirPNJ();
                 if(pnj != null){
-                    // TODO: interagir
+                    System.out.println("Vous avez choisi " + pnj.getNom());
                 }
                 break;
 

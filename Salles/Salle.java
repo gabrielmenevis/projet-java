@@ -222,11 +222,42 @@ public class Salle {
     }
 
     public PNJ choisirPNJ(){
+
         if(!this.listePNJ.isEmpty()){
-            // TODO: afficher la liste de PNJ et retourner le PNJ choisi
-            return null;
+
+            int i;
+            boolean continuer = true;
+            HashMap<String, PNJ> choixPNJ = new HashMap<String, PNJ>();
+            PNJ PNJChoisi = null;
+            String choix;
+            Scanner sc = new Scanner(System.in);
+
+            System.out.println("Attention, vous n'êtes pas seul(e)... Vous pensez qu'ils vous observent ?");
+            while(continuer){
+
+                i = 1;
+                System.out.println("À qui voulez-vous parler ?");
+                for(PNJ pnj: this.listePNJ){
+                    choixPNJ.put(String.valueOf(i), pnj); // dictionnaire de choix possibles
+                    System.out.println((i++) + " - " + pnj.getNom() + " " + pnj.getType());
+                }
+                // choix "Annuler" pour retourner null
+                choixPNJ.put(String.valueOf(i), null);
+                System.out.println(i + " - Annuler");
+
+                choix = sc.nextLine();
+                // si le choix est valide
+                if(choixPNJ.containsKey(choix)){
+                    continuer = false;
+                    PNJChoisi = choixPNJ.get(choix);
+                }
+                
+            }
+            
+            return PNJChoisi;
         }
-        else{
+
+        else{ // personne dans la pièce
             System.out.println("C'est calme, très calme. En fait vous êtes seul(e). Très seul(e).");
             return null;
         }
