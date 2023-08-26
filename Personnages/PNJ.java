@@ -1,15 +1,14 @@
 package Personnages;
 
 public class PNJ extends Personnage {
-    private String indice;
+
     private String textePNJ;
     private String type;
     private int base_p_attaque;
 
-    public PNJ(String nom, String type, String indice, String textePNJ, int max_pv, int p_attaque, int p_charisme) {
+    public PNJ(String nom, String type, String textePNJ, int max_pv, int p_attaque, int p_charisme) {
         super(nom, max_pv, max_pv, p_attaque, p_charisme);  // Ici, max_pv est passé deux fois à cause du constructeur de Personnage
         this.type = type;
-        this.indice = indice;
         this.textePNJ = textePNJ;
         this.base_p_attaque = p_attaque;
     }
@@ -18,20 +17,12 @@ public class PNJ extends Personnage {
         return this.type;
     }
 
-    public String getIndice() {
-        return indice;
-    }
-
     public String getTextePNJ() {
         return textePNJ;
     }
 
     public void setType(String type){
         this.type = type;
-    }
-
-    public void setIndice(String indice){
-        this.indice = indice;
     }
 
     public void setTextePNJ(String textePNJ){

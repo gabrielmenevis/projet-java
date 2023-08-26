@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import Objets.Objet;
 import Objets.ObjetConsommable;
 import Objets.ObjetUnique;
-import Personnages.PNJ;
+import Personnages.PNJSpecial;
 import Salles.Salle;
 
 public class Chargement {
@@ -139,8 +139,8 @@ public class Chargement {
 
     public static void chargerPNJ(ArrayList<Salle> listeSalles) throws IOException{
 
-        ArrayList<PNJ> listePNJ = new ArrayList<PNJ>();
-        PNJ pnj;
+        ArrayList<PNJSpecial> listePNJ = new ArrayList<PNJSpecial>();
+        PNJSpecial pnj;
         String fichier = ".\\files\\pnj.csv";
         FileReader f = new FileReader(fichier);
         BufferedReader r = new BufferedReader(f);
@@ -177,7 +177,7 @@ public class Chargement {
                 pc = Integer.parseInt(donnees[4]);
                 replique = donnees[5];
                 indice = donnees[6];
-                pnj = new PNJ(nom, type, indice, replique, max_pv, pa, pc);
+                pnj = new PNJSpecial(nom, type, indice, replique, max_pv, pa, pc);
 
                 // ajout à la liste des PNJ de la salle
                 indexSalle = Integer.parseInt(donnees[7]);
