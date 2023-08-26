@@ -18,14 +18,58 @@ public class Jeu {
 
         Random r = new Random();
 
-        joueur = new Courgette("josé", 0, 0, 0, 0);
+        joueur = creationPersonnage();
+        joueur.presentation();
+        System.out.println("Bonjour "+ joueur.getNom()+ " bien ou bien ?  ");
         listeSalles = Chargement.chargerSalles();
         Chargement.chargerObjets(listeSalles);
-        salleActuelle = listeSalles.get(r.nextInt(listeSalles.size()));
+        salleActuelle = listeSalles.get(0);
 
         // lancement de la boucle principale
         while(menuAction());
     }
+
+    public static Personnage creationPersonnage(){
+        String rep = " ";
+        String prenom;
+        Personnage perso = null;
+        Scanner sc = new Scanner (System.in);
+
+        while((!rep.equals("1")) && (!rep.equals("2")) && (!rep.equals("3")) && (!rep.equals("4"))) {
+        System.out.println("Bonjour, quel personnage souhaitez-vous incarner durant le jeu ? ");
+        System.out.println("1 - Un sportif, fort en attaque mais très peu de charisme");
+        System.out.println("2 - Un artiste, on vous trouve un certain charme mais vous n'êtes clairement pas le premier qu'on choisirais dans son equipe de sport");
+        System.out.println("3 - Un employé de bureau, ni le plus charismatique ni le plus fort, vous excellez dans l'art d'être moyen");
+        System.out.println("4 - Une courgette, laissez-vous suprendre par la courgette");
+        rep = sc.nextLine();
+        
+
+            switch(rep){
+
+                case "1": System.out.println("Ok le sportif, et c'est quoi votre petit nom?");
+                         prenom = sc.nextLine();
+                         perso = new Sportif(prenom);
+                break;
+                case "2" :System.out.println("Ok l'artiste, et c'est quoi votre petit nom?");
+                         prenom = sc.nextLine();
+                         perso = new Artiste(prenom);
+                break;        
+                case "3": System.out.println("Comme c'est original, et c'est quoi votre petit nom?");
+                         prenom = sc.nextLine();
+                         perso = new  Employe(prenom);
+                break;
+                case "4": System.out.println("Très bon choix, et quel est le nom de cette jeune Courgette?");
+                         prenom = sc.nextLine();
+                         perso = new Courgette(prenom);
+                break;
+                default : System.out.println("ce personnage n'existe pas");   
+                break;           
+            }
+        }
+
+        return perso;
+    }
+        
 
     public static boolean menuAction(){
 
@@ -35,6 +79,7 @@ public class Jeu {
         Salle prochaineSalle;
         Objet o;
 
+        System.out.println();
         salleActuelle.descriptionCourte();
 
         while(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") && !choix.equals("4") && !choix.equals("5") && !choix.equals("6") && !choix.equals("10")){

@@ -126,10 +126,7 @@ public abstract class Objet {
 
         } 
        
-        //     
-
-            //rajouter méthode gagnerPA, gagnerPV, gagnerPC dans personnage
-            // rajouter aussi "mourir" ou "se reveiller à l'infirmerie" --> se reveiller avec les pv redevenus normaux, dans la salle de l'infirmerie
+    
     }
 
 
