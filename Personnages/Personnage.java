@@ -2,6 +2,7 @@ package Personnages;
 
 import Objets.Inventaire;
 import Objets.Objet;
+import Objets.ObjetConsommable;
 
 public abstract class Personnage {
 
@@ -96,10 +97,18 @@ public abstract class Personnage {
             boolean restant;
             objetChoisi.utilisationObjet(this);
             System.out.println();
-            restant = this.inventaire.enleverObjet(objetChoisi);
-            if(!restant){
-                System.out.println("Vous n'avez plus de " + objetChoisi.getNom() + "...");
-                System.out.println("J'espère que vous en avez bien profité.");
+            if(objetChoisi instanceof ObjetConsommable){ // les messages affichés dépendent de la nature de l'objet
+                restant = this.inventaire.enleverObjet((ObjetConsommable) objetChoisi);
+                if(!restant){
+                    System.out.println("Vous n'avez plus de " + objetChoisi.getNom() + "...");
+                    System.out.println("J'espère que vous en avez bien profité.");
+                    System.out.println();
+                }
+            }
+            else{
+                System.out.println("Alors, ça valait le coup de " + objetChoisi.getArticleDefini() + " " + objetChoisi.getNom() + " ?");
+                System.out.println("On n'en trouve pas à tous les coins de rue. En fait vous n'en trouverez plus.");
+                System.out.println("Mais pas de panique, vous pouvez toujours consulter son effet depuis l'inventaire, si le coeur vous en dit. Je dis ça, je dis rien...");
                 System.out.println();
             }
         }

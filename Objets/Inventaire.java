@@ -1,22 +1,33 @@
 package Objets;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class Inventaire {
 
     private HashMap<Objet, Integer> listeObjets;
+    private ArrayList<ObjetUnique> objetsUniquesUtilises;
 
     public Inventaire(){
         listeObjets = new HashMap<Objet, Integer>();
+        objetsUniquesUtilises = new ArrayList<ObjetUnique>();
     }
 
     public HashMap<Objet, Integer> getListeObjets(){
         return this.listeObjets;
     }
 
+    public ArrayList<ObjetUnique> getObjetsUniquesUtilises(){
+        return this.objetsUniquesUtilises;
+    }
+
     public void setListeObjets(HashMap<Objet, Integer> listeObjets){
         this.listeObjets = listeObjets;
+    }
+
+    public void setObjetsUniquesUtilises(ArrayList<ObjetUnique> objetsUniquesUtilises){
+        this.objetsUniquesUtilises = objetsUniquesUtilises;
     }
 
     public void rangerObjet(Objet objet){
@@ -53,11 +64,13 @@ public class Inventaire {
             System.out.println("Vous rangez " + objet.getArticleDefini() + " " + objet.getNom() + " dans votre inventaire.");
             System.out.println("Gardez " + objet.getArticleDefini() + " précieusement, ça ne court pas les rues...");
             System.out.println();
-            ((ObjetUnique) objet).setDejaPris(true); // on retient que l'objet a été pris
+            // on retient que l'objet a déjà été pris pour qu'il n'apparaisse pas à nouveau dans la salle
+            ((ObjetUnique) objet).setDejaPris(true);
         }
     }
 
-    public boolean enleverObjet(Objet objet){
+    // décrémente l'objet consommable de l'inventaire
+    public boolean enleverObjet(ObjetConsommable objet){
         int quantiteObjet;
         // on s'assure que l'objet est bien présent
         if(this.listeObjets.containsKey(objet)){
@@ -76,6 +89,15 @@ public class Inventaire {
             return false; // retourne faux si l'objet n'était pas présent
         }
     }
+
+
+    // ranger un objet unique dans la liste des objets utilisés
+    public void rangerObjetUtilise(ObjetUnique objetUtilise){
+        this.objetsUniquesUtilises.add(objetUtilise);
+        if(this.listeObjets.containsKey(objetUtilise)){
+            this.listeObjets.remove(objetUtilise);
+        }
+    }
     
 
     // laisse le joueur choisir un objet dans son inventaire et l'utiliser
@@ -91,7 +113,7 @@ public class Inventaire {
         Objet objetChoisi = null;
 
         // objets dans l'inventaire
-        if(!this.listeObjets.isEmpty()){
+        if(!this.listeObjets.isEmpty() || !this.objetsUniquesUtilises.isEmpty()){
 
             System.out.println();
             System.out.println("On dirait que vous ne voyagez pas les poches vides...");
@@ -102,10 +124,27 @@ public class Inventaire {
                 System.out.println("Voici ce que vous avez amassé :");
 
                 i = 1;
-                for(HashMap.Entry<Objet, Integer> objet: listeObjets.entrySet()){
-                    choixObjet.put(String.valueOf(i), objet.getKey()); // dictionnaire des choix possibles
-                    System.out.println((i++) + " - " + objet.getKey().getNom() + " (" + objet.getValue() + ")");
+
+                if(!this.objetsUniquesUtilises.isEmpty()){
+                    System.out.println("Déjà utilisés :");
+                    for(ObjetUnique objet: this.objetsUniquesUtilises){
+                        choixObjet.put(String.valueOf(i), objet); // dictionnaire des choix possibles
+                        System.out.println((i++) + " - " + objet.getNom());
+                    }
                 }
+
+                if(!this.objetsUniquesUtilises.isEmpty() && !this.listeObjets.isEmpty()){
+                    System.out.println("------------------------");
+                }
+
+                if(!this.listeObjets.isEmpty()){
+                    System.out.println("Utilisation possible :");
+                    for(HashMap.Entry<Objet, Integer> objet: this.listeObjets.entrySet()){
+                        choixObjet.put(String.valueOf(i), objet.getKey()); // dictionnaire des choix possibles
+                        System.out.println((i++) + " - " + objet.getKey().getNom() + " (" + objet.getValue() + ")");
+                    }
+                }
+
                 choixObjet.put(String.valueOf(i), null); // choix Annuler
                 System.out.println(i + " - Annuler");
 
@@ -117,32 +156,45 @@ public class Inventaire {
 
                     if(objetChoisi != null){ // l'utilisateur n'a pas choisi Annuler
 
-                        // boucle pour le choix de l'action à effectuer
-                        while(continuer2){
+                        if(this.objetsUniquesUtilises.contains(objetChoisi)){ // si objet unique utilisé, on affiche juste l'effet
                             System.out.println();
-                            System.out.println(objetChoisi.getUtilisation() + " " + objetChoisi.getArticleDefini() + " " + objetChoisi.getNom() + " ?");
-                            System.out.println("1 - Oui");
-                            System.out.println("2 - Non");
+                            System.out.println(objetChoisi.getEffet());
+                            System.out.println("Vous avez déjà utilisé " + objetChoisi.getArticleDefini() + " " + objetChoisi.getNom());
+                            System.out.println("Effet : " + objetChoisi.getValeurAjoutee() + " " + objetChoisi.getAttributTouche());
+                            System.out.println();
+                            objetChoisi = null; // on ne retourne rien car il ne faut pas réutiliser l'objet
+                        }
 
-                            action = sc.nextLine();
-                            switch(action){
-
-                                // utiliser l'objet, on retournera l'objet choisi
-                                case "1": continuer2 = false;
-                                break;
-
-                                // ne pas utiliser l'objet, on retournera null
-                                case "2":
+                        else{
+                            // boucle pour le choix de l'action à effectuer
+                            while(continuer2){
                                 System.out.println();
-                                System.out.println("À ta guise...");
-                                System.out.println();
-                                objetChoisi = null;
-                                continuer2 = false;
-                                break;
+                                System.out.println(objetChoisi.getUtilisation() + " " + objetChoisi.getArticleDefini() + " " + objetChoisi.getNom() + " ?");
+                                System.out.println("1 - Oui");
+                                System.out.println("2 - Non");
+
+                                action = sc.nextLine();
+                                switch(action){
+
+                                    // utiliser l'objet, on retournera l'objet choisi
+                                    case "1": continuer2 = false;
+                                    break;
+
+                                    // ne pas utiliser l'objet, on retournera null
+                                    case "2":
+                                    System.out.println();
+                                    System.out.println("À ta guise...");
+                                    System.out.println();
+                                    objetChoisi = null;
+                                    continuer2 = false;
+                                    break;
+                                }
                             }
                         }
                     }
                 }
+
+                System.out.println();
             }
         }
 

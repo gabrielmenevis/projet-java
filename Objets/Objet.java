@@ -42,7 +42,7 @@ public abstract class Objet {
         return this.valeurAjoutee;
     }
 
-    public String attributTouche(){
+    public String getAttributTouche(){
         return this.attributTouche;
     }
 
@@ -129,14 +129,6 @@ public abstract class Objet {
     
     }
 
-
-    public void laisserObjet(){
-        // si dans le menuObjet on fait le choix de laisser l'objet, on revient au menu de la salle
-
-    }
-    public void rangerInventaire(){
-        // ajouter à l'inventaire du perso et retirer de la liste objet de la salle
-    }
 
     public String menuObjet(){
         Scanner s = new Scanner(System.in);
