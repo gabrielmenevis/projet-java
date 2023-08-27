@@ -40,6 +40,11 @@ public abstract class Personnage {
     public int getPAttaque() {
         return this.p_attaque;
     }
+
+    public void setNom(String nom){
+        this.nom = nom;
+    }
+
     public void setP_attaque(int p_attaque) {
         this.p_attaque = p_attaque;
     }
@@ -110,6 +115,34 @@ public abstract class Personnage {
                 System.out.println("On n'en trouve pas à tous les coins de rue. En fait vous n'en trouverez plus.");
                 System.out.println("Mais pas de panique, vous pouvez toujours consulter son effet depuis l'inventaire, si le coeur vous en dit. Je dis ça, je dis rien...");
                 System.out.println();
+            }
+        }
+    }
+
+    public void donnerObjet(PNJ pnj){
+
+        Objet objet;
+        boolean pnjAccepte;
+
+        System.out.println("Une lueur d'avidité scintille dans les yeux de " + pnj.decrire());
+
+        objet = this.inventaire.menuDonnerObjet();
+
+        if(objet == null){
+            System.out.println();
+            System.out.println(pnj.decrire() + " vous fixe avec dédain.");
+            System.out.println("En même temps, pourquoi lui promettre quelque chose si c'est pour ne rien lui donner ?");
+            System.out.println();
+        }
+
+        else{ //TODO: ce qui se passe quand on donne l'objet au PNJ
+            System.out.println("Vous proposez " + objet.getArticleDefini() + " " + objet.getNom());
+            pnjAccepte = pnj.recevoirObjet(objet);
+            if(pnjAccepte){
+                System.out.println("Super !");
+            }
+            else{
+                System.out.println("On dirait que ça n'a pas trop plu... Vous gardez " + objet.getArticleDefini() + " " + objet.getNom() + " dans votre inventaire.");
             }
         }
     }

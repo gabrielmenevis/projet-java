@@ -212,5 +212,53 @@ public class Inventaire {
 
         return objetChoisi;
     }
+
+
+    public Objet menuDonnerObjet(){
+
+        Objet objetChoisi = null;
+        HashMap<String, Objet> choixObjet = new HashMap<String, Objet>();
+        int i;
+        boolean continuer = true;
+        String choix;
+        Scanner sc = new Scanner(System.in);
+
+        if(this.listeObjets.isEmpty() && this.objetsUniquesUtilises.isEmpty()){
+            System.out.println();
+            System.out.println("Qu'est-ce qui vous prend ? Vous n'avez rien à lui donner.");
+            objetChoisi = null;
+        }
+
+        else{
+
+            while(continuer){
+
+                System.out.println();
+                System.out.println("Vous fouillez dans votre inventaire pour trouver ce que vous pourriez lui donner.");
+
+                i = 1;
+                for(HashMap.Entry<Objet, Integer> objet: this.listeObjets.entrySet()){
+                    choixObjet.put(String.valueOf(i), objet.getKey()); // dictionnaire des choix possibles
+                    System.out.println((i++) + " - " + objet.getKey().getNom() + " (" + objet.getValue() + ")");
+                }
+                for(ObjetUnique objet: this.objetsUniquesUtilises){
+                    choixObjet.put(String.valueOf(i), objet);
+                    System.out.println((i++) + " - " + objet.getNom() + " (1)");
+                }
+                choixObjet.put(String.valueOf(i), null); // choix "Annuler"
+                System.out.println(i + " - Annuler");
+
+                choix = sc.nextLine();
+                if(choixObjet.containsKey(choix)){
+                    continuer = false;
+                    objetChoisi = choixObjet.get(choix);
+                }
+
+            }
+
+        }
+
+        return objetChoisi;
+    }
     
 }

@@ -1,11 +1,16 @@
 package Salles;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 import Personnages.*;
+import combats.combats;
 import Objets.Objet;
 
 public class Salle {
@@ -112,6 +117,12 @@ public class Salle {
         }
     }
 
+    public void ajouterPNJ(PNJ pnj){
+        if(this.listePNJ.contains(pnj) == false){
+            this.listePNJ.add(pnj);
+        }
+    }
+
     public void descriptionCourte(){
         System.out.println("Vous êtes dans " + this.article + " " + this.nom);
     }
@@ -123,8 +134,8 @@ public class Salle {
 
         if(this.listePNJ.size() > 0){
             System.out.println("Vous regardez autour de vous. Vous voyez : ");
-            for(PNJ p: this.listePNJ){ // TODO: attendre la classe PNJ
-                // System.out.println(p.getNom());
+            for(PNJ p: this.listePNJ){
+                System.out.println(p.getNom() + " " + p.getArticle() + " " + p.getType());
             }
         }
 
@@ -144,20 +155,76 @@ public class Salle {
         }
     }
 
-    public Objet fouiller(Personnage perso){
+    // génére de 0 à 3 PNJ aléatoirement
+    public void genererPNJ() throws IOException {
+
+        Random r = new Random();
+        int tirage, tirage2;
+        List<String> donnees;
+        String nom, article, type, replique;
+        PNJ pnj;
+
+        // 3/4 de générer au moins un PNJ, 2/4 d'en générer au moins deux, 1/4 d'en générer 3
+        tirage = r.nextInt(4);
+        for(int i = 0 ; i < tirage ; i++){
+
+            // tirage du nom et article
+            donnees = Files.readAllLines(Paths.get(".\\files\\pnj_hasard\\nom_pnj.csv"));
+            tirage2 = r.nextInt(donnees.size());
+            nom = donnees.get(tirage2).split(";")[0];
+            article = donnees.get(tirage2).split(";")[1];
+
+            // tirage du type
+            donnees = Files.readAllLines(Paths.get(".\\files\\pnj_hasard\\type_pnj.csv"));
+            tirage2 = r.nextInt(donnees.size());
+            type = donnees.get(tirage2);
+
+            // tirage de la réplique
+            donnees = Files.readAllLines(Paths.get(".\\files\\pnj_hasard\\phrase_pnj.csv"));
+            tirage2 = r.nextInt(donnees.size());
+            replique = donnees.get(tirage2);
+
+            // génération et ajout du pnj
+            pnj = new PNJ(nom, type, article, replique, 100, 40, 40);
+            this.listePNJ.add(pnj);
+        }
+    }
+
+    // vide la liste de PNJ des PNJ générés aléatoirement
+    public void viderPNJ(){
+        this.listePNJ.removeIf(pnj -> !(pnj instanceof PNJSpecial));
+    }
+
+    // affiche les objets dans la pièce, le personnage peut en choisir un
+    // il peut aussi se faire attraper en train de fouiller par un PNJ
+    public Objet fouiller(Personnage perso) throws IOException {
 
         int i;
         Objet objetChoisi = null;
         Scanner sc = new Scanner(System.in);
         String choix;
-        boolean continuer = true;
+        boolean continuer = true, attrape;
         HashMap<String, Objet> choixObjet = new HashMap<String, Objet>();
         ArrayList<Objet> listeObjetsTemp = new ArrayList<Objet>();
+        Random r = new Random();
+        int tirage;
+        PNJ pnjAttrape;
+        combats combat;
 
         System.out.println("Vous fouillez " + this.article + " " + this.nom + " dans ses moindres recoins.");
 
+        // tirage pour voir si vous échappez à la vigilance des PNJ
+        // si la pièce n'a jamais été fouillée, ils ne le feront pas remarquer, sinon ils interceptent
+        tirage = r.nextInt(6);
+        if(tirage >= this.listePNJ.size()){
+            attrape = false;
+        }
+        else{
+            attrape = true;
+        }
+
         // la pièce n'a jamais été fouillée ou il n'y a aucun PNJ pour vous attraper
-        if((!this.fouille) || this.listePNJ.isEmpty()){
+        if((!this.fouille) || (!attrape)){
 
             // constitution de la liste des objets apparus
             for(Objet o: this.listeObjets){
@@ -207,20 +274,59 @@ public class Salle {
             return objetChoisi;
         }
 
-        // la pièce a été fouillée et il y a au moins un PNJ
-        // TODO: ajouter ce qui se passe
+        // la pièce a déjà été fouillée et les PNJ vous attrapent
         else{
-            System.out.println("malheur ! machin vous a attrapé");
+
+            pnjAttrape = this.listePNJ.get(tirage);
+
+            System.out.println("Vous pensez que fouiller " + this.article + " " + this.nom + " de fond en comble est la meilleure manière de passer inaperçu ??!");
+            System.out.println(pnjAttrape.decrire() + " s'approche de vous d'un air suspicieux... Vous n'allez pas pouvoir échapper au combat.");
+            System.out.println();
+
+            combat = new combats(perso, pnjAttrape);
+            combat.lancerCombat();
+
             return null;
         }
     }
 
     public PNJ choisirPNJ(){
+
         if(!this.listePNJ.isEmpty()){
-            // TODO: afficher la liste de PNJ et retourner le PNJ choisi
-            return null;
+
+            int i;
+            boolean continuer = true;
+            HashMap<String, PNJ> choixPNJ = new HashMap<String, PNJ>();
+            PNJ PNJChoisi = null;
+            String choix;
+            Scanner sc = new Scanner(System.in);
+
+            System.out.println("Attention, vous n'êtes pas seul(e)... Vous pensez qu'ils vous observent ?");
+            while(continuer){
+
+                i = 1;
+                System.out.println("À qui voulez-vous parler ?");
+                for(PNJ pnj: this.listePNJ){
+                    choixPNJ.put(String.valueOf(i), pnj); // dictionnaire de choix possibles
+                    System.out.println((i++) + " - " + pnj.getNom() + " " + pnj.getArticle() + " " + pnj.getType());
+                }
+                // choix "Annuler" pour retourner null
+                choixPNJ.put(String.valueOf(i), null);
+                System.out.println(i + " - Annuler");
+
+                choix = sc.nextLine();
+                // si le choix est valide
+                if(choixPNJ.containsKey(choix)){
+                    continuer = false;
+                    PNJChoisi = choixPNJ.get(choix);
+                }
+                
+            }
+            
+            return PNJChoisi;
         }
-        else{
+
+        else{ // personne dans la pièce
             System.out.println("C'est calme, très calme. En fait vous êtes seul(e). Très seul(e).");
             return null;
         }

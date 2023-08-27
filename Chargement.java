@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import Objets.Objet;
 import Objets.ObjetConsommable;
 import Objets.ObjetUnique;
+import Personnages.PNJSpecial;
 import Salles.Salle;
 
 public class Chargement {
@@ -35,7 +36,7 @@ public class Chargement {
 
                 // s'il a trop ou pas assez de champs sur une ligne
                 if(donnees.length != nombreColonnes){
-                    throw new IOException("Erreur dans le chargement des salles.");
+                    throw new IOException();
                 }
 
                 // appel au constructeur avec nom, article, description
@@ -62,7 +63,7 @@ public class Chargement {
             }
 
         } catch(IOException e){
-            System.out.println(e);
+            System.out.println("Erreur dans le chargement des salles.");
         }
 
         return listeSalles;
@@ -71,7 +72,6 @@ public class Chargement {
 
     public static void chargerObjets(ArrayList<Salle> listeSalles) throws IOException{
 
-        ArrayList<Objet> listeObjets = new ArrayList<Objet>();
         Objet o;
         String fichier = ".\\files\\objets.csv";
         FileReader f = new FileReader(fichier);
@@ -81,7 +81,6 @@ public class Chargement {
         // variables pour stocker les données des objets lus
         String nom, articleDefini, articleIndefini, attributTouche, utilisation, effet;
         int valeurAjoutee, indexSalle, probaSpawn;
-        // boolean consommable;
 
 
         try {
@@ -99,7 +98,7 @@ public class Chargement {
 
                 // s'il a trop ou pas assez de champs sur une ligne
                 if(donnees.length != nombreColonnes){
-                    throw new IOException("Erreur dans le chargement des objets.");
+                    throw new IOException();
                 }
 
                 // appel au constructeur avec tous les arguments requis
@@ -111,19 +110,12 @@ public class Chargement {
                 utilisation = donnees[5];
                 effet = donnees[6];
                 probaSpawn = Integer.parseInt(donnees[9]);
-                if(donnees[8].equals("1")){
+                if(donnees[8].equals("1")){ // créer un objet consommable
                     o = new ObjetConsommable(nom, articleDefini, articleIndefini, valeurAjoutee, attributTouche, utilisation, effet, probaSpawn);
                 }
-                else{
+                else{ // créer un objet unique
                     o = new ObjetUnique(nom, articleDefini, articleIndefini, valeurAjoutee, attributTouche, utilisation, effet);
                 }
-                // if(donnees[8].equals("0")){
-                //     consommable = false;
-                // } else{
-                //     consommable = true;
-                // }
-                // probaSpawn = Integer.parseInt(donnees[9]);
-                // o = new Objet(nom, articleDefini, articleIndefini, valeurAjoutee, attributTouche, utilisation, effet, consommable, probaSpawn);
 
                 // ajout à la liste des objets de la salle
                 indexSalle = Integer.parseInt(donnees[7]);
@@ -134,16 +126,75 @@ public class Chargement {
                     listeSalles.get(indexSalle).ajouterObjet(o);
                 }
 
-                // ajout du nouvel objet à la liste
-                listeObjets.add(o);
+                // ligne suivante
+                ligne = r.readLine();
+            }
+
+        } catch(IOException e){
+            System.out.println("Erreur dans le chargement des objets.");
+        }
+    }
+
+
+    public static void chargerPNJ(ArrayList<Salle> listeSalles) throws IOException{
+
+        PNJSpecial pnj;
+        String fichier = ".\\files\\pnjspecial.csv";
+        FileReader f = new FileReader(fichier);
+        BufferedReader r = new BufferedReader(f);
+        String ligne;
+
+        // variables pour stocker les données des objets lus
+        String nom, article, type, replique, indice;
+        int max_pv, pa, pc, indexSalle;
+
+        try{
+
+            // on compte le nombre de colonnes
+            ligne = r.readLine();
+            int nombreColonnes = ligne.split(";").length;
+
+            // on parcourt les lignes
+            ligne = r.readLine();
+
+            while(ligne != null){
+
+                // on éclate chaque ligne avec un séparateur ';'
+                String[] donnees = ligne.split(";");
+
+                // s'il a trop ou pas assez de champs sur une ligne
+                if(donnees.length != nombreColonnes){
+                    throw new IOException();
+                }
+
+                // appel au constructeur avec tous les arguments requis
+                nom = donnees[0];
+                article = donnees[1];
+                type = donnees[2];
+                max_pv = Integer.parseInt(donnees[3]);
+                pa = Integer.parseInt(donnees[4]);
+                pc = Integer.parseInt(donnees[5]);
+                replique = donnees[6];
+                indice = donnees[7];
+                pnj = new PNJSpecial(nom, type, article, indice, replique, max_pv, pa, pc);
+
+                // ajout à la liste des PNJ de la salle
+                indexSalle = Integer.parseInt(donnees[8]);
+                if((indexSalle >= listeSalles.size()) || (indexSalle < 0)){ // index invalide
+                    System.out.println("Problème au chargement des PNJ. Salle introuvable pour " + pnj.getNom());
+                }
+                else{
+                    listeSalles.get(indexSalle).ajouterPNJ(pnj);
+                }
 
                 // ligne suivante
                 ligne = r.readLine();
             }
 
         } catch(IOException e){
-            System.out.println(e);
+            System.out.println("Erreur dans le chargement des objets");
         }
+
     }
     
 }
