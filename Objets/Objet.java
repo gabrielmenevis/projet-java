@@ -87,7 +87,7 @@ public abstract class Objet {
         System.out.println(this.effet);
         if (this.valeurAjoutee < 0 ){
         
-             switch (this.attributTouche) {
+            switch (this.attributTouche) {
             
                 case "PV" : perso.perdrePV(this.valeurAjoutee*-1);
                 System.out.println("Oups ! Vous avez perdu "+ this.valeurAjoutee*-1 + " PV ");

@@ -88,7 +88,7 @@ public class Inventaire {
             }
         }
 
-        // sinon si c'est un objet unique déjà utilisé
+        // sinon si c'est un objet unique déjà utilisé, on l'enlève de la liste
         else if(objetsUniquesUtilises.contains(objet)){
             objetsUniquesUtilises.remove(objet);
             return false;
