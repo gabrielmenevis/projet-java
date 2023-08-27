@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Personnages.*;
+import combats.combats;
 import Objets.Objet;
 
 public class Salle {
@@ -194,20 +195,36 @@ public class Salle {
         this.listePNJ.removeIf(pnj -> !(pnj instanceof PNJSpecial));
     }
 
-    public Objet fouiller(Personnage perso){
+    // affiche les objets dans la pièce, le personnage peut en choisir un
+    // il peut aussi se faire attraper en train de fouiller par un PNJ
+    public Objet fouiller(Personnage perso) throws IOException {
 
         int i;
         Objet objetChoisi = null;
         Scanner sc = new Scanner(System.in);
         String choix;
-        boolean continuer = true;
+        boolean continuer = true, attrape;
         HashMap<String, Objet> choixObjet = new HashMap<String, Objet>();
         ArrayList<Objet> listeObjetsTemp = new ArrayList<Objet>();
+        Random r = new Random();
+        int tirage;
+        PNJ pnjAttrape;
+        combats combat;
 
         System.out.println("Vous fouillez " + this.article + " " + this.nom + " dans ses moindres recoins.");
 
+        // tirage pour voir si vous échappez à la vigilance des PNJ
+        // si la pièce n'a jamais été fouillée, ils ne le feront pas remarquer, sinon ils interceptent
+        tirage = r.nextInt(6);
+        if(tirage >= this.listePNJ.size()){
+            attrape = false;
+        }
+        else{
+            attrape = true;
+        }
+
         // la pièce n'a jamais été fouillée ou il n'y a aucun PNJ pour vous attraper
-        if((!this.fouille) || this.listePNJ.isEmpty()){
+        if((!this.fouille) || (!attrape)){
 
             // constitution de la liste des objets apparus
             for(Objet o: this.listeObjets){
@@ -257,10 +274,19 @@ public class Salle {
             return objetChoisi;
         }
 
-        // la pièce a été fouillée et il y a au moins un PNJ
+        // la pièce a déjà été fouillée et les PNJ vous attrapent
         // TODO: ajouter ce qui se passe
         else{
-            System.out.println("malheur ! machin vous a attrapé");
+
+            pnjAttrape = this.listePNJ.get(tirage);
+
+            System.out.println("Vous pensez que fouiller " + this.article + " " + this.nom + " de fond en comble est la meilleure manière de passer inaperçu ??!");
+            System.out.println(pnjAttrape.decrire() + " s'approche de vous d'un air suspicieux... Vous n'allez pas pouvoir échapper au combat.");
+            System.out.println();
+
+            combat = new combats(perso, pnjAttrape);
+            combat.lancerCombat();
+
             return null;
         }
     }
