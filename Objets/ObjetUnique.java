@@ -19,6 +19,7 @@ public class ObjetUnique extends Objet {
         this.dejaPris = dejaPris;
     }
 
+    // les objets uniques apparaissent à coup sûr
     public boolean apparaitre(){
         if(!this.dejaPris){
             return true;
@@ -28,8 +29,7 @@ public class ObjetUnique extends Objet {
         }
     }
 
-<<<<<<< Updated upstream
-=======
+
     public boolean utilisationObjet(Personnage perso){
         boolean mourir;
         mourir = super.utilisationObjet(perso);
@@ -37,14 +37,14 @@ public class ObjetUnique extends Objet {
         // this.utilise = true;
         return mourir;
     }
-
->>>>>>> Stashed changes
-    public String menuObjet(){
+  
+  
+    public String menuObjetTrouve(){
 
         String rep;
 
         // appel à la méthode de la classe parente
-        rep = super.menuObjet();
+        rep = super.menuObjetTrouve();
 
         // si l'objet est utilisé ou rangé dans l'inventaire, il n'est plus dispo dans la salle
         if(rep.equals("2") || rep.equals("3")){
@@ -54,5 +54,9 @@ public class ObjetUnique extends Objet {
         // on retourne le choix du joueur
         return rep;
     }
+
+    // public void donner(){
+
+    // }
     
 }

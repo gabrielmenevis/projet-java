@@ -4,9 +4,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Objets.Objet;
-import Objets.ObjetUnique;
 import Salles.Salle;
 import Personnages.*;
+import combats.combats;
 
 public class Jeu {
 
@@ -18,18 +18,19 @@ public class Jeu {
 
         Random r = new Random();
 
+        listeSalles = Chargement.chargerSalles();
+        Chargement.chargerObjets(listeSalles);
+        Chargement.chargerPNJ(listeSalles);
+        salleActuelle = listeSalles.get(0);
+
         joueur = creationPersonnage();
         joueur.presentation();
         System.out.println("Bonjour "+ joueur.getNom()+ " bien ou bien ?  ");
-        listeSalles = Chargement.chargerSalles();
-        Chargement.chargerObjets(listeSalles);
-        salleActuelle = listeSalles.get(0);
 
         // lancement de la boucle principale
         while(menuAction());
     }
-<<<<<<< Updated upstream
-=======
+
     public static void reveilInfirmerie(){
         System.out.println("Olala, on vous envoie à l'infirmerie pour réanimation...");
         salleActuelle = listeSalles.get(0);
@@ -37,7 +38,6 @@ public class Jeu {
     }
 
     // affichage de la map
->>>>>>> Stashed changes
     public static void ouvrirMap(){
         System.out.println("      _____________                                         _______________");
         System.out.println("     |   Salle de  |                                       |   Salle des   |");
@@ -98,18 +98,16 @@ public class Jeu {
     }
         
 
-    public static boolean menuAction(){
+    // l'IOException peut venir du combat
+    public static boolean menuAction() throws IOException{
 
         Scanner sc = new Scanner(System.in);
         String choix = "";
         PNJ pnj;
         Salle prochaineSalle;
         Objet o;
-<<<<<<< Updated upstream
-=======
         combats combat;
         boolean mourir;
->>>>>>> Stashed changes
 
         System.out.println();
         salleActuelle.descriptionCourte();
@@ -149,7 +147,7 @@ public class Jeu {
                 o = salleActuelle.fouiller(joueur);
                 // menu d'action de l'objet choisi
                 if(o != null){
-                    choix = o.menuObjet();
+                    choix = o.menuObjetTrouve();
                     switch (choix){
                         case "2" : mourir = o.utilisationObjet(joueur);
                         if (mourir == true) reveilInfirmerie();
@@ -164,31 +162,39 @@ public class Jeu {
             case "3":
                 pnj = salleActuelle.choisirPNJ();
                 if(pnj != null){
-<<<<<<< Updated upstream
-                    // TODO: interagir
-=======
+                  
                     choix = pnj.menuPNJ();
                     switch(choix){
                         // TODO: parler encore au PNJ
                         case "1": System.out.println("deux secondes");
                         break;
-                        case "2":
+                        
+                        case "2": // donner un objet
+                        joueur.donnerObjet(pnj);
+                        break;
+
+                        case "3": // lancer un combat
                         combat = new combats(joueur, pnj);
                         mourir = combat.lancerCombat();
-                        if (mourir == true){
+                        if(mourir){
                             reveilInfirmerie();
                         }
                         break;
+
+                        case "4":
+                        System.out.println("Sans vous donnez la peine de répondre, vous tournez le dos à " + pnj.decrire());
+                        break;
                     }
->>>>>>> Stashed changes
                 }
                 break;
 
             // changer de salle
             case "4":
                 prochaineSalle = salleActuelle.choisirSalle();
-                if(prochaineSalle != null){
+                if(prochaineSalle != null){ // le joueur a choisi une salle, sinon il ne se passe rien
+                    salleActuelle.viderPNJ();
                     salleActuelle = prochaineSalle;
+                    salleActuelle.genererPNJ();
                 }
                 break;
 

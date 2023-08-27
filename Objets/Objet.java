@@ -42,7 +42,7 @@ public abstract class Objet {
         return this.valeurAjoutee;
     }
 
-    public String attributTouche(){
+    public String getAttributTouche(){
         return this.attributTouche;
     }
 
@@ -134,15 +134,7 @@ public abstract class Objet {
     }
 
 
-    public void laisserObjet(){
-        // si dans le menuObjet on fait le choix de laisser l'objet, on revient au menu de la salle
-
-    }
-    public void rangerInventaire(){
-        // ajouter à l'inventaire du perso et retirer de la liste objet de la salle
-    }
-
-    public String menuObjet(){
+    public String menuObjetTrouve(){
         Scanner s = new Scanner(System.in);
         String rep;
 
@@ -158,6 +150,28 @@ public abstract class Objet {
     }
 
     public abstract boolean apparaitre();
+
+    // public boolean donner(){
+
+    //     String choix = "";
+    //     Scanner sc = new Scanner(System.in);
+
+    //     System.out.println();
+    //     while(!choix.equals("1") && !choix.equals("2")){
+    //         System.out.println();
+    //         System.out.println("Voulez-vous donner " + this.articleDefini + " " + this.nom + " ?");
+    //         System.out.println("1 - Oui");
+    //         System.out.println("2 - Non");
+    //         choix = sc.nextLine();
+    //     }
+
+    //     if(choix.equals("1")){
+    //         return true;
+    //     }
+    //     else{
+    //         return false;
+    //     }
+    // }
 
 }
     
