@@ -28,6 +28,16 @@ public class Jeu {
         // lancement de la boucle principale
         while(menuAction());
     }
+<<<<<<< Updated upstream
+=======
+    public static void reveilInfirmerie(){
+        System.out.println("Olala, on vous envoie à l'infirmerie pour réanimation...");
+        salleActuelle = listeSalles.get(0);
+        joueur.gagnerPV(10); // on redonne au joueur mort tous ces points de pv de base.
+    }
+
+    // affichage de la map
+>>>>>>> Stashed changes
     public static void ouvrirMap(){
         System.out.println("      _____________                                         _______________");
         System.out.println("     |   Salle de  |                                       |   Salle des   |");
@@ -95,6 +105,11 @@ public class Jeu {
         PNJ pnj;
         Salle prochaineSalle;
         Objet o;
+<<<<<<< Updated upstream
+=======
+        combats combat;
+        boolean mourir;
+>>>>>>> Stashed changes
 
         System.out.println();
         salleActuelle.descriptionCourte();
@@ -136,7 +151,8 @@ public class Jeu {
                 if(o != null){
                     choix = o.menuObjet();
                     switch (choix){
-                        case "2" : o.utilisationObjet(joueur);
+                        case "2" : mourir = o.utilisationObjet(joueur);
+                        if (mourir == true) reveilInfirmerie();
                         break;
                         case "3": joueur.getInventaire().rangerObjet(o);
                         break;
@@ -148,7 +164,23 @@ public class Jeu {
             case "3":
                 pnj = salleActuelle.choisirPNJ();
                 if(pnj != null){
+<<<<<<< Updated upstream
                     // TODO: interagir
+=======
+                    choix = pnj.menuPNJ();
+                    switch(choix){
+                        // TODO: parler encore au PNJ
+                        case "1": System.out.println("deux secondes");
+                        break;
+                        case "2":
+                        combat = new combats(joueur, pnj);
+                        mourir = combat.lancerCombat();
+                        if (mourir == true){
+                            reveilInfirmerie();
+                        }
+                        break;
+                    }
+>>>>>>> Stashed changes
                 }
                 break;
 
@@ -162,7 +194,10 @@ public class Jeu {
 
             // ouvrir l'inventaire
             case "5":
-                joueur.ouvrirInventaire();
+                mourir = joueur.ouvrirInventaire();
+                if(mourir){
+                    reveilInfirmerie();
+                }
                 break;
 
             case "6":

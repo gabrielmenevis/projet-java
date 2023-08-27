@@ -82,7 +82,7 @@ public abstract class Objet {
         this.effet = effet;
     }
 
-    public void utilisationObjet(Personnage perso){
+    public boolean utilisationObjet(Personnage perso){
 
         System.out.println(this.effet);
         if (this.valeurAjoutee < 0 ){
@@ -92,6 +92,7 @@ public abstract class Objet {
                 case "PV" : perso.perdrePV(this.valeurAjoutee*-1);
                 System.out.println("Oups ! Vous avez perdu "+ this.valeurAjoutee*-1 + " PV ");
                 System.out.println("vous êtes maintenant à "+ perso.getPV() + " PV");
+               
                 break;
                 case "PA" : perso.perdrePA(this.valeurAjoutee*-1);
                 System.out.println("Oups ! Vous avez perdu "+ this.valeurAjoutee*-1 + " point(s) d'attaque ");
@@ -126,7 +127,10 @@ public abstract class Objet {
 
         } 
        
-    
+        if (perso.getPV() <= 0) {
+            return true;
+        }
+        else return false;
     }
 
 

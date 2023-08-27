@@ -28,6 +28,17 @@ public class ObjetUnique extends Objet {
         }
     }
 
+<<<<<<< Updated upstream
+=======
+    public boolean utilisationObjet(Personnage perso){
+        boolean mourir;
+        mourir = super.utilisationObjet(perso);
+        perso.getInventaire().rangerObjetUtilise(this);
+        // this.utilise = true;
+        return mourir;
+    }
+
+>>>>>>> Stashed changes
     public String menuObjet(){
 
         String rep;
