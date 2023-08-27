@@ -53,7 +53,10 @@ public class combats {
         System.out.println("Le combat est terminé. " + (combatant1.getPV() > 0 ? combatant1.getNom() : combatant2.getNom()) + " est le vainqueur!");
         if (combatant1.getPV()<=0){
             return true;
-        } 
+        }
+        else if(combatant2.getPV() <= 0){
+            combatant2.setVaincu(true);
+        }
         return false;
     }
 

@@ -70,9 +70,11 @@ public class Inventaire {
     }
 
     // décrémente l'objet consommable de l'inventaire
-    public boolean enleverObjet(ObjetConsommable objet){
+    public boolean enleverObjet(Objet objet){
+
         int quantiteObjet;
-        // on s'assure que l'objet est bien présent
+
+        // on s'assure que l'objet est bien présent dans la liste d'objets
         if(this.listeObjets.containsKey(objet)){
             // s'il y a plus d'un objet de ce type en stock
             if(this.listeObjets.get(objet) > 1){
@@ -85,6 +87,13 @@ public class Inventaire {
                 return false; // retourne faux si c'était le dernier dans l'inventaire
             }
         }
+
+        // sinon si c'est un objet unique déjà utilisé, on l'enlève de la liste
+        else if(objetsUniquesUtilises.contains(objet)){
+            objetsUniquesUtilises.remove(objet);
+            return false;
+        }
+
         else{
             return false; // retourne faux si l'objet n'était pas présent
         }

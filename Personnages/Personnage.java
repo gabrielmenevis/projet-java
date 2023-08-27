@@ -3,6 +3,7 @@ package Personnages;
 import Objets.Inventaire;
 import Objets.Objet;
 import Objets.ObjetConsommable;
+import Objets.ObjetUnique;
 
 public abstract class Personnage {
 
@@ -127,7 +128,7 @@ public abstract class Personnage {
             mourir = objetChoisi.utilisationObjet(this);
             System.out.println();
             if(objetChoisi instanceof ObjetConsommable){ // les messages affichés dépendent de la nature de l'objet
-                restant = this.inventaire.enleverObjet((ObjetConsommable) objetChoisi);
+                restant = this.inventaire.enleverObjet(objetChoisi);
                 if(!restant){
                     System.out.println("Vous n'avez plus de " + objetChoisi.getNom() + "...");
                     System.out.println("J'espère que vous en avez bien profité.");
@@ -148,7 +149,7 @@ public abstract class Personnage {
     public void donnerObjet(PNJ pnj){
 
         Objet objet;
-        boolean pnjAccepte;
+        boolean pnjAccepte, restant;
 
         System.out.println("Une lueur d'avidité scintille dans les yeux de " + pnj.decrire());
 
@@ -166,11 +167,26 @@ public abstract class Personnage {
             pnjAccepte = pnj.recevoirObjet(objet);
             if(pnjAccepte){
                 System.out.println("Super !");
+                if(this.inventaire.getObjetsUniquesUtilises().contains(objet)){
+                    ((ObjetUnique) objet).desequiper(this); // si l'objet était équipé, on enlève ses effets
+                }
+                restant = this.inventaire.enleverObjet(objet); // on enlève l'objet de l'inventaire
+                if(!restant){ // c'était le dernier objet de ce type dans votre inventaire
+                    System.out.println();
+                    System.out.println("Vous n'avez plus de " + objet.getNom() + "... Le coeur sur la main, hein ?");
+                    System.out.println();
+                }
             }
             else{
+                System.out.println();
                 System.out.println("On dirait que ça n'a pas trop plu... Vous gardez " + objet.getArticleDefini() + " " + objet.getNom() + " dans votre inventaire.");
+                System.out.println();
             }
         }
+    }
+
+    public void afficherStats(){
+        System.out.println("Vous avez " + this.pv + "/" + this.max_pv + "PV, " + this.p_attaque + "PA et " + this.p_charisme + "PC.");
     }
 
     public abstract void presentation();

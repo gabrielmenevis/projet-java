@@ -19,7 +19,7 @@ public class ObjetUnique extends Objet {
         this.dejaPris = dejaPris;
     }
 
-    // les objets uniques apparaissent à coup sûr
+    // les objets uniques apparaissent à coup sûr s'ils ne sont pas déjà pris
     public boolean apparaitre(){
         if(!this.dejaPris){
             return true;
@@ -35,6 +35,60 @@ public class ObjetUnique extends Objet {
         mourir = super.utilisationObjet(perso);
         perso.getInventaire().rangerObjetUtilise(this);
         // this.utilise = true;
+        return mourir;
+    }
+
+
+    public boolean desequiper(Personnage perso){
+
+        boolean mourir = false;
+
+        // on annule l'effet de l'objet sur le personnage
+        switch(this.getAttributTouche()){
+
+            case "PV":
+            if(this.getValeurAjoutee() > 0){
+                perso.perdrePV(this.getValeurAjoutee());
+            }
+            else if(this.getValeurAjoutee() < 0){
+                perso.gagnerPV(this.getValeurAjoutee() * -1); // inversion de la valeur ajoutée
+            }
+            break;
+
+            case "PA":
+            if(this.getValeurAjoutee() > 0){
+                perso.perdrePA(this.getValeurAjoutee());
+            }
+            else if(this.getValeurAjoutee() < 0){
+                perso.gagnerPA(this.getValeurAjoutee() * -1);
+            }
+            break;
+
+            case "PC":
+            if(this.getValeurAjoutee() > 0){
+                perso.perdrePC(this.getValeurAjoutee());
+            }
+            else if(this.getValeurAjoutee() < 0){
+                perso.gagnerPC(this.getValeurAjoutee() * -1);
+            }
+            break;
+        }
+
+        // information au joueur
+        if(this.getValeurAjoutee() > 0){
+            System.out.println("Vous perdez " + (this.getValeurAjoutee()) + " " + this.getAttributTouche() + " en déséquipant " + this.getArticleDefini() + " " + this.getNom());
+        }
+        else if(this.getValeurAjoutee() < 0){
+            System.out.println("Vous gagnez " + (this.getValeurAjoutee()*-1) + " " + this.getAttributTouche() + " en déséquipant " + this.getArticleDefini() + " " + this.getNom());
+        }
+
+        perso.afficherStats();
+
+        // on vérifie que le personnage n'est pas mort
+        if(perso.getPV() <= 0){
+            mourir = true;
+        }
+
         return mourir;
     }
   
@@ -54,9 +108,5 @@ public class ObjetUnique extends Objet {
         // on retourne le choix du joueur
         return rep;
     }
-
-    // public void donner(){
-
-    // }
     
 }

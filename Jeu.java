@@ -179,7 +179,7 @@ public class Jeu {
                     choix = pnj.menuPNJ();
                     switch(choix){
                         // TODO: parler encore au PNJ
-                        case "1": System.out.println("deux secondes");
+                        case "1": pnj.parler();
                         break;
                         
                         case "2": // donner un objet
@@ -187,8 +187,7 @@ public class Jeu {
                         break;
 
                         case "3": // lancer un combat
-                        combat = new combats(joueur, pnj);
-                        mourir = combat.lancerCombat();
+                        mourir = pnj.combattre(joueur);
                         System.out.println();
                         if(mourir){
                             reveilInfirmerie();

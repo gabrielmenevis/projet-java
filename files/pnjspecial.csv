@@ -1,2 +1,2 @@
-nom;article;type;max_pv;pa;pc;replique;indice;salle
-Margarette;la;cuisinière;100;10;40;La cuisine est fermée au public, si vous voulez y entrer, il faudra me passer sur le corps;mon 1er est un test;2
+nom;article;type;max_pv;pa;pc;replique;indice;salle;objet_demande
+Margarette;la;cuisinière;100;10;40;La cuisine est fermée au public, si vous voulez y entrer, il faudra me passer sur le corps;mon 1er est un test;2;lunettes de soleil
