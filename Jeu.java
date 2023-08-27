@@ -179,7 +179,7 @@ public class Jeu {
                     choix = pnj.menuPNJ();
                     switch(choix){
                         // TODO: parler encore au PNJ
-                        case "1": System.out.println("deux secondes");
+                        case "1": pnj.parler();
                         break;
                         
                         case "2": // donner un objet

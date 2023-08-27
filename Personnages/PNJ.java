@@ -71,7 +71,7 @@ public class PNJ extends Personnage {
 
         while(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") && !choix.equals("4")){
             System.out.println("À vous de réagir :");
-            System.out.println("1 - Parle moi encore...");
+            System.out.println("1 - Répète un peu pour voir...");
             System.out.println("2 - Tiens, c'est pour toi !");
             System.out.println("3 - Tu veux te battre c'est ça ??!");
             System.out.println("4 - Annuler");
@@ -81,17 +81,23 @@ public class PNJ extends Personnage {
         return choix;
     }
 
+    public void parler(){
+        System.out.println();
+        System.out.println(this.getNom() + " vous dit : '" + this.textePNJ + "'");
+        System.out.println();
+    }
+
     public boolean combattre(Personnage perso) throws IOException{
 
         combats combat = new combats(perso, this);
         boolean mourir;
 
-        if(this.vaincu){
+        if(this.vaincu){ // le joueur a déjà vaincu le PNJ
             System.out.println();
-            System.out.println("Pitié... Laisse-moi tranquille...");
+            System.out.println("Vous avez déjà vaincu " + this.getNom() + ". Il vous implore : 'Pitié... Laisse-moi tranquille...");
             mourir = false;
         }
-        else{
+        else{ // sinon le combat se lance
             mourir = combat.lancerCombat();
         }
 

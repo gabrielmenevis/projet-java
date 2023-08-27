@@ -1,6 +1,10 @@
 package Personnages;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 import Objets.Objet;
+import combats.combats;
 
 public class PNJSpecial extends PNJ {
 
@@ -39,6 +43,70 @@ public class PNJSpecial extends PNJ {
         this.satisfait = satisfait;
     }
 
+    public String menuPNJ(){
+
+        String choix = "";
+        Scanner sc = new Scanner(System.in);
+
+        // le PNJ n'est ni satisfait ni vaincu, l'interaction est la même que pour les PNJ aléatoires
+        if(!this.satisfait && !this.getVaincu()){
+            choix = super.menuPNJ();
+        }
+
+        else{
+            System.out.println();
+            System.out.println(this.decrire() + " vous dit : 'Ah, c'est toi ! Comment puis-je t'aider ?'");
+            while(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") && !choix.equals("4")){
+                System.out.println("À vous de réagir :");
+                System.out.println("1 - Répète-moi l'indice !");
+                System.out.println("2 - Tiens, c'est pour toi !");
+                System.out.println("3 - Baston !");
+                System.out.println("4 - Annuler");
+                choix = sc.nextLine();
+            }
+        }
+
+        return choix;
+    }
+
+    public void parler(){
+        if(!this.satisfait && !this.getVaincu()){ // si ni satisfait ni vaincu, répète sa phrase
+            super.parler();
+        }
+        else{ // sinon, répète l'indice
+            this.donnerIndice();
+        }
+    }
+
+    public boolean combattre(Personnage perso) throws IOException{
+
+        boolean mourir;
+        combats combat = new combats(perso, this);
+
+        if(this.satisfait){ // le joueur a donné l'objet demandé au PNJ
+            System.out.println();
+            System.out.println(this.decrire() + " vous a donné un indice... Vous n'allez pas lui taper dessus, quand même.");
+            System.out.println("Mais peut-être que " + this.getNom() + " peut vous répéter l'indice si vous lui parlez gentiment.");
+            System.out.println();
+            mourir = false;
+        }
+
+        else if(this.getVaincu()){ // le joueur a battu le PNJ
+            System.out.println();
+            System.out.println(this.decrire() + " vous implore :");
+            System.out.println("Pitié... Je t'ai déjà dit ce que tu voulais savoir...");
+            System.out.println("Il te suffit de me parler si tu veux que je répète l'indice...");
+            System.out.println();
+            mourir = false;
+        }
+
+        else{ // sinon le combat se lance
+            mourir = combat.lancerCombat();
+        }
+
+        return mourir;
+    }
+
     public boolean recevoirObjet(Objet o){
         
         boolean accepte;
@@ -65,6 +133,7 @@ public class PNJSpecial extends PNJ {
 
 
     public void donnerIndice(){
+        System.out.println();
         System.out.println(this.decrire() + " vous dit :");
         System.out.println("Écoute attentivement ce que j'ai à te dire... Tu en auras besoin pour retrouver ce que tu cherches.");
         System.out.println(this.indice);
