@@ -136,7 +136,7 @@ public abstract class Personnage {
                 }
             }
             else{
-                System.out.println("Alors, ça valait le coup de " + objetChoisi.getArticleDefini() + " " + objetChoisi.getNom() + " ?");
+                System.out.println("Alors, ça valait le coup de " + objetChoisi.getArticleDefini() + " " + objetChoisi.getUtilisation() + " ?");
                 System.out.println("On n'en trouve pas à tous les coins de rue. En fait vous n'en trouverez plus.");
                 System.out.println("Mais pas de panique, vous pouvez toujours consulter son effet depuis l'inventaire, si le coeur vous en dit. Je dis ça, je dis rien...");
                 System.out.println();

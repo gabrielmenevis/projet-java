@@ -26,7 +26,7 @@ public class Jeu {
         joueur = creationPersonnage();
         joueur.presentation();
         System.out.println();
-        System.out.println("Comment allez-vous depuis hier soir? Nous sommes heureux de vous revoir parmis nous, et en vie!");
+        System.out.println("''Comment allez-vous depuis hier soir? Nous sommes heureux de vous revoir parmis nous, et en vie!");
         System.out.println("Je ne sais pas si vous vous souvenez mais hier vous étiez en train de chercher quelque chose quand vous avez reçu un coup à la tête. C'etait quoi deja?");
         System.out.println("Ah oui ! Votre passeport ahah. Quel dommage...Je m'en souviens maintenant, vous vous êtes pris un sacré coup de branche sur la tête pendant que vous cherchiez votre passeport pour quitter ce club !");
         System.out.println("Quelle histoire tout de même...Je suis désolé que l'accident ait mis pause à votre projet, surtout quand on sait que ce Club Med à le don de nous faire égarer des choses ");
@@ -37,8 +37,16 @@ public class Jeu {
         System.out.println();
         System.out.println("Cordialement,");
         System.out.println();
-        System.out.println("Le Staff");
+        System.out.println("Le Staff''");
         System.out.println();
+        System.out.println("......................");
+        System.out.println();
+        System.out.println("''J'ai mal au crâne...Mes souvenirs sont flous...Il faut que je retrouve ce fouttu passeport...Vérifions une dernière fois qu'il n'est pas dans poche...Tiens, qu'est ce que c'est que ça?''");
+        System.out.println();
+        System.out.println("Félicitation "+joueur.getNom()+ ",vous avez trouvé la carte n°1, d'autres sont dispérsées par-ci par-là dans le club. Voyons ce qu'elle a à vous dire :");
+        System.out.println();
+        System.out.println("''Si de l'objet perdu vous voulez vous rapprocher, un petit creux vous guiderais vers une de celle qui peut vous aider...''");
+        System.out.println("..........................................");
 
         // lancement de la boucle principale
         while(menuAction());
@@ -181,6 +189,10 @@ public class Jeu {
                         case "3": joueur.getInventaire().rangerObjet(o);
                         break;
                     }
+                }
+                // sinon si le joueur est mort en combat après s'être fait attraper
+                else if(joueur.getPV() <= 0){
+                    reveilInfirmerie();
                 }
                 break;
 
