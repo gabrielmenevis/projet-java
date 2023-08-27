@@ -41,6 +41,14 @@ public abstract class Personnage {
         return this.p_attaque;
     }
 
+    public int getPCharisme() {
+        return this.p_charisme;
+    }
+
+    public Inventaire getInventaire(){
+        return this.inventaire;
+    }
+
     public void setNom(String nom){
         this.nom = nom;
     }
@@ -49,12 +57,16 @@ public abstract class Personnage {
         this.p_attaque = p_attaque;
     }
 
-    public int getPCharisme() {
-        return this.p_charisme;
+    public void setMaxPV(int maxPV){
+        this.max_pv = maxPV;
     }
 
-    public Inventaire getInventaire(){
-        return this.inventaire;
+    public void setPV(int PV){
+        this.pv = PV;
+    }
+
+    public void resetPV(){
+        this.pv = this.max_pv;
     }
 
     // méthode perte de PV à utiliser dans la fonction combats

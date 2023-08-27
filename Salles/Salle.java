@@ -105,6 +105,10 @@ public class Salle {
         this.listeObjets = listeObjets;
     }
 
+    public void setFouille(boolean fouille){
+        this.fouille = fouille;
+    }
+
     public void ajouterSalleAdjacente(Salle salleAdjacente){
         if(this.sallesAdjacentes.contains(salleAdjacente) == false){
             this.sallesAdjacentes.add(salleAdjacente);

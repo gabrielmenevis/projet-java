@@ -32,9 +32,22 @@ public class Jeu {
     }
 
     public static void reveilInfirmerie(){
-        System.out.println("Olala, on vous envoie à l'infirmerie pour réanimation...");
+
+        // message informatif
+        System.out.println("Olala, on vous envoie à l'infirmerie pour réanimation... Ne perdez pas espoir, vous finirez bien par quitter cet endroit.");
+
+        // vider la liste de PNJ de la pièce dans laquelle on est mort
+        salleActuelle.viderPNJ();
+        
+        // retour à l'infirmerie
         salleActuelle = listeSalles.get(0);
-        joueur.gagnerPV(10); // on redonne au joueur mort tous ces points de pv de base.
+
+        // on oublie que les salles ont été fouillées
+        for(Salle s: listeSalles){
+            s.setFouille(false);
+        }
+
+        joueur.resetPV(); // on redonne au joueur mort tous ses pv de base.
     }
 
     // affichage de la map
