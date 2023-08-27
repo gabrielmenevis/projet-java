@@ -193,7 +193,7 @@ public class Chargement {
             }
 
         } catch(IOException e){
-            System.out.println("Erreur dans le chargement des objets");
+            System.out.println("Erreur dans le chargement des PNJ");
         }
 
     }

@@ -25,7 +25,20 @@ public class Jeu {
 
         joueur = creationPersonnage();
         joueur.presentation();
-        System.out.println("Bonjour "+ joueur.getNom()+ " bien ou bien ?  ");
+        System.out.println();
+        System.out.println("Comment allez-vous depuis hier soir? Nous sommes heureux de vous revoir parmis nous, et en vie!");
+        System.out.println("Je ne sais pas si vous vous souvenez mais hier vous étiez en train de chercher quelque chose quand vous avez reçu un coup à la tête. C'etait quoi deja?");
+        System.out.println("Ah oui ! Votre passeport ahah. Quel dommage...Je m'en souviens maintenant, vous vous êtes pris un sacré coup de branche sur la tête pendant que vous cherchiez votre passeport pour quitter ce club !");
+        System.out.println("Quelle histoire tout de même...Je suis désolé que l'accident ait mis pause à votre projet, surtout quand on sait que ce Club Med à le don de nous faire égarer des choses ");
+        System.out.println("Remarque, voyez le verre à moitié plein, en cherchant votre passeport vous tomberez peut-être sur d'autres objets interessants qui sait?");
+        System.out.println("Néanmoins, dans le cas ou votre passeport ne réapparait pas, nos équipe ont fait les démarches necessaires pour que vous en receviez un nouveau au plus vite !");
+        System.out.println("C'est normal, vraiment ça nous fais plaisir. Et evidemment le Club Med s'engage a prolonger votre séjour gratuitement tant que votre nouveau passeport n'est pas arrivé...ou que vous n'ayez retrouvé l'ancien.");
+        System.out.println("Bonne suite de séjour ! ");
+        System.out.println();
+        System.out.println("Cordialement,");
+        System.out.println();
+        System.out.println("Le Staff");
+        System.out.println();
 
         // lancement de la boucle principale
         while(menuAction());
