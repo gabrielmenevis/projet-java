@@ -47,7 +47,7 @@ public class combats {
                 }
             } else { // "fuir"
                 System.out.println(combatant1.getNom() + " a fui le combat. " + combatant2.getNom() + " est le vainqueur!");
-                
+                return false;
             }
         }
         System.out.println("Le combat est terminé. " + (combatant1.getPV() > 0 ? combatant1.getNom() : combatant2.getNom()) + " est le vainqueur!");
