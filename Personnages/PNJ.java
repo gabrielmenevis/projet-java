@@ -2,6 +2,9 @@ package Personnages;
 
 import java.util.Scanner;
 
+import Objets.Objet;
+import Objets.ObjetUnique;
+
 public class PNJ extends Personnage {
 
     private String textePNJ;
@@ -50,18 +53,38 @@ public class PNJ extends Personnage {
         String choix = "";
         Scanner sc = new Scanner(System.in);
 
-        System.out.println(this.textePNJ);
+        System.out.println();
+        System.out.println(this.decrire() + " vous dit : '" + this.textePNJ + "'");
         System.out.println("Non mais ! " + this.getNom() + " vous provoque ou quoi ?");
 
-        while(!choix.equals("1") && !choix.equals("2") && !choix.equals("3")){
+        while(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") && !choix.equals("4")){
             System.out.println("À vous de réagir :");
             System.out.println("1 - Parle moi encore...");
-            System.out.println("2 - Baston !");
-            System.out.println("3 - Annuler");
+            System.out.println("2 - Tiens, c'est pour toi !");
+            System.out.println("3 - Tu veux te battre c'est ça ??!");
+            System.out.println("4 - Annuler");
             choix = sc.nextLine();
         }
         
         return choix;
+    }
+
+    // TODO: mettre une proba d'accepter le consommable
+    public boolean recevoirObjet(Objet o){
+
+        boolean accepte;
+
+        System.out.println();
+        if(o instanceof ObjetUnique){
+            System.out.println(this.getNom() + " vous dit : 'Peuh ! ça ne m'intéresse pas.'");
+            accepte = false;
+        }
+        else{
+            System.out.println(this.getNom() + " vous dit : '" + o.getArticleIndefini() + " " + o.getNom() + " ? Merci, il ne fallait pas...'");
+            accepte = true;
+        }
+
+        return accepte;
     }
 
     public String decrire(){

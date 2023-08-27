@@ -119,6 +119,34 @@ public abstract class Personnage {
         }
     }
 
+    public void donnerObjet(PNJ pnj){
+
+        Objet objet;
+        boolean pnjAccepte;
+
+        System.out.println("Une lueur d'avidité scintille dans les yeux de " + pnj.decrire());
+
+        objet = this.inventaire.menuDonnerObjet();
+
+        if(objet == null){
+            System.out.println();
+            System.out.println(pnj.decrire() + " vous fixe avec dédain.");
+            System.out.println("En même temps, pourquoi lui promettre quelque chose si c'est pour ne rien lui donner ?");
+            System.out.println();
+        }
+
+        else{ //TODO: ce qui se passe quand on donne l'objet au PNJ
+            System.out.println("Vous proposez " + objet.getArticleDefini() + " " + objet.getNom());
+            pnjAccepte = pnj.recevoirObjet(objet);
+            if(pnjAccepte){
+                System.out.println("Super !");
+            }
+            else{
+                System.out.println("On dirait que ça n'a pas trop plu... Vous gardez " + objet.getArticleDefini() + " " + objet.getNom() + " dans votre inventaire.");
+            }
+        }
+    }
+
     public abstract void presentation();
 }
 

@@ -1,5 +1,7 @@
 package Personnages;
 
+import Objets.Objet;
+
 public class PNJSpecial extends PNJ {
 
     private String indice;
@@ -15,6 +17,15 @@ public class PNJSpecial extends PNJ {
 
     public void setIndice(String indice){
         this.indice = indice;
+    }
+
+    public boolean recevoirObjet(Objet o){
+        
+        boolean accepte = true;
+
+        // TODO: accepte l'objet unique si c'est celui qu'il demande
+
+        return accepte;
     }
     
 }

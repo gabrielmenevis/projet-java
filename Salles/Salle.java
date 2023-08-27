@@ -275,7 +275,6 @@ public class Salle {
         }
 
         // la pièce a déjà été fouillée et les PNJ vous attrapent
-        // TODO: ajouter ce qui se passe
         else{
 
             pnjAttrape = this.listePNJ.get(tirage);

@@ -140,7 +140,7 @@ public class Jeu {
                 o = salleActuelle.fouiller(joueur);
                 // menu d'action de l'objet choisi
                 if(o != null){
-                    choix = o.menuObjet();
+                    choix = o.menuObjetTrouve();
                     switch (choix){
                         case "2" : o.utilisationObjet(joueur);
                         break;
@@ -159,9 +159,18 @@ public class Jeu {
                         // TODO: parler encore au PNJ
                         case "1": System.out.println("deux secondes");
                         break;
-                        case "2":
+
+                        case "2": // donner un objet
+                        joueur.donnerObjet(pnj);
+                        break;
+
+                        case "3": // lancer un combat
                         combat = new combats(joueur, pnj);
                         combat.lancerCombat();
+                        break;
+
+                        case "4":
+                        System.out.println("Sans vous donnez la peine de répondre, vous tournez le dos à " + pnj.decrire());
                         break;
                     }
                 }
