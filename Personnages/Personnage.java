@@ -127,7 +127,7 @@ public abstract class Personnage {
             mourir = objetChoisi.utilisationObjet(this);
             System.out.println();
             if(objetChoisi instanceof ObjetConsommable){ // les messages affichés dépendent de la nature de l'objet
-                restant = this.inventaire.enleverObjet((ObjetConsommable) objetChoisi);
+                restant = this.inventaire.enleverObjet(objetChoisi);
                 if(!restant){
                     System.out.println("Vous n'avez plus de " + objetChoisi.getNom() + "...");
                     System.out.println("J'espère que vous en avez bien profité.");
@@ -148,7 +148,7 @@ public abstract class Personnage {
     public void donnerObjet(PNJ pnj){
 
         Objet objet;
-        boolean pnjAccepte;
+        boolean pnjAccepte, restant;
 
         System.out.println("Une lueur d'avidité scintille dans les yeux de " + pnj.decrire());
 
@@ -166,9 +166,17 @@ public abstract class Personnage {
             pnjAccepte = pnj.recevoirObjet(objet);
             if(pnjAccepte){
                 System.out.println("Super !");
+                restant = this.inventaire.enleverObjet(objet);
+                if(!restant){ // c'était le dernier objet de ce type dans votre inventaire
+                    System.out.println();
+                    System.out.println("Vous n'avez plus de " + objet.getNom() + "... Le coeur sur la main, hein ?");
+                    System.out.println();
+                }
             }
             else{
+                System.out.println();
                 System.out.println("On dirait que ça n'a pas trop plu... Vous gardez " + objet.getArticleDefini() + " " + objet.getNom() + " dans votre inventaire.");
+                System.out.println();
             }
         }
     }
