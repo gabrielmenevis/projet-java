@@ -187,8 +187,7 @@ public class Jeu {
                         break;
 
                         case "3": // lancer un combat
-                        combat = new combats(joueur, pnj);
-                        mourir = combat.lancerCombat();
+                        mourir = pnj.combattre(joueur);
                         System.out.println();
                         if(mourir){
                             reveilInfirmerie();

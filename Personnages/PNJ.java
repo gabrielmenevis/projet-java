@@ -1,9 +1,11 @@
 package Personnages;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import Objets.Objet;
 import Objets.ObjetUnique;
+import combats.combats;
 
 public class PNJ extends Personnage {
 
@@ -11,6 +13,7 @@ public class PNJ extends Personnage {
     private String article;
     private String type;
     private int base_p_attaque;
+    private boolean vaincu;
 
     public PNJ(String nom, String type, String article, String textePNJ, int max_pv, int p_attaque, int p_charisme) {
         super(nom, max_pv, max_pv, p_attaque, p_charisme);  // Ici, max_pv est passé deux fois à cause du constructeur de Personnage
@@ -18,6 +21,7 @@ public class PNJ extends Personnage {
         this.article = article;
         this.textePNJ = textePNJ;
         this.base_p_attaque = p_attaque;
+        this.vaincu = false;
     }
 
     public String getType(){
@@ -32,6 +36,10 @@ public class PNJ extends Personnage {
         return this.article;
     }
 
+    public boolean getVaincu(){
+        return this.vaincu;
+    }
+
     public void setType(String type){
         this.type = type;
     }
@@ -42,6 +50,10 @@ public class PNJ extends Personnage {
 
     public void setArticle(String article){
         this.article = article;
+    }
+    
+    public void setVaincu(boolean vaincu){
+        this.vaincu = vaincu;
     }
 
     public void presentation() {
@@ -67,6 +79,23 @@ public class PNJ extends Personnage {
         }
         
         return choix;
+    }
+
+    public boolean combattre(Personnage perso) throws IOException{
+
+        combats combat = new combats(perso, this);
+        boolean mourir;
+
+        if(this.vaincu){
+            System.out.println();
+            System.out.println("Pitié... Laisse-moi tranquille...");
+            mourir = false;
+        }
+        else{
+            mourir = combat.lancerCombat();
+        }
+
+        return mourir;
     }
 
     // TODO: mettre une proba d'accepter le consommable

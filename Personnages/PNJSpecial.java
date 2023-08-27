@@ -6,11 +6,13 @@ public class PNJSpecial extends PNJ {
 
     private String indice;
     private String nomObjetDemande;
+    private boolean satisfait;
 
     public PNJSpecial(String nom, String type, String article, String indice, String textePNJ, int max_pv, int p_attaque, int p_charisme, String nomObjetDemande) {
         super(nom, type, article, textePNJ, max_pv, p_attaque, p_charisme);  // Ici, max_pv est passé deux fois à cause du constructeur de Personnage
         this.indice = indice;
         this.nomObjetDemande = nomObjetDemande;
+        this.satisfait = false;
     }
 
     public String getIndice() {
@@ -21,6 +23,10 @@ public class PNJSpecial extends PNJ {
         return this.nomObjetDemande;
     }
 
+    public boolean getSatisfait(){
+        return this.satisfait;
+    }
+
     public void setIndice(String indice){
         this.indice = indice;
     }
@@ -29,15 +35,20 @@ public class PNJSpecial extends PNJ {
         this.nomObjetDemande = nomObjetDemande;
     }
 
-    // TODO: accepte l'objet unique si c'est celui qu'il demande
+    public void setSatisfait(boolean satisfait){
+        this.satisfait = satisfait;
+    }
+
     public boolean recevoirObjet(Objet o){
         
         boolean accepte;
 
-        if(o.getNom().equals(this.nomObjetDemande)){
+        if(o.getNom().equals(this.nomObjetDemande)){ // TODO: revoir messages
             accepte = true;
+            this.satisfait = true;
             System.out.println();
-            System.out.println("trop cool merci mon reuf");
+            System.out.println(o.getArticleIndefini() + " " + o.getNom() + " !!!!! J'en ai toujours rêvé...");
+            this.donnerIndice();
             System.out.println();
         }
 
@@ -50,6 +61,14 @@ public class PNJSpecial extends PNJ {
         }
 
         return accepte;
+    }
+
+
+    public void donnerIndice(){
+        System.out.println(this.decrire() + " vous dit :");
+        System.out.println("Écoute attentivement ce que j'ai à te dire... Tu en auras besoin pour retrouver ce que tu cherches.");
+        System.out.println(this.indice);
+        System.out.println();
     }
     
 }
