@@ -29,11 +29,16 @@ public class ObjetUnique extends Objet {
         }
     }
 
-    public void utilisationObjet(Personnage perso){
-        super.utilisationObjet(perso);
-        perso.getInventaire().rangerObjetUtilise(this);
-    }
 
+    public boolean utilisationObjet(Personnage perso){
+        boolean mourir;
+        mourir = super.utilisationObjet(perso);
+        perso.getInventaire().rangerObjetUtilise(this);
+        // this.utilise = true;
+        return mourir;
+    }
+  
+  
     public String menuObjetTrouve(){
 
         String rep;

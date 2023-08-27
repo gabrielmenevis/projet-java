@@ -60,30 +60,41 @@ public abstract class Personnage {
     // méthode perte de PV à utiliser dans la fonction combats
     public void perdrePV(int degats) {
         this.pv -= degats;
-        if (this.pv < 0) this.pv = 0; // Assure que les PV ne tombent pas en dessous de 0
+        if (this.pv <= 0) {
+            this.pv = 0;
+            
+        }  // Assure que les PV ne tombent pas en dessous de 0
     }
      public void perdrePA(int degats) {
         this.p_attaque -= degats;
-        if (this.p_attaque < 0) this.p_attaque = 0;
+        if (this.p_attaque < 0) {
+            this.p_attaque = 0;
+            System.out.println("vous n'avez plus de PA, il faut reprendre des forces...");
+        }
+
      }
       public void perdrePC(int degats) {
         this.p_charisme -= degats;
-        if (this.p_charisme < 0) this.p_charisme = 0;
+        if (this.p_charisme < 0){
+            this.p_charisme = 0;
+            System.out.println("vous n'avez plus de PC...");
+
+        } 
       }
 
     public void gagnerPA(int ajout_pa) {
         this.p_attaque += ajout_pa;
-        if (this.p_attaque < 0) this.p_attaque = 1;
+        
     }
 
     public void gagnerPV(int ajout_pv) {
         this.pv += ajout_pv;
-        if (this.pv < 0) this.pv = 1;
+        if (this.pv < 0) this.pv = 0;
     }
 
     public void gagnerPC(int ajout_pc) {
         this.p_charisme += ajout_pc;
-        if (this.p_charisme < 0) this.p_charisme = 1;
+        if (this.p_charisme < 0) this.p_charisme = 0;
     }
 
     public boolean isCharme() {
@@ -94,13 +105,14 @@ public abstract class Personnage {
         this.charme = charme;
     }
 
-    public void ouvrirInventaire(){
+    public boolean ouvrirInventaire(){
         Objet objetChoisi;
+        boolean mourir = false;
         objetChoisi = this.inventaire.menuInventaire();
         // utiliser l'objet si le joueur en a fait le choix
         if(objetChoisi != null){
             boolean restant;
-            objetChoisi.utilisationObjet(this);
+            mourir = objetChoisi.utilisationObjet(this);
             System.out.println();
             if(objetChoisi instanceof ObjetConsommable){ // les messages affichés dépendent de la nature de l'objet
                 restant = this.inventaire.enleverObjet((ObjetConsommable) objetChoisi);
@@ -117,6 +129,8 @@ public abstract class Personnage {
                 System.out.println();
             }
         }
+
+        return mourir;
     }
 
     public void donnerObjet(PNJ pnj){
@@ -148,6 +162,8 @@ public abstract class Personnage {
     }
 
     public abstract void presentation();
+
+ 
 }
 
 

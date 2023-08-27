@@ -24,7 +24,7 @@ public class combats {
         catchphrases.addAll(lines);
     }
 
-    public void lancerCombat() {
+    public boolean lancerCombat() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Le combat commence entre " + combatant1.getNom() + " et " + combatant2.getNom());
         System.out.println("Vous êtes " + combatant1.getNom());
@@ -47,10 +47,14 @@ public class combats {
                 }
             } else { // "fuir"
                 System.out.println(combatant1.getNom() + " a fui le combat. " + combatant2.getNom() + " est le vainqueur!");
-                return;
+                
             }
         }
         System.out.println("Le combat est terminé. " + (combatant1.getPV() > 0 ? combatant1.getNom() : combatant2.getNom()) + " est le vainqueur!");
+        if (combatant1.getPV()<=0){
+            return true;
+        } 
+        return false;
     }
 
 

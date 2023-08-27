@@ -31,6 +31,12 @@ public class Jeu {
         while(menuAction());
     }
 
+    public static void reveilInfirmerie(){
+        System.out.println("Olala, on vous envoie à l'infirmerie pour réanimation...");
+        salleActuelle = listeSalles.get(0);
+        joueur.gagnerPV(10); // on redonne au joueur mort tous ces points de pv de base.
+    }
+
     // affichage de la map
     public static void ouvrirMap(){
         System.out.println("      _____________                                         _______________");
@@ -101,6 +107,7 @@ public class Jeu {
         Salle prochaineSalle;
         Objet o;
         combats combat;
+        boolean mourir;
 
         System.out.println();
         salleActuelle.descriptionCourte();
@@ -142,7 +149,8 @@ public class Jeu {
                 if(o != null){
                     choix = o.menuObjetTrouve();
                     switch (choix){
-                        case "2" : o.utilisationObjet(joueur);
+                        case "2" : mourir = o.utilisationObjet(joueur);
+                        if (mourir == true) reveilInfirmerie();
                         break;
                         case "3": joueur.getInventaire().rangerObjet(o);
                         break;
@@ -154,19 +162,23 @@ public class Jeu {
             case "3":
                 pnj = salleActuelle.choisirPNJ();
                 if(pnj != null){
+                  
                     choix = pnj.menuPNJ();
                     switch(choix){
                         // TODO: parler encore au PNJ
                         case "1": System.out.println("deux secondes");
                         break;
-
+                        
                         case "2": // donner un objet
                         joueur.donnerObjet(pnj);
                         break;
 
                         case "3": // lancer un combat
                         combat = new combats(joueur, pnj);
-                        combat.lancerCombat();
+                        mourir = combat.lancerCombat();
+                        if(mourir){
+                            reveilInfirmerie();
+                        }
                         break;
 
                         case "4":
@@ -188,7 +200,10 @@ public class Jeu {
 
             // ouvrir l'inventaire
             case "5":
-                joueur.ouvrirInventaire();
+                mourir = joueur.ouvrirInventaire();
+                if(mourir){
+                    reveilInfirmerie();
+                }
                 break;
 
             case "6":
