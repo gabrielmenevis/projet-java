@@ -145,7 +145,7 @@ public class Chargement {
         String ligne;
 
         // variables pour stocker les données des objets lus
-        String nom, article, type, replique, indice;
+        String nom, article, type, replique, indice, nomObjetDemande;
         int max_pv, pa, pc, indexSalle;
 
         try{
@@ -176,7 +176,8 @@ public class Chargement {
                 pc = Integer.parseInt(donnees[5]);
                 replique = donnees[6];
                 indice = donnees[7];
-                pnj = new PNJSpecial(nom, type, article, indice, replique, max_pv, pa, pc);
+                nomObjetDemande = donnees[9];
+                pnj = new PNJSpecial(nom, type, article, indice, replique, max_pv, pa, pc, nomObjetDemande);
 
                 // ajout à la liste des PNJ de la salle
                 indexSalle = Integer.parseInt(donnees[8]);
