@@ -13,7 +13,7 @@ public class Chargement {
 
     public static ArrayList<Salle> chargerSalles() throws IOException {
 
-        String fichier = ".\\files\\salles.csv";
+        String fichier = "./files/salles.csv";
         FileReader f = new FileReader(fichier);
         BufferedReader r = new BufferedReader(f);
         String ligne;
@@ -73,7 +73,7 @@ public class Chargement {
     public static void chargerObjets(ArrayList<Salle> listeSalles) throws IOException{
 
         Objet o;
-        String fichier = ".\\files\\objets.csv";
+        String fichier = "./files/objets.csv";
         FileReader f = new FileReader(fichier);
         BufferedReader r = new BufferedReader(f);
         String ligne;
@@ -139,7 +139,7 @@ public class Chargement {
     public static void chargerPNJ(ArrayList<Salle> listeSalles) throws IOException{
 
         PNJSpecial pnj;
-        String fichier = ".\\files\\pnjspecial.csv";
+        String fichier = "./files/pnjspecial.csv";
         FileReader f = new FileReader(fichier);
         BufferedReader r = new BufferedReader(f);
         String ligne;
