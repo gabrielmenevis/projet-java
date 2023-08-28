@@ -116,7 +116,7 @@ public class combats {
 
     private void flirt(Personnage charmeur, Personnage adversaire) {
         Random random = new Random();
-        int baseChance = 75;
+        int baseChance = 25;
         int chance = random.nextInt(80) + charmeur.getPCharisme() - adversaire.getPCharisme();
 
         int randomIndex = random.nextInt(catchphrasesEtReponses.size());
@@ -127,7 +127,7 @@ public class combats {
         if (chance > baseChance + 15) { // Grand succès
             System.out.println(adversaire.getNom() + " répond : " + chosenLine[3]);
             adversaire.setCharme(true);
-        } else if (chance > baseChance) { // Succès partiel
+        } else if (chance >= baseChance) { // Succès partiel
             System.out.println(adversaire.getNom() + " répond : " + chosenLine[2]);
             adversaire.gagnerPA(-5);  // on ajoute le malus d'attaque
         } else { // Échec
