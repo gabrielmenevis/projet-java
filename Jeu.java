@@ -97,7 +97,9 @@ public class Jeu {
         Scanner sc = new Scanner (System.in);
 
         while((!rep.equals("1")) && (!rep.equals("2")) && (!rep.equals("3")) && (!rep.equals("4"))) {
+        System.out.println();
         System.out.println("Bonjour, quel personnage souhaitez-vous incarner durant le jeu ? ");
+        System.out.println();
         System.out.println("1 - Un sportif, fort en attaque mais très peu de charisme");
         System.out.println("2 - Un artiste, on vous trouve un certain charme mais vous n'êtes clairement pas le premier qu'on choisirais dans son equipe de sport");
         System.out.println("3 - Un employé de bureau, ni le plus charismatique ni le plus fort, vous excellez dans l'art d'être moyen");
