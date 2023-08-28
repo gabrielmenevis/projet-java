@@ -151,7 +151,7 @@ public abstract class Personnage {
         Objet objet;
         boolean pnjAccepte, restant;
 
-        System.out.println("Une lueur d'avidité scintille dans les yeux de " + pnj.decrire());
+        
 
         objet = this.inventaire.menuDonnerObjet();
 
