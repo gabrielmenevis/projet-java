@@ -173,18 +173,18 @@ public class Salle {
         for(int i = 0 ; i < tirage ; i++){
 
             // tirage du nom et article
-            donnees = Files.readAllLines(Paths.get(".\\files\\pnj_hasard\\nom_pnj.csv"));
+            donnees = Files.readAllLines(Paths.get("./files/pnj_hasard/nom_pnj.csv"));
             tirage2 = r.nextInt(donnees.size());
             nom = donnees.get(tirage2).split(";")[0];
             article = donnees.get(tirage2).split(";")[1];
 
             // tirage du type
-            donnees = Files.readAllLines(Paths.get(".\\files\\pnj_hasard\\type_pnj.csv"));
+            donnees = Files.readAllLines(Paths.get("./files/pnj_hasard/type_pnj.csv"));
             tirage2 = r.nextInt(donnees.size());
             type = donnees.get(tirage2);
 
             // tirage de la réplique
-            donnees = Files.readAllLines(Paths.get(".\\files\\pnj_hasard\\phrase_pnj.csv"));
+            donnees = Files.readAllLines(Paths.get("./files/pnj_hasard/phrase_pnj.csv"));
             tirage2 = r.nextInt(donnees.size());
             replique = donnees.get(tirage2);
 
