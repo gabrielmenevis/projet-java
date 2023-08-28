@@ -69,7 +69,7 @@ public class Inventaire {
         }
     }
 
-    // décrémente l'objet consommable de l'inventaire
+    // décrémente l'objet de l'inventaire
     public boolean enleverObjet(Objet objet){
 
         int quantiteObjet;

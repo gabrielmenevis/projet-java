@@ -11,8 +11,10 @@ public class Sportif extends Personnage {
     }
         
     public void presentation() {
-        System.out.println(getNom() + ", " + getPV() + " points de vie sur " + getMaxPV() + ", " + getPAttaque() + 
+        System.out.println();
+        System.out.println("Rebonjour "+ getNom() + ", vous avez actuellement " + getPV() + " points de vie sur " + getMaxPV() + ", " + getPAttaque() + 
         " points d'attaque et " + getPCharisme() + " point de charisme.");
+        System.out.println();
 
     }
 

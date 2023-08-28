@@ -25,7 +25,28 @@ public class Jeu {
 
         joueur = creationPersonnage();
         joueur.presentation();
-        System.out.println("Bonjour "+ joueur.getNom()+ " bien ou bien ?  ");
+        System.out.println();
+        System.out.println("''Comment allez-vous depuis hier soir? Nous sommes heureux de vous revoir parmis nous, et en vie!");
+        System.out.println("Je ne sais pas si vous vous souvenez mais hier vous étiez en train de chercher quelque chose quand vous avez reçu un coup à la tête. C'etait quoi deja?");
+        System.out.println("Ah oui ! Votre passeport ahah. Quel dommage...Je m'en souviens maintenant, vous vous êtes pris un sacré coup de branche sur la tête pendant que vous cherchiez votre passeport pour quitter ce club !");
+        System.out.println("Quelle histoire tout de même...Je suis désolé que l'accident ait mis pause à votre projet, surtout quand on sait que ce Club Med à le don de nous faire égarer des choses ");
+        System.out.println("Remarque, voyez le verre à moitié plein, en cherchant votre passeport vous tomberez peut-être sur d'autres objets interessants qui sait?");
+        System.out.println("Néanmoins, dans le cas ou votre passeport ne réapparait pas, nos équipe ont fait les démarches necessaires pour que vous en receviez un nouveau au plus vite !");
+        System.out.println("C'est normal, vraiment ça nous fais plaisir. Et evidemment le Club Med s'engage a prolonger votre séjour gratuitement tant que votre nouveau passeport n'est pas arrivé...ou que vous n'ayez retrouvé l'ancien.");
+        System.out.println("Bonne suite de séjour ! ");
+        System.out.println();
+        System.out.println("Cordialement,");
+        System.out.println();
+        System.out.println("Le Staff''");
+        System.out.println();
+        System.out.println("......................");
+        System.out.println();
+        System.out.println("''J'ai mal au crâne...Mes souvenirs sont flous...Il faut que je retrouve ce fouttu passeport...Vérifions une dernière fois qu'il n'est pas dans poche...Tiens, qu'est ce que c'est que ça?''");
+        System.out.println();
+        System.out.println("Félicitation "+joueur.getNom()+ ",vous avez trouvé la carte n°1, d'autres sont dispérsées par-ci par-là dans le club. Voyons ce qu'elle a à vous dire :");
+        System.out.println();
+        System.out.println("''Si de l'objet perdu vous voulez vous rapprocher, un petit creux vous guiderais vers une de celle qui peut vous aider...''");
+        System.out.println("..........................................");
 
         // lancement de la boucle principale
         while(menuAction());
@@ -76,7 +97,9 @@ public class Jeu {
         Scanner sc = new Scanner (System.in);
 
         while((!rep.equals("1")) && (!rep.equals("2")) && (!rep.equals("3")) && (!rep.equals("4"))) {
+        System.out.println();
         System.out.println("Bonjour, quel personnage souhaitez-vous incarner durant le jeu ? ");
+        System.out.println();
         System.out.println("1 - Un sportif, fort en attaque mais très peu de charisme");
         System.out.println("2 - Un artiste, on vous trouve un certain charme mais vous n'êtes clairement pas le premier qu'on choisirais dans son equipe de sport");
         System.out.println("3 - Un employé de bureau, ni le plus charismatique ni le plus fort, vous excellez dans l'art d'être moyen");
@@ -168,6 +191,10 @@ public class Jeu {
                         case "3": joueur.getInventaire().rangerObjet(o);
                         break;
                     }
+                }
+                // sinon si le joueur est mort en combat après s'être fait attraper
+                else if(joueur.getPV() <= 0){
+                    reveilInfirmerie();
                 }
                 break;
 
