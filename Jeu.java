@@ -25,6 +25,14 @@ public class Jeu {
 
         joueur = creationPersonnage();
         joueur.presentation();
+        debutJeu();
+    
+
+        // lancement de la boucle principale
+        while(menuAction());
+    }
+
+    public static void debutJeu(){
         System.out.println();
         System.out.println("''Comment allez-vous depuis hier soir? Nous sommes heureux de vous revoir parmi nous, et en vie!");
         System.out.println("Je ne sais pas si vous vous souvenez mais hier vous étiez en train de chercher quelque chose quand vous avez reçu un coup à la tête. C'etait quoi deja?");
@@ -47,9 +55,6 @@ public class Jeu {
         System.out.println();
         System.out.println("Carte 1 : ''Si de l'objet perdu vous voulez vous rapprocher, un petit creux vous guiderais vers une de celle qui peut vous aider...''");
         System.out.println("..........................................");
-
-        // lancement de la boucle principale
-        while(menuAction());
     }
 
     public static void reveilInfirmerie(){

@@ -57,7 +57,7 @@ public class Chargement {
                 }
 
                 if (nom.equals("hammam")){
-                    Boss boss = new Boss("jupiter", "motdepasse", "Bonjour, quelle est ta réponse?", "Non, dégage", "Bravo, tu as gagné"); 
+                    Boss boss = new Boss("Jupiter", "motdepasse", "Bonjour, quelle est ta réponse?", "Non, mauvaise réponse", "Bravo, tu as gagné"); 
                     s.ajouterPNJ(boss);
                 }
 

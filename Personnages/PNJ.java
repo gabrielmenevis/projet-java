@@ -94,7 +94,7 @@ public class PNJ extends Personnage {
 
         if(this.vaincu){ // le joueur a déjà vaincu le PNJ
             System.out.println();
-            System.out.println("Vous avez déjà vaincu " + this.getNom() + ". Il vous implore : 'Pitié... Laisse-moi tranquille...");
+            System.out.println("Vous avez déjà vaincu " + this.getNom() + " qui vous implore : 'Pitié... Laisse-moi tranquille...'");
             mourir = false;
         }
         else{ // sinon le combat se lance
