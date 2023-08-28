@@ -26,13 +26,13 @@ public class Jeu {
         joueur = creationPersonnage();
         joueur.presentation();
         System.out.println();
-        System.out.println("''Comment allez-vous depuis hier soir? Nous sommes heureux de vous revoir parmis nous, et en vie!");
+        System.out.println("''Comment allez-vous depuis hier soir? Nous sommes heureux de vous revoir parmi nous, et en vie!");
         System.out.println("Je ne sais pas si vous vous souvenez mais hier vous étiez en train de chercher quelque chose quand vous avez reçu un coup à la tête. C'etait quoi deja?");
         System.out.println("Ah oui ! Votre passeport ahah. Quel dommage...Je m'en souviens maintenant, vous vous êtes pris un sacré coup de branche sur la tête pendant que vous cherchiez votre passeport pour quitter ce club !");
-        System.out.println("Quelle histoire tout de même...Je suis désolé que l'accident ait mis pause à votre projet, surtout quand on sait que ce Club Med à le don de nous faire égarer des choses ");
-        System.out.println("Remarque, voyez le verre à moitié plein, en cherchant votre passeport vous tomberez peut-être sur d'autres objets interessants qui sait?");
-        System.out.println("Néanmoins, dans le cas ou votre passeport ne réapparait pas, nos équipe ont fait les démarches necessaires pour que vous en receviez un nouveau au plus vite !");
-        System.out.println("C'est normal, vraiment ça nous fais plaisir. Et evidemment le Club Med s'engage a prolonger votre séjour gratuitement tant que votre nouveau passeport n'est pas arrivé...ou que vous n'ayez retrouvé l'ancien.");
+        System.out.println("Quelle histoire tout de même...Je suis désolé que l'accident ait mis pause à votre projet, surtout quand on sait que ce Club Med a le don de nous faire égarer nos affares. ");
+        System.out.println("Remarque, voyez le verre à moitié plein, en cherchant votre passeport vous tomberez peut-être sur d'autres objets interessants, qui sait?");
+        System.out.println("Néanmoins, dans le cas où votre passeport ne réapparaittrait pas, nos équipes ont fait les démarches necessaires pour que vous en receviez un nouveau au plus vite !");
+        System.out.println("C'est normal, vraiment, ça nous fais plaisir. Et evidemment le Club Med s'engage à prolonger votre séjour gratuitement tant que votre nouveau passeport n'est pas arrivé...ou que vous n'ayez retrouvé l'ancien.");
         System.out.println("Bonne suite de séjour ! ");
         System.out.println();
         System.out.println("Cordialement,");
@@ -41,11 +41,11 @@ public class Jeu {
         System.out.println();
         System.out.println("......................");
         System.out.println();
-        System.out.println("''J'ai mal au crâne...Mes souvenirs sont flous...Il faut que je retrouve ce fouttu passeport...Vérifions une dernière fois qu'il n'est pas dans poche...Tiens, qu'est ce que c'est que ça?''");
+        System.out.println("''J'ai mal au crâne...Mes souvenirs sont flous...Il faut que je retrouve ce foutu passeport...Vérifions une dernière fois qu'il n'est pas dans poche...Tiens, qu'est ce que c'est que ça?''");
         System.out.println();
-        System.out.println("Félicitation "+joueur.getNom()+ ",vous avez trouvé la carte n°1, d'autres sont dispérsées par-ci par-là dans le club. Voyons ce qu'elle a à vous dire :");
+        System.out.println("Félicitation "+joueur.getNom()+ ",vous venez de trouvé la carte n°1, d'autres sont dispérsées par-ci par-là dans le club et pourrons vous aider dans votre quête. Voyons ce qu'elle a à vous dire :");
         System.out.println();
-        System.out.println("''Si de l'objet perdu vous voulez vous rapprocher, un petit creux vous guiderais vers une de celle qui peut vous aider...''");
+        System.out.println("Carte 1 : ''Si de l'objet perdu vous voulez vous rapprocher, un petit creux vous guiderais vers une de celle qui peut vous aider...''");
         System.out.println("..........................................");
 
         // lancement de la boucle principale
@@ -222,7 +222,7 @@ public class Jeu {
                         break;
 
                         case "4":
-                        System.out.println("Sans vous donnez la peine de répondre, vous tournez le dos à " + pnj.decrire());
+                        System.out.println("Sans vous donner la peine de répondre, vous tournez le dos à " + pnj.decrire());
                         break;
                     }
                 }
