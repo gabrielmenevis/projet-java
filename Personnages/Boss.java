@@ -57,6 +57,7 @@ public class Boss extends PNJ {
             if (rep.equals(this.mdp)){
                 
                 System.out.println(this.reponseY);
+                finDuJeu();
                 
             }
             else {
@@ -91,7 +92,7 @@ public class Boss extends PNJ {
         System.out.println();
         System.out.println("Le Staff");
         System.out.println();
-        System.out.println("PS : Evitez de passer près du grand chène en partant...Une branche pourrait vous tomber sur la tête ! haha.");
+        System.out.println("PS : Evitez de passer près du grand chêne en partant...Une branche pourrait vous tomber sur la tête ! haha.");
 
     }
 
