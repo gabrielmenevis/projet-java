@@ -11,6 +11,7 @@ public class PNJSpecial extends PNJ {
     private String indice;
     private String nomObjetDemande;
     private boolean satisfait;
+    private boolean isSpecial = true;
 
     public PNJSpecial(String nom, String type, String article, String indice, String textePNJ, int max_pv, int p_attaque, int p_charisme, String nomObjetDemande) {
         super(nom, type, article, textePNJ, max_pv, p_attaque, p_charisme);  // Ici, max_pv est passé deux fois à cause du constructeur de Personnage
@@ -42,6 +43,10 @@ public class PNJSpecial extends PNJ {
     public void setSatisfait(boolean satisfait){
         this.satisfait = satisfait;
     }
+    public boolean isSpecial(){
+        return this.isSpecial;
+    }
+
 
     public String menuPNJ(){
 

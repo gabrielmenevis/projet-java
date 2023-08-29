@@ -15,6 +15,7 @@ public class PNJ extends Personnage {
     private int base_p_attaque;
     private boolean vaincu;
 
+    private boolean isSpecial = false;
     public PNJ(String nom, String type, String article, String textePNJ, int max_pv, int p_attaque, int p_charisme) {
         super(nom, max_pv, max_pv, p_attaque, p_charisme);  // Ici, max_pv est passé deux fois à cause du constructeur de Personnage
         this.type = type;
@@ -55,9 +56,17 @@ public class PNJ extends Personnage {
     public void setVaincu(boolean vaincu){
         this.vaincu = vaincu;
     }
+    public boolean isSpecial(){
+        return this.isSpecial;
+    }
 
     public void presentation() {
         System.out.println("Je suis " + this.getNom() + " " + this.article + " " + this.type + ". " + this.textePNJ);
+    }
+
+    @Override
+    public void donnerIndice() {
+
     }
 
     public String menuPNJ(){

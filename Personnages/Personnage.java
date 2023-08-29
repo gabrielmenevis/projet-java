@@ -192,7 +192,8 @@ public abstract class Personnage {
 
     public abstract void presentation();
 
- 
+
+    public abstract void donnerIndice();
 }
 
 
