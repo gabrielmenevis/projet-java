@@ -160,7 +160,7 @@ public class Combat {
         int randomIndex = random.nextInt(catchphrasesEtReponses.size()); // Choix aléatoire d'une catchphrase
         String[] chosenLine = catchphrasesEtReponses.get(randomIndex);
         String catchphrase = chosenLine[0]; // La catchphrase est la première colonne du CSV
-        System.out.println(charmeur.getNom() + " tente de charmer " + adversaire.getNom() + " en disant : " + catchphrase);
+        System.out.println("Vous essayez de charmer " + adversaire.getNom() + " en lui disant : " + catchphrase);
 
         if (chance > baseChance + 15) { // Grand succès
             System.out.println(adversaire.getNom() + " répond : " + chosenLine[3]);
