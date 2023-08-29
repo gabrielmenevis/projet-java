@@ -196,7 +196,7 @@ public class Salle {
 
     // vide la liste de PNJ des PNJ générés aléatoirement
     public void viderPNJ(){
-        this.listePNJ.removeIf(pnj -> !(pnj instanceof PNJSpecial));
+        this.listePNJ.removeIf(pnj -> !(pnj instanceof PNJSpecial || pnj instanceof Boss));
     }
 
     // affiche les objets dans la pièce, le personnage peut en choisir un
