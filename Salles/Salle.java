@@ -210,6 +210,7 @@ public class Salle {
         boolean continuer = true, attrape;
         HashMap<String, Objet> choixObjet = new HashMap<String, Objet>();
         ArrayList<Objet> listeObjetsTemp = new ArrayList<Objet>();
+        ArrayList<PNJ> listePNJTemp = new ArrayList<PNJ>();
         Random r = new Random();
         int tirage;
         PNJ pnjAttrape;
@@ -217,10 +218,18 @@ public class Salle {
 
         System.out.println("Vous fouillez " + this.article + " " + this.nom + " dans ses moindres recoins.");
 
+        // constitution de la liste des PNJ aléatoires qui n'ont pas encore été vaincus par le joueur
+        // seuls eux peuvent attraper le joueur en train de fouiller
+        for(PNJ pnj: this.listePNJ){
+            if(!(pnj instanceof PNJSpecial) && !(pnj instanceof Boss) && !(pnj.getVaincu())){
+                listePNJTemp.add(pnj);
+            }
+        }
+
         // tirage pour voir si vous échappez à la vigilance des PNJ
         // si la pièce n'a jamais été fouillée, ils ne le feront pas remarquer, sinon ils interceptent
-        tirage = r.nextInt(6);
-        if(tirage >= this.listePNJ.size()){
+        tirage = r.nextInt(4);
+        if(tirage >= listePNJTemp.size()){
             attrape = false;
         }
         else{
@@ -281,14 +290,10 @@ public class Salle {
         // la pièce a déjà été fouillée et les PNJ vous attrapent
         else{
 
-            pnjAttrape = this.listePNJ.get(tirage);
+            pnjAttrape = listePNJTemp.get(tirage);
 
             System.out.println("Vous pensez que fouiller " + this.article + " " + this.nom + " de fond en comble est la meilleure manière de passer inaperçu ??!");
-            System.out.println(pnjAttrape.decrire() + " s'approche de vous d'un air suspicieux... Vous n'allez pas pouvoir échapper au combat.");
-            System.out.println();
-
-            combat = new combats(perso, pnjAttrape);
-            combat.lancerCombat();
+            pnjAttrape.attraper(perso);
 
             return null;
         }

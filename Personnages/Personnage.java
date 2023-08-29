@@ -146,12 +146,10 @@ public abstract class Personnage {
         return mourir;
     }
 
-    public void donnerObjet(PNJ pnj){
+    public boolean donnerObjet(PNJ pnj){
 
         Objet objet;
-        boolean pnjAccepte, restant;
-
-        
+        boolean pnjAccepte, restant;        
 
         objet = this.inventaire.menuDonnerObjet();
 
@@ -160,6 +158,7 @@ public abstract class Personnage {
             System.out.println(pnj.decrire() + " vous fixe avec dédain.");
             System.out.println("En même temps, pourquoi lui promettre quelque chose si c'est pour ne rien lui donner ?");
             System.out.println();
+            pnjAccepte = false;
         }
 
         else{ //TODO: ce qui se passe quand on donne l'objet au PNJ
@@ -183,6 +182,8 @@ public abstract class Personnage {
                 System.out.println();
             }
         }
+
+        return pnjAccepte;
     }
 
     public void afficherStats(){

@@ -1,10 +1,10 @@
 package Personnages;
 
 import java.io.IOException;
+import java.util.Random;
 import java.util.Scanner;
 
-import Objets.Objet;
-import Objets.ObjetUnique;
+import Objets.*;
 import combats.combats;
 
 public class PNJ extends Personnage {
@@ -104,22 +104,81 @@ public class PNJ extends Personnage {
         return mourir;
     }
 
-    // TODO: mettre une proba d'accepter le consommable
     public boolean recevoirObjet(Objet o){
 
         boolean accepte;
+        int tirage;
+        Random r = new Random();
 
         System.out.println();
+        // les PNJs aléatoires n'acceptent pas les objets uniques
         if(o instanceof ObjetUnique){
             System.out.println(this.getNom() + " vous dit : 'Peuh ! ça ne m'intéresse pas.'");
             accepte = false;
         }
+
         else{
-            System.out.println(this.getNom() + " vous dit : '" + o.getArticleIndefini() + " " + o.getNom() + " ? Merci, il ne fallait pas...'");
-            accepte = true;
+            // probabilité d'accepter l'objet proportionnelle à la rareté de l'objet
+            tirage = r.nextInt(10);
+            if(tirage >= ((ObjetConsommable)o).getProbaSpawn()){
+                accepte = true;
+                System.out.println(this.getNom() + " vous dit : '" + o.getArticleIndefini() + " " + o.getNom() + " ? Merci, il ne fallait pas...'");
+            }
+            else{
+                accepte = false;
+                System.out.println(this.getNom() + " vous dit : 'Peuh ! ça ne m'intéresse pas.'");
+            }
         }
 
         return accepte;
+    }
+
+    public void attraper(Personnage perso) throws IOException{
+
+        String choix = "";
+        Scanner sc = new Scanner(System.in);
+        combats combat;
+        boolean corrompre, mourirAuCombat;
+
+        while(!(choix.equals("1")) && !(choix.equals("2"))){
+            System.out.println(this.decrire() + " s'approche de vous d'un air suspicieux... Vous avez peut-être encore une chance d'échapper au combat :");
+            System.out.println("1 - Tenter de corrompre " + this.getNom() + " en lui donnant un objet.");
+            System.out.println("2 - Combat");
+            choix = sc.nextLine();
+        }
+
+        switch(choix){
+
+            case "1":
+            corrompre = perso.donnerObjet(this);
+            System.out.println();
+            if(corrompre){
+                System.out.println("Ouf ! Vous l'avez échappé belle !");
+                System.out.println(this.decrire() + " s'est laissé(e) amadouer par votre 'cadeau'... Croisez les doigts pour que ça marche la prochaine fois.");
+            }
+            else{
+                System.out.println("Aïe aïe aïe... Pas le choix, il faudra combattre " + this.getNom());
+                combat = new combats(perso, this);
+                mourirAuCombat = combat.lancerCombat();
+                if(!mourirAuCombat){
+                    System.out.println();
+                    System.out.println("Avec la raclée que vous lui avez mise, " + this.decrire() + " ne viendra plus vous embêter de si tôt...");
+                    System.out.println();
+                }
+            }
+            System.out.println();
+            break;
+
+            case "2":
+            combat = new combats(perso, this);
+            mourirAuCombat = combat.lancerCombat();
+            System.out.println();
+            if(!mourirAuCombat){
+                System.out.println("Avec la raclée que vous lui avez mise, " + this.decrire() + " ne viendra plus vous embêter de si tôt...");
+                System.out.println();
+            }
+            break;
+        }
     }
 
     public String decrire(){
