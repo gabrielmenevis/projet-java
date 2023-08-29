@@ -1,4 +1,4 @@
-package combats;
+package Combats;
 
 import Personnages.Personnage;
 import Personnages.PNJ;
@@ -15,7 +15,7 @@ import java.io.IOException;
  * Elle offre la possibilité d'attaquer, flirter ou fuir pendant le combat.
  * Les catchphrases pour charmer un adversaire sont récupérées à partir d'un fichier CSV.
  */
-public class combats {
+public class Combat {
 
     private Personnage combatant1; // Le combattant 1 est le joueur
     private PNJ combatant2; // le combattant 2 est le PNJ
@@ -29,7 +29,7 @@ public class combats {
      * @param combatant2 Le PNJ adversaire.
      * @throws IOException Si une erreur se produit lors de la lecture du fichier.
      */
-    public combats(Personnage combatant1, PNJ combatant2) throws IOException {
+    public Combat(Personnage combatant1, PNJ combatant2) throws IOException {
         this.combatant1 = combatant1;
         this.combatant2 = combatant2;
         catchphrasesEtReponses = new ArrayList<>(); // Initialisation de la liste des catchphrases

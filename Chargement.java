@@ -10,8 +10,17 @@ import Personnages.Boss;
 import Personnages.PNJSpecial;
 import Salles.Salle;
 
+/**
+ * Classe utilisée pour le chargement des données en début de jeu. Ses trois méthodes sont statiques :
+ * chargement des salles, des objets et des PNJ.
+ */
 public class Chargement {
 
+    /**
+     * Charge les salles à partir d'un fichier CSV, construit une liste de salles.
+     * @return : la liste de salles chargées
+     * @throws IOException : si une erreur se produit à la lecture du fichier
+     */
     public static ArrayList<Salle> chargerSalles() throws IOException {
 
         String fichier = "./files/salles.csv";
@@ -46,9 +55,11 @@ public class Chargement {
                 String description = donnees[4];
                 s = new Salle(nom, article, description);
 
+                // la salle a une ou plusieurs salles adjacentes
                 if(donnees[3].compareTo("") != 0){
+                    // on récupère les index des salles adjacentes dans un tableau
                     String[] numeros = donnees[3].split(",");
-                    for(String numero: numeros){
+                    for(String numero: numeros){ // on récupère la salle correspondante et on l'ajoute à la liste
                         noSalleAdjacente = Integer.parseInt(numero);
                         sAdjacente = listeSalles.get(noSalleAdjacente);
                         s.ajouterSalleAdjacente(sAdjacente);
@@ -56,6 +67,7 @@ public class Chargement {
                     }
                 }
 
+                // ajout du boss dans le hammam
                 if (nom.equals("hammam")){
                     Boss boss = new Boss("Jupiter", "MIMOANDJAVADANSENTLASAMBA", "Bonjour, quelle est ta réponse?", "Non, mauvaise réponse", "Bravo, tu as gagné"); 
                     s.ajouterPNJ(boss);
@@ -72,10 +84,18 @@ public class Chargement {
             System.out.println("Erreur dans le chargement des salles.");
         }
 
+        r.close();
+        f.close();
+
         return listeSalles;
     }
 
 
+    /**
+     * Charge les objets depuis un fichier CSV, les place dans les salles appropriées.
+     * @param listeSalles : la liste des salles dans lesquelles placer les objets
+     * @throws IOException : si une erreur si produit à la lecture du fichier
+     */
     public static void chargerObjets(ArrayList<Salle> listeSalles) throws IOException{
 
         Objet o;
@@ -139,9 +159,17 @@ public class Chargement {
         } catch(IOException e){
             System.out.println("Erreur dans le chargement des objets.");
         }
+
+        r.close();
+        f.close();
     }
 
 
+    /**
+     * Charge les PNJ depuis un fichier CSV, les place dans les salles appropriées.
+     * @param listeSalles : la liste des salles où placer les PNJ
+     * @throws IOException : si une erreur se produit à la lecture du fichier
+     */
     public static void chargerPNJ(ArrayList<Salle> listeSalles) throws IOException{
 
         PNJSpecial pnj;
@@ -201,6 +229,9 @@ public class Chargement {
         } catch(IOException e){
             System.out.println("Erreur dans le chargement des PNJ");
         }
+
+        r.close();
+        f.close();
 
     }
     

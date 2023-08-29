@@ -3,8 +3,8 @@ package Personnages;
 import java.io.IOException;
 import java.util.Scanner;
 
+import Combats.Combat;
 import Objets.Objet;
-import combats.combats;
 
 public class PNJSpecial extends PNJ {
 
@@ -81,7 +81,7 @@ public class PNJSpecial extends PNJ {
     public boolean combattre(Personnage perso) throws IOException{
 
         boolean mourir;
-        combats combat = new combats(perso, this);
+        Combat combat = new Combat(perso, this);
 
         if(this.satisfait){ // le joueur a donné l'objet demandé au PNJ
             System.out.println();
