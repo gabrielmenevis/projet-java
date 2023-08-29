@@ -18,6 +18,8 @@ public class Jeu {
     public static ArrayList<Salle> listeSalles;
     public static Salle salleActuelle;
     public static Personnage joueur;
+    public static boolean gagner = false;
+    
 
     /**
      * Fonction principale qui charge les salles, appelle les fonctions de création de personnage
@@ -73,7 +75,33 @@ public class Jeu {
      * Gère le réveil du joueur à l'infirmerie après un game over. Vide la liste des PNJ de la dernière salle
      * où se trouvait le joueur, actualise la salle actuelle avec l'infirmerie, réinitialise les PV du joueur
      * au maximum, oublie que les salles ont été fouillées.
+     * 
      */
+    public static boolean finDuJeu(){
+        if(gagner == false){
+            System.out.println("Vous ne pouvez pas partir, vous n'avez pas votre passeport");
+            return true;
+        }
+        else {
+
+            System.out.println("Félicitation, Jupiter vous a rendu votre passeport. Ce coquin est lui même bloqué depuis des années. Et avec le temps il a même oublié pourquoi");
+            System.out.println("Ainsi il a pris l'habitude depuis quelques années d'empecher certains autres habitants de partir. Cette année c'est tombez sur vous, voyez nous excusez ce désagrément");
+            System.out.println("Le pauvre vieux n'a pas trouvé mieux comme occupation que de brutaliser nos clients avec ses énigmes à la noix...Mais comprenez, à cause du fait qu'il est bloqué depuis des années dans ce club med");
+            System.out.println("Jupiter est l'un de nos plus ancien client, ainsi nous ne voulons pas lui faire de la peine en l'empechant de saboter le départ des autres... Je suis sur que vous nous comprenez.");
+            System.out.println("En tout cas, on peut dire que vous avez réussi une mission impossible. Vous êtes le seul a avoir réussi a tenir bon et ne pas perdre la tête. Profitons de cet instant pour diriger nos pensées vers ceux qui ne sortiront peut-être jamais plus.");
+            System.out.println("Vous avez du faire la connaissance de quelques uns d'ailleurs ! Armindo le peintre, Marinette la garagiste, ou encore Nagui le garagiste... ou alors est-il podologue? Je ne suis plus très sur... ");
+            System.out.println("Pour vous féliciter d'avoir réussi a vaincre Jupiter, nous vous offrons 3 semaines suplémentaires au club ! Appelez nous et nous vous reserverons une chambre aussitôt.");
+            System.out.println();
+            System.out.println("Au plaisir de vous revoir,");
+            System.out.println();
+            System.out.println("Le Staff");
+            System.out.println();
+            System.out.println("PS : Evitez de passer près du grand chêne en partant...Une branche pourrait vous tomber sur la tête ! haha.");
+            System.out.println();
+            return false;
+        }
+    }
+    
     public static void reveilInfirmerie(){
 
         // message informatif
@@ -188,7 +216,9 @@ public class Jeu {
             System.out.println("4 - Se déplacer");
             System.out.println("5 - Ouvrir l'inventaire");
             System.out.println("6 - Ouvrir la map");
+            System.out.println("7 - Quitter le club med");
             System.out.println("10 - Arrêter");
+            System.out.println();
             choix = sc.nextLine();
 
         }
@@ -225,12 +255,16 @@ public class Jeu {
 
             // interagir avec les PNJ
             case "3":
+                boolean ok;
                 pnj = salleActuelle.choisirPNJ(); // appel au menu de choix du PNJ
                 if(pnj != null){ // si le joueur a choisi un PNJ
                   
                     choix = pnj.menuPNJ(); // choix de l'action
                     switch(choix){
-                        case "1": pnj.parler(); // parler au PNJ
+                        case "1": ok = pnj.parler(); // parler au PNJ
+                        if (ok == true){
+                            gagner = true;
+                        }
                         break;
                         
                         case "2": // donner un objet
@@ -274,6 +308,10 @@ public class Jeu {
             case "6": 
                 ouvrirMap();
                 break;
+            case "7":
+                return finDuJeu();
+                
+
 
             // arrêter le jeu
             case "10":
