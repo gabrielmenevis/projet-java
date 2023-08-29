@@ -180,9 +180,8 @@ public abstract class Objet {
             System.out.println("2 - "+ this.articleDefini +" " + this.utilisation);// 
             System.out.println("3 - " + this.articleDefini + " ranger dans l'inventaire");
             System.out.println("4 - Annuler");
+            rep=s.nextLine();
         }
-        
-        rep=s.nextLine();
         
         return rep;
     }
