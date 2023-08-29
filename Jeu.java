@@ -122,7 +122,7 @@ public class Jeu {
         String rep = " ";
         String prenom;
         Personnage perso = null;
-        Scanner sc = new Scanner (System.in);
+        Scanner sc = new Scanner(System.in);
 
         while((!rep.equals("1")) && (!rep.equals("2")) && (!rep.equals("3")) && (!rep.equals("4"))) {
             System.out.println();
@@ -153,8 +153,6 @@ public class Jeu {
                 perso = new Courgette(prenom);
                 break;
         }
-
-        sc.close();
 
         return perso;
     }
@@ -279,11 +277,8 @@ public class Jeu {
 
             // arrêter le jeu
             case "10":
-                sc.close();
                 return false;
         }
-
-        sc.close();
         
         return true;
 

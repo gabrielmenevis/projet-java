@@ -183,7 +183,7 @@ public abstract class Objet {
         }
         
         rep=s.nextLine();
-        s.close();
+        
         return rep;
     }
 
