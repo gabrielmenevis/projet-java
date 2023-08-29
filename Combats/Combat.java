@@ -162,7 +162,7 @@ public class Combat {
      */
     private void flirt(Personnage charmeur, Personnage adversaire) {
         Random random = new Random();
-        int baseChance = 25; // Chance de base de charmer l'adversaire
+        int baseChance = 35; // Chance de base de charmer l'adversaire
         int chance = random.nextInt(80) + charmeur.getPCharisme() - adversaire.getPCharisme();
 
         int randomIndex = random.nextInt(catchphrasesEtReponses.size()); // Choix aléatoire d'une catchphrase
