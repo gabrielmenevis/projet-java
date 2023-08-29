@@ -9,20 +9,23 @@ import java.nio.file.*;
 import java.util.Random;
 import java.util.Scanner;
 import java.io.IOException;
+
 public class combats {
 
     private Personnage combatant1;
     private PNJ combatant2;
-    private List<String> catchphrases;
+    private List<String[]> catchphrasesEtReponses;
 
     public combats(Personnage combatant1, PNJ combatant2) throws IOException {
         this.combatant1 = combatant1;
         this.combatant2 = combatant2;
-        //
-        catchphrases = new ArrayList<>();
+        catchphrasesEtReponses = new ArrayList<>();
         List<String> lines = Files.readAllLines(Paths.get("files/catchphrases.csv"));
-        catchphrases.addAll(lines);
+        for (String line : lines.subList(1, lines.size())) {  // Nous sautons la ligne d'en-tête
+            catchphrasesEtReponses.add(line.split(";"));
+        }
     }
+
 
     public boolean lancerCombat() {
         Scanner scanner = new Scanner(System.in);
@@ -30,53 +33,55 @@ public class combats {
         System.out.println("Vous êtes " + combatant1.getNom());
         while (combatant1.getPV() > 0 && combatant2.getPV() > 0 && !combatant2.isCharme()) {
             // Affiche les PV actuels de chaque combattant
-            System.out.println(combatant1.getNom() + " a " + combatant1.getPV() + "/" + combatant1.getMaxPV() + " PVs. " +
-                    combatant2.getNom() + " a " + combatant2.getPV() + "/" + combatant2.getMaxPV() + " PVs.");
+            System.out.println(combatant1.getNom() + " " + afficherBarreSante(combatant1.getPV(), combatant1.getMaxPV()) +
+                    "\n" + combatant2.getNom() + " " + afficherBarreSante(combatant2.getPV(), combatant2.getMaxPV()));
 
             String action = joueurChoix(scanner);
             if ("attaquer".equals(action)) {
+                System.out.println("Vous lancez une attaque rapide et tranchante contre " + combatant2.getNom() + " ! *Slash!*");
                 attaquer(combatant1, combatant2);
                 if (combatant2.getPV() > 0) {
+                    System.out.println(combatant2.getNom() + " riposte avec fureur ! *Pow!*");
                     attaquer(combatant2, combatant1);
                 }
             } else if ("flirter".equals(action)) {
+                System.out.println("Vous essayez de charmer " + combatant2.getNom() + " avec vos mots doux...");
                 flirt(combatant1, combatant2);
-                if (!combatant2.isCharme()) {
+                if (!combatant2.isCharme() && combatant2.getPV() > 0) {
+                    System.out.println(combatant2.getNom() + " n'est pas impressionné et lance une contre-attaque !");
                     attaquer(combatant2, combatant1);
                     combatant2.resetPAttaque();
                 }
             } else { // "fuir"
-                System.out.println(combatant1.getNom() + " a fui le combat. " + combatant2.getNom() + " est le vainqueur!");
+                System.out.println(combatant1.getNom() + " décide que le combat n'en vaut pas la peine et bat en retraite. " + combatant2.getNom() + " est le vainqueur !");
                 return false;
             }
         }
-        System.out.println("Le combat est terminé. " + (combatant1.getPV() > 0 ? combatant1.getNom() : combatant2.getNom()) + " est le vainqueur!");
-        if (combatant1.getPV()<=0){
+        System.out.println("Le combat est terminé. " + (combatant1.getPV() > 0 ? combatant1.getNom() : combatant2.getNom()) + " est le vainqueur !");
+        if (combatant1.getPV() <= 0) {
             return true;
-        }
-        else if(combatant2.getPV() <= 0){
+        } else if (combatant2.getPV() <= 0) {
             combatant2.setVaincu(true);
         }
         return false;
     }
 
-
-
     private String joueurChoix(Scanner scanner) {
-        System.out.println("Choisissez une action : 1 pour attaquer, 2 pour flirter, 3 pour fuir");
-        String choix = scanner.nextLine();
-        while (!choix.equals("1") && !choix.equals("2") && !choix.equals("3")) {
-            System.out.println("Choix invalide. Entrez 1 pour attaquer, 2 pour flirter, ou 3 pour fuir");
-            choix = scanner.nextLine();
+        String[] actions = {"attaquer", "flirter", "fuir"};
+        System.out.println("Quelle action souhaitez-vous entreprendre ?");
+        for (int i = 0; i < actions.length; i++) {
+            System.out.println((i + 1) + ". " + actions[i]);
         }
-        if (choix.equals("1")) {
-            return "attaquer";
-        } else if (choix.equals("2")) {
-            return "flirter";
-        } else {
-            return "fuir";
+        int choix = scanner.nextInt();
+        scanner.nextLine(); // consomme la ligne restante
+        while (choix < 1 || choix > actions.length) {
+            System.out.println("Choix invalide. Veuillez choisir une action valide.");
+            choix = scanner.nextInt();
+            scanner.nextLine(); // consomme la ligne restante
         }
+        return actions[choix - 1];
     }
+
 
 
     private void attaquer(Personnage attaquant, Personnage adversaire) {
@@ -88,20 +93,20 @@ public class combats {
             System.out.println(attaquant.getNom() + " passe à l'attaque !");
             System.out.println(adversaire.getNom() + " perd " + Degats + " PVs.");
             adversaire.perdrePV(Degats);
-            System.out.println(adversaire.getNom() + " : " + adversaire.getPV() + "/" + adversaire.getMaxPV() + "PVs.");
+            System.out.println(adversaire.getNom() + " " + afficherBarreSante(adversaire.getPV(), adversaire.getMaxPV()));
         } else if (chance < 90) { // 15% de chance d'un coup raté
             System.out.println(attaquant.getNom() + " a raté son attaque !");
             if (random.nextInt(2) == 0) { // 50% de chance de glisser sur une banane
                 System.out.println(attaquant.getNom() + " glisse sur une peau de banane, se blesse et perd 5 PVs.");
                 attaquant.perdrePV(5);
-                System.out.println(attaquant.getNom() + " : " + attaquant.getPV() + "/" + attaquant.getMaxPV() + "PVs.");
+                System.out.println(attaquant.getNom() + " " + afficherBarreSante(attaquant.getPV(), attaquant.getMaxPV()));
             }
         } else { // 10% de chance d'un coup critique
             int Degats = attaquant.getPAttaque() * 2; // Les dégâts sont multipliés par 2 si coup critique
             System.out.println(attaquant.getNom() + " réussit un coup critique !");
             System.out.println(adversaire.getNom() + " perd " + Degats + " PVs.");
             adversaire.perdrePV(Degats);
-            System.out.println(adversaire.getNom() + " : " + adversaire.getPV() + "/" + adversaire.getMaxPV() + "PVs.");
+            System.out.println(adversaire.getNom() + " " + afficherBarreSante(adversaire.getPV(), adversaire.getMaxPV()));
         }
 
         if (adversaire.getPV() <= 0) {
@@ -111,23 +116,43 @@ public class combats {
 
     private void flirt(Personnage charmeur, Personnage adversaire) {
         Random random = new Random();
-        int baseChance = 75;
+        int baseChance = 25;
         int chance = random.nextInt(80) + charmeur.getPCharisme() - adversaire.getPCharisme();
 
-        String catchphrase = catchphrases.get(random.nextInt(catchphrases.size()));
+        int randomIndex = random.nextInt(catchphrasesEtReponses.size());
+        String[] chosenLine = catchphrasesEtReponses.get(randomIndex);
+        String catchphrase = chosenLine[0];
         System.out.println(charmeur.getNom() + " tente de charmer " + adversaire.getNom() + " en disant : " + catchphrase);
 
         if (chance > baseChance + 15) { // Grand succès
-            System.out.println(adversaire.getNom() + " est totalement envouté par votre charme !");
+            System.out.println(adversaire.getNom() + " répond : " + chosenLine[3]);
             adversaire.setCharme(true);
-        } else if (chance > baseChance) { // Succès partiel
-            System.out.println(adversaire.getNom() + " semble décontenancé et sa prochaine attaque sera moins efficace.");
+        } else if (chance >= baseChance) { // Succès partiel
+            System.out.println(adversaire.getNom() + " répond : " + chosenLine[2]);
             adversaire.gagnerPA(-5);  // on ajoute le malus d'attaque
         } else { // Échec
-            System.out.println(adversaire.getNom() + " n'est guère convaincu... Il vous frappera plus fort à sa prochaine attaque");
+            System.out.println(adversaire.getNom() + " répond : " + chosenLine[1]);
             adversaire.gagnerPA(5); // bonus d'attaque
         }
     }
+
+
+    public String afficherBarreSante(int pvActuel, int pvMax) {
+        int longueurBarre = 20;
+        double pourcentageSante = (double) pvActuel / pvMax;
+        int nbCaracteresSante = (int) (pourcentageSante * longueurBarre);
+
+        String barre = "";
+        for (int i = 0; i < nbCaracteresSante; i++) {
+            barre += "█";
+        }
+        for (int i = nbCaracteresSante; i < longueurBarre; i++) {
+            barre += "-";
+        }
+
+        return "[" + barre + "] " + pvActuel + "/" + pvMax + " PVs";
+    }
+
 
 
 }
