@@ -243,8 +243,6 @@ public class Inventaire {
             objetChoisi = null;
         }
 
-        sc.close();
-
         return objetChoisi;
     }
 
@@ -296,8 +294,6 @@ public class Inventaire {
             }
 
         }
-
-        sc.close();
 
         return objetChoisi;
     }

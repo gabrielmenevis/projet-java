@@ -311,8 +311,6 @@ public class Salle {
             // la pièce est maintenant fouillée
             this.fouille = true;
 
-            sc.close();
-
             return objetChoisi;
         }
 
@@ -323,8 +321,6 @@ public class Salle {
 
             System.out.println("Vous pensez que fouiller " + this.article + " " + this.nom + " de fond en comble est la meilleure manière de passer inaperçu ??!");
             pnjAttrape.attraper(perso);
-
-            sc.close();
 
             return null;
         }
@@ -367,8 +363,6 @@ public class Salle {
                 }
                 
             }
-            
-            sc.close();
 
             return PNJChoisi;
         }
@@ -414,14 +408,12 @@ public class Salle {
                 }
             }
 
-            sc.close();
             return prochaineSalle;
         }
 
         // pas de salles adjacentes (normalement ça n'arrive pas)
         else{
             System.out.println("On dirait que vous êtes bloqué(e) dans " + this.article + " " + this.nom + ".");
-            sc.close();
             return null;
         }
     }
