@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
+import Combats.Combat;
 import Objets.*;
-import combats.combats;
 
 public class PNJ extends Personnage {
 
@@ -89,7 +89,7 @@ public class PNJ extends Personnage {
 
     public boolean combattre(Personnage perso) throws IOException{
 
-        combats combat = new combats(perso, this);
+        Combat combat = new Combat(perso, this);
         boolean mourir;
 
         if(this.vaincu){ // le joueur a déjà vaincu le PNJ
@@ -137,7 +137,7 @@ public class PNJ extends Personnage {
 
         String choix = "";
         Scanner sc = new Scanner(System.in);
-        combats combat;
+        Combat combat;
         boolean corrompre, mourirAuCombat;
 
         while(!(choix.equals("1")) && !(choix.equals("2"))){
@@ -158,7 +158,7 @@ public class PNJ extends Personnage {
             }
             else{
                 System.out.println("Aïe aïe aïe... Pas le choix, il faudra combattre " + this.getNom());
-                combat = new combats(perso, this);
+                combat = new Combat(perso, this);
                 mourirAuCombat = combat.lancerCombat();
                 if(!mourirAuCombat){
                     System.out.println();
@@ -170,7 +170,7 @@ public class PNJ extends Personnage {
             break;
 
             case "2":
-            combat = new combats(perso, this);
+            combat = new Combat(perso, this);
             mourirAuCombat = combat.lancerCombat();
             System.out.println();
             if(!mourirAuCombat){

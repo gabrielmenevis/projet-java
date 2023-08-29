@@ -1,22 +1,31 @@
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 import Objets.Objet;
 import Salles.Salle;
 import Personnages.*;
-import combats.combats;
 
+
+/**
+ * Classe principale contenant la fonction main du jeu. Contient aussi des fonctions permettant d'afficher
+ * des informations, et le menu principal affiché à chaque tour.
+ * Possède trois variables accessibles depuis toutes les méthodes de la classe : la liste des salles,
+ * la salle dans laquelle se trouve le joueur, et le joueur lui-même.
+ */
 public class Jeu {
 
     public static ArrayList<Salle> listeSalles;
     public static Salle salleActuelle;
     public static Personnage joueur;
 
+    /**
+     * Fonction principale qui charge les salles, appelle les fonctions de création de personnage
+     * et de début de jeu, puis lance la boucle principale
+     * @param args
+     * @throws IOException : fait appel à des méthodes qui lisent des fichiers
+     */
     public static void main(String[] args) throws IOException {
-
-        Random r = new Random();
 
         listeSalles = Chargement.chargerSalles();
         Chargement.chargerObjets(listeSalles);
@@ -32,6 +41,9 @@ public class Jeu {
         while(menuAction());
     }
 
+    /**
+     * Affiche le texte introductif du jeu
+     */
     public static void debutJeu(){
         System.out.println();
         System.out.println("''Comment allez-vous depuis hier soir? Nous sommes heureux de vous revoir parmi nous, et en vie!");
@@ -57,6 +69,11 @@ public class Jeu {
         System.out.println("..........................................");
     }
 
+    /**
+     * Gère le réveil du joueur à l'infirmerie après un game over. Vide la liste des PNJ de la dernière salle
+     * où se trouvait le joueur, actualise la salle actuelle avec l'infirmerie, réinitialise les PV du joueur
+     * au maximum, oublie que les salles ont été fouillées.
+     */
     public static void reveilInfirmerie(){
 
         // message informatif
@@ -76,7 +93,9 @@ public class Jeu {
         joueur.resetPV(); // on redonne au joueur mort tous ses pv de base.
     }
 
-    // affichage de la map
+    /**
+     * Affiche la carte du jeu dans la console.
+     */
     public static void ouvrirMap(){
         System.out.println("      _____________                                         _______________");
         System.out.println("     |   Salle de  |                                       |   Salle des   |");
@@ -95,6 +114,10 @@ public class Jeu {
         System.out.println("                          |__________|");
     }
 
+    /**
+     * Menu de création du personnage. Choix d'une classe de personnage et d'un nom.
+     * @return : le personnage créé
+     */
     public static Personnage creationPersonnage(){
         String rep = " ";
         String prenom;
@@ -102,44 +125,48 @@ public class Jeu {
         Scanner sc = new Scanner (System.in);
 
         while((!rep.equals("1")) && (!rep.equals("2")) && (!rep.equals("3")) && (!rep.equals("4"))) {
-        System.out.println();
-        System.out.println("Bonjour, quel personnage souhaitez-vous incarner durant le jeu ? ");
-        System.out.println();
-        System.out.println("1 - Un sportif, fort en attaque mais très peu de charisme");
-        System.out.println("2 - Un artiste, on vous trouve un certain charme mais vous n'êtes clairement pas le premier qu'on choisirais dans son equipe de sport");
-        System.out.println("3 - Un employé de bureau, ni le plus charismatique ni le plus fort, vous excellez dans l'art d'être moyen");
-        System.out.println("4 - Une courgette, laissez-vous suprendre par la courgette");
-        rep = sc.nextLine();
-        
-
-            switch(rep){
-
-                case "1": System.out.println("Ok le sportif, et c'est quoi votre petit nom?");
-                         prenom = sc.nextLine();
-                         perso = new Sportif(prenom);
-                break;
-                case "2" :System.out.println("Ok l'artiste, et c'est quoi votre petit nom?");
-                         prenom = sc.nextLine();
-                         perso = new Artiste(prenom);
-                break;        
-                case "3": System.out.println("Comme c'est original, et c'est quoi votre petit nom?");
-                         prenom = sc.nextLine();
-                         perso = new  Employe(prenom);
-                break;
-                case "4": System.out.println("Très bon choix, et quel est le nom de cette jeune Courgette?");
-                         prenom = sc.nextLine();
-                         perso = new Courgette(prenom);
-                break;
-                default : System.out.println("ce personnage n'existe pas");   
-                break;           
-            }
+            System.out.println();
+            System.out.println("Bonjour, quel personnage souhaitez-vous incarner durant le jeu ? ");
+            System.out.println();
+            System.out.println("1 - Un sportif, fort en attaque mais très peu de charisme");
+            System.out.println("2 - Un artiste, on vous trouve un certain charme mais vous n'êtes clairement pas le premier qu'on choisirait dans son equipe de sport");
+            System.out.println("3 - Un employé de bureau, ni le plus charismatique ni le plus fort, vous excellez dans l'art d'être moyen");
+            System.out.println("4 - Une courgette, laissez-vous suprendre par la courgette");
+            rep = sc.nextLine();
         }
+
+        switch(rep){
+            case "1": System.out.println("Ok le sportif, et c'est quoi votre petit nom?");
+                prenom = sc.nextLine();
+                perso = new Sportif(prenom);
+                break;
+            case "2" :System.out.println("Ok l'artiste, et c'est quoi votre petit nom?");
+                prenom = sc.nextLine();
+                perso = new Artiste(prenom);
+                break;        
+            case "3": System.out.println("Comme c'est original, et c'est quoi votre petit nom?");
+                prenom = sc.nextLine();
+                perso = new  Employe(prenom);
+                break;
+            case "4": System.out.println("Très bon choix, et quel est le nom de cette jeune Courgette?");
+                prenom = sc.nextLine();
+                perso = new Courgette(prenom);
+                break;
+        }
+
+        sc.close();
 
         return perso;
     }
         
 
     // l'IOException peut venir du combat
+    /**
+     * Menu principal du jeu. Situé dans une pièce, plusieurs choix s'offrent au joueur. Différentes classes
+     * et méthodes sont utilisées en fonction du choix.
+     * @return : true si le jeu continue, false sinon (si le joueur a choisi d'arrêter)
+     * @throws IOException : le menu fait appel à des méthodes qui lisent des fichiers et peuvent générer une IOException
+     */
     public static boolean menuAction() throws IOException{
 
         Scanner sc = new Scanner(System.in);
@@ -147,12 +174,13 @@ public class Jeu {
         PNJ pnj;
         Salle prochaineSalle;
         Objet o;
-        combats combat;
         boolean mourir;
 
+        // information sur la salle où se trouve le joueur
         System.out.println();
         salleActuelle.descriptionCourte();
 
+        // choix de l'action
         while(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") && !choix.equals("4") && !choix.equals("5") && !choix.equals("6") && !choix.equals("7") && !choix.equals("10")){
 
             System.out.println("Que faire ?");
@@ -161,8 +189,7 @@ public class Jeu {
             System.out.println("3 - Parler à un personnage");
             System.out.println("4 - Se déplacer");
             System.out.println("5 - Ouvrir l'inventaire");
-            System.out.println("6 - Attendre");
-            System.out.println("7 - Ouvrir la map");
+            System.out.println("6 - Ouvrir la map");
             System.out.println("10 - Arrêter");
             choix = sc.nextLine();
 
@@ -181,18 +208,18 @@ public class Jeu {
             case "2":
                 System.out.println();
                 o = salleActuelle.fouiller(joueur);
-                // menu d'action de l'objet choisi
+                // menu d'action de l'objet choisi (si le joueur a choisi un objet)
                 if(o != null){
                     choix = o.menuObjetTrouve();
                     switch (choix){
-                        case "2" : mourir = o.utilisationObjet(joueur);
-                        if (mourir == true) reveilInfirmerie();
-                        break;
-                        case "3": joueur.getInventaire().rangerObjet(o);
-                        break;
+                        case "2" : mourir = o.utilisationObjet(joueur); // le joueur a choisi d'utiliser l'objet
+                            if (mourir == true) reveilInfirmerie(); // le joueur se réveille à l'infirmerie si l'objet le tue
+                            break;
+                        case "3": joueur.getInventaire().rangerObjet(o); // le joueur a choisi de ranger l'objet
+                            break;
                     }
                 }
-                // sinon si le joueur est mort en combat après s'être fait attraper
+                // sinon si le joueur est mort en combat après s'être fait attraper en fouillant la salle
                 else if(joueur.getPV() <= 0){
                     reveilInfirmerie();
                 }
@@ -200,12 +227,12 @@ public class Jeu {
 
             // interagir avec les PNJ
             case "3":
-                pnj = salleActuelle.choisirPNJ();
-                if(pnj != null){
+                pnj = salleActuelle.choisirPNJ(); // appel au menu de choix du PNJ
+                if(pnj != null){ // si le joueur a choisi un PNJ
                   
-                    choix = pnj.menuPNJ();
+                    choix = pnj.menuPNJ(); // choix de l'action
                     switch(choix){
-                        case "1": pnj.parler();
+                        case "1": pnj.parler(); // parler au PNJ
                         break;
                         
                         case "2": // donner un objet
@@ -215,7 +242,7 @@ public class Jeu {
                         case "3": // lancer un combat
                         mourir = pnj.combattre(joueur);
                         System.out.println();
-                        if(mourir){
+                        if(mourir){ // si le joueur est mort en combat
                             reveilInfirmerie();
                         }
                         break;
@@ -229,37 +256,35 @@ public class Jeu {
 
             // changer de salle
             case "4":
-                prochaineSalle = salleActuelle.choisirSalle();
+                prochaineSalle = salleActuelle.choisirSalle(); // choix parmi les salles adjacentes
                 if(prochaineSalle != null){ // le joueur a choisi une salle, sinon il ne se passe rien
-                    salleActuelle.viderPNJ();
+                    salleActuelle.viderPNJ(); // les PNJ aléatoires disparaissent
                     salleActuelle = prochaineSalle;
-                    salleActuelle.genererPNJ();
+                    salleActuelle.genererPNJ(); // les PNJ aléatoires apparaissent dans la nouvelle salle
                 }
                 break;
 
             // ouvrir l'inventaire
             case "5":
                 mourir = joueur.ouvrirInventaire();
-                if(mourir){
+                if(mourir){ // si le joueur utilise un objet qui le tue
                     reveilInfirmerie();
                 }
                 break;
 
-            case "6":
-                System.out.println("à venir");
-                break;
-                // Ouvrir la Map
-            case "7": 
+            // Ouvrir la Map
+            case "6": 
                 ouvrirMap();
                 break;
 
-
-
-            // arrêter le jeu (temporaire)
+            // arrêter le jeu
             case "10":
+                sc.close();
                 return false;
         }
 
+        sc.close();
+        
         return true;
 
     }

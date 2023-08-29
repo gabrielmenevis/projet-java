@@ -4,11 +4,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * Inventaire du joueur. Elle a un dictionnaire d'objets (contenant les objets consommables et les objets uniques
+ * non encore utilisés, avec l'objet et la quantité possédée) ainsi qu'une liste d'objets uniques déjà utilisés 
+ * par le joueur dont on veut pouvoir afficher la description même quand l'effet a déjà été reçu.
+ * Ses méthodes comportent un menu à ouvrir depuis le jeu principal, un menu des objets à donner aux PNJ,
+ * ainsi que des méthodes pour ranger un objet dans l'inventaire et l'en enlever.
+ */
 public class Inventaire {
 
     private HashMap<Objet, Integer> listeObjets;
     private ArrayList<ObjetUnique> objetsUniquesUtilises;
 
+    /**
+     * Constructeur de l'inventaire. Ne prend pas de paramètre. Crée un dictionnaire d'objets non utilisés 
+     * et une liste d'objets uniques utilisés, tous les deux vides.
+     */
     public Inventaire(){
         listeObjets = new HashMap<Objet, Integer>();
         objetsUniquesUtilises = new ArrayList<ObjetUnique>();
@@ -30,6 +41,11 @@ public class Inventaire {
         this.objetsUniquesUtilises = objetsUniquesUtilises;
     }
 
+    /**
+     * Range un objet dans l'inventaire : augmente sa quantité dans le dictionnaire d'objets s'il est déjà
+     * présent, sinon crée une entrée pour cet objet.
+     * @param objet : l'objet à ranger dans l'inventaire
+     */
     public void rangerObjet(Objet objet){
 
         // si l'objet est consommable on peut en avoir de 0 à n
@@ -69,7 +85,11 @@ public class Inventaire {
         }
     }
 
-    // décrémente l'objet de l'inventaire
+    /**
+     * Décrémente un objet de l'inventaire. Supprime l'entrée du dictionnaire associée si c'était le dernier.
+     * @param objet : l'objet à enlever de l'inventaire
+     * @return vrai si c'était le dernier objet, sinon faux
+     */
     public boolean enleverObjet(Objet objet){
 
         int quantiteObjet;
@@ -100,7 +120,10 @@ public class Inventaire {
     }
 
 
-    // ranger un objet unique dans la liste des objets utilisés
+    /**
+     * Range un objet unique dans la liste des objets uniques utilisés.
+     * @param objetUtilise : l'objet unique à ajouter dans la liste
+     */
     public void rangerObjetUtilise(ObjetUnique objetUtilise){
         this.objetsUniquesUtilises.add(objetUtilise);
         if(this.listeObjets.containsKey(objetUtilise)){
@@ -109,9 +132,10 @@ public class Inventaire {
     }
     
 
-    // laisse le joueur choisir un objet dans son inventaire et l'utiliser
-    // retourne l'objet choisi si le joueur souhaite l'utiliser
-    // retourne null si l'inventaire est vide ou si le joueur annule
+    /**
+     * Laisse le joueur choisir un objet dans son inventaire et l'utiliser.
+     * @return l'objet choisi, sinon null si le joueur ne choisit rien (ou que l'inventaire est vide)
+     */
     public Objet menuInventaire(){
 
         HashMap<String, Objet> choixObjet = new HashMap<String, Objet>();
@@ -219,10 +243,16 @@ public class Inventaire {
             objetChoisi = null;
         }
 
+        sc.close();
+
         return objetChoisi;
     }
 
 
+    /**
+     * Menu pour donner un objet à un PNJ. L'affichage diffère de celui du menu inventaire classique.
+     * @return l'objet choisi, sinon null si l'inventaire est vide ou que le joueur annule
+     */
     public Objet menuDonnerObjet(){
 
         Objet objetChoisi = null;
@@ -266,6 +296,8 @@ public class Inventaire {
             }
 
         }
+
+        sc.close();
 
         return objetChoisi;
     }
