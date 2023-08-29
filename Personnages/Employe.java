@@ -3,7 +3,7 @@ package Personnages;
 public class Employe extends Personnage {
 
     public Employe(String nom){
-        super(nom,5,10,4,4);
+        super(nom,100,100,35,40);
     }
     
     public Employe(String nom, int pv, int max_pv, int p_attaque, int p_charisme) {
