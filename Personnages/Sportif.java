@@ -18,6 +18,11 @@ public class Sportif extends Personnage {
 
     }
 
+    @Override
+    public void donnerIndice() {
+
+    }
+
     public static void main(String[] args) {
 
         Sportif sportif = new Sportif("Sam?", 5, 10, 10, 1);

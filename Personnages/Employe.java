@@ -17,6 +17,11 @@ public class Employe extends Personnage {
         System.out.println();
     }
 
+    @Override
+    public void donnerIndice() {
+
+    }
+
     public static void main(String[] args) {
 
         Employe employe = new Employe("à définir",2, 8, 4, 3);

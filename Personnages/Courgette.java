@@ -16,6 +16,11 @@ public class Courgette extends Personnage {
         System.out.println();
     }
 
+    @Override
+    public void donnerIndice() {
+
+    }
+
     public static void main(String[] args) {
 
         Courgette courgette = new Courgette("à définir", 6, 12, 1, 2);

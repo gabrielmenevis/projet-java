@@ -17,6 +17,11 @@ public class Artiste extends Personnage{
         System.out.println();
     }
 
+    @Override
+    public void donnerIndice() {
+
+    }
+
     public static void main(String[] args) {
 
         Artiste artiste = new Artiste("à définir", 5, 6, 6, 4);
