@@ -166,11 +166,6 @@ public class Jeu {
             System.out.println("10 - Arrêter");
             choix = sc.nextLine();
 
-            // TODO: ajouter des événements quand trop d'erreurs d'affilée
-            if(!choix.equals("1") && !choix.equals("2") && !choix.equals("3") && !choix.equals("4") && !choix.equals("5") && !choix.equals("6") && !choix.equals("7") && !choix.equals("10")){
-                System.out.println("à venir");
-            }
-
         }
 
         switch(choix){
@@ -210,7 +205,6 @@ public class Jeu {
                   
                     choix = pnj.menuPNJ();
                     switch(choix){
-                        // TODO: parler encore au PNJ
                         case "1": pnj.parler();
                         break;
                         
