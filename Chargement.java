@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import Objets.Objet;
 import Objets.ObjetConsommable;
 import Objets.ObjetUnique;
+import Personnages.Boss;
 import Personnages.PNJSpecial;
 import Salles.Salle;
 
@@ -53,6 +54,11 @@ public class Chargement {
                         s.ajouterSalleAdjacente(sAdjacente);
                         sAdjacente.ajouterSalleAdjacente(s);
                     }
+                }
+
+                if (nom.equals("hammam")){
+                    Boss boss = new Boss("Jupiter", "MIMOANDJAVADANSENTLASAMBA", "Bonjour, quelle est ta réponse?", "Non, mauvaise réponse", "Bravo, tu as gagné"); 
+                    s.ajouterPNJ(boss);
                 }
 
                 // on ajoute la nouvelle salle à la liste
