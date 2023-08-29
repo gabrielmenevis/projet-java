@@ -3,7 +3,7 @@ package Personnages;
 public class Artiste extends Personnage{
     
     public Artiste(String nom){
-        super(nom,5,10,1,9);
+        super(nom,100,100,20,65);
     }
 
     public Artiste(String nom, int pv, int max_pv, int p_attaque, int p_charisme) {
