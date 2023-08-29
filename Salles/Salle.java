@@ -180,7 +180,7 @@ public class Salle {
     public void genererPNJ() throws IOException {
 
         Random r = new Random();
-        int tirage, tirage2;
+        int tirage, tirage2, pv, pa, pc, totalPoints;
         List<String> donnees;
         String nom, article, type, replique;
         PNJ pnj;
@@ -205,8 +205,15 @@ public class Salle {
             tirage2 = r.nextInt(donnees.size());
             replique = donnees.get(tirage2);
 
-            // génération et ajout du pnj
-            pnj = new PNJ(nom, type, article, replique, 100, 40, 40);
+            // génération des stats au hasard en tenant compte de contraintes
+            totalPoints = 180; // total de points à 180
+            pv = 80 + (r.nextInt(5) * 10); // les PV vont de 80 à 120
+            totalPoints -= pv;
+            pa = (totalPoints / 2) - 10 + (r.nextInt(3) * 10); // les PA vont de -10 à +10 la moitié des points restants
+            pc = totalPoints - pa; // les PC prennent les points restants
+
+            // génération du PNJ
+            pnj = new PNJ(nom, type, article, replique, pv, pa, pc);
             this.listePNJ.add(pnj);
         }
     }
