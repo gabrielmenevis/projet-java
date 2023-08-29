@@ -71,6 +71,9 @@ public class Combat {
                     combatant2.resetPAttaque(); // Le PNJ retrouve ses PA après avoir attaqué
                     // car ils peuvent avoir été modifiés suite à un flirt partiellement réussi
                 }
+                else{
+                    combatant2.setVaincu(true);
+                }
             } else { // "fuir"
                 System.out.println("Vous décidez que le combat n'en vaut pas la peine et bat en retraite. " + combatant2.getNom() + " est le vainqueur !");
                 return false; // Le PNJ ne peut pas fuir, seul le joueur peut fuir
