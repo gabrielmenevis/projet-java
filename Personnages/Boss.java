@@ -49,7 +49,7 @@ public class Boss extends PNJ {
         return rep; 
     }
     
-    public void parler(){
+    public boolean parler(){
         Scanner sc = new Scanner(System.in);
         String rep = "";
         System.out.println("votre réponse : ");
@@ -57,12 +57,13 @@ public class Boss extends PNJ {
             if (rep.equals(this.mdp)){
                 
                 System.out.println(this.reponseY);
-                finDuJeu();
+                System.out.println();
+                return true;
                 
             }
             else {
                 System.out.println(this.reponseN);
-            
+                return false;
             }
 
         
@@ -79,21 +80,6 @@ public class Boss extends PNJ {
         return false;
     }
 
-    public void finDuJeu(){
-        System.out.println("Félicitation, Jupiter vous a rendu votre passeport. Ce coquin est lui même bloqué depuis des années. Et avec le temps il a même oublié pourquoi");
-        System.out.println("Ainsi il a pris l'habitude depuis quelques années d'empecher certains autres habitants de partir. Cette année c'est tombez sur vous, voyez nous excusez ce désagrément");
-        System.out.println("Le pauvre vieux n'a pas trouvé mieux comme occupation que de brutaliser nos clients avec ses énigmes à la noix...Mais comprenez, à cause du fait qu'il est bloqué depuis des années dans ce club med");
-        System.out.println("Jupiter est l'un de nos plus ancien client, ainsi nous ne voulons pas lui faire de la peine en l'empechant de saboter le départ des autres... Je suis sur que vous nous comprenez.");
-        System.out.println("En tout cas, on peut dire que vous avez réussi une mission impossible. Vous êtes le seul a avoir réussi a tenir bon et ne pas perdre la tête. Profitons de cet instant pour diriger nos pensées vers ceux qui ne sortiront peut-être jamais plus.");
-        System.out.println("Vous avez du faire la connaissance de quelques uns d'ailleurs ! Armindo le peintre, Marinette la garagiste, ou encore Nagui le garagiste... ou alors est-il podologue? Je ne suis plus très sur... ");
-        System.out.println("Pour vous féliciter d'avoir réussi a vaincre Jupiter, nous vous offrons 3 semaines suplémentaires au club ! Appelez nous et nous vous reserverons une chambre aussitôt.");
-        System.out.println();
-        System.out.println("Au plaisir de vous revoir,");
-        System.out.println();
-        System.out.println("Le Staff");
-        System.out.println();
-        System.out.println("PS : Evitez de passer près du grand chêne en partant...Une branche pourrait vous tomber sur la tête ! haha.");
-
-    }
+   
 
 }

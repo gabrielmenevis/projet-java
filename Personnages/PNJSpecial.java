@@ -74,13 +74,14 @@ public class PNJSpecial extends PNJ {
         return choix;
     }
 
-    public void parler(){
+    public boolean parler(){
         if(!this.satisfait && !this.getVaincu()){ // si ni satisfait ni vaincu, répète sa phrase
             super.parler();
         }
         else{ // sinon, répète l'indice
             this.donnerIndice();
         }
+        return false;
     }
 
     public boolean combattre(Personnage perso) throws IOException{

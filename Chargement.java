@@ -69,7 +69,7 @@ public class Chargement {
 
                 // ajout du boss dans le hammam
                 if (nom.equals("hammam")){
-                    Boss boss = new Boss("Jupiter", "MIMOANDJAVADANSENTLASAMBA", "Bonjour, quelle est ta réponse?", "Non, mauvaise réponse", "Bravo, tu as gagné"); 
+                    Boss boss = new Boss("Jupiter", "MIMOANDJAVADANSENTLASAMBA", "Bonjour, quelle est ta réponse?", "Non, mauvaise réponse", "Bravo, tu as gagné. Voilà ton passeport"); 
                     s.ajouterPNJ(boss);
                 }
 

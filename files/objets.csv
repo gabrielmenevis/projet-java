@@ -8,7 +8,11 @@ gameboy;la;une;0;PV;tester;Woaw le temps passe vite quand on joue a ce machin...
 veste de costard;la;une;-3;PC;porter;Cette veste est vraiment hideuse...qui a pu confectionner cette loque;5;0;10
 partition;la;une;0;PV;lire;- LASAMBA -;4;0;10
 boisson énergisante;la;une;5;PA;boire;C'est chimique mais c'est pas mal ! on en deviendrais accro...;7;1;8
-carte n°3;la;une;0;PV;lire;Carte n°3 : Cette histoire de passeport vous donne du fil à retordre...Avez-vous pensé à parler à un couturier?;8;0;10
-carte n°4 bis;la;une;0;PV;lire;Carte n°4 bis : Vous savez, il parait que les enfants disent toujours la vérité...;7;0;10
-carte n°4;la;une;-10;PV;lire;Haha vous ne pensiez quand même pas que ca serait si facile ? Attention cette carte explose dans 3..2..1;4;0;10
-carte n°2;la;une;0;PV;lire;Carte n°2 dis : Si vous brulez d'impatience de retrouver votre passeport, autant aller directement au hammam...Mais soyez sur de vous";2;0;10
+carte n°3;la;une;0;PV;lire;Carte n°3 dit : Cette histoire de passeport vous donne du fil à retordre...Avez-vous pensé à parler à un couturier?;8;0;10
+carte n°4 bis;la;une;0;PV;lire;Carte n°4 bis dit : Vous savez, il ne faut pas monter sur ses grands chevaux...Quoique?..;7;0;10
+carte n°4;la;une;-10;PV;lire;Carte n°4 dit : Haha vous ne pensiez quand même pas que ca serait si facile ? Attention cette carte explose dans 3..2..1;4;0;10
+carte n°2;la;une;0;PV;lire;Carte n°2 dit : Si vous brulez d'impatience de retrouver votre passeport, autant aller directement au hammam...Mais soyez sur de vous";2;0;10
+potion magique;la;une;20;PV;boire;Delicieux ! c'est tout a fait exquis, vous vous sentiez très en forme;9;1;5
+carte n°5;la;une;0;PV;lire;Carte n°5 dit : Un virtuose de l'informatique vous attend en salle de musique, essayer de ne pas venir les mains vides...;5;0;10
+fleur;la;une;8;PV;sentir;Ca sent rudement bon, c'est comme si l'on vous caressait les narines avec délicatesse...cette fleur est spéciale;6;0;8
+cuisse de poulet;la;une;10;PV;ronger;Huuuum poulet.........;3;0;8

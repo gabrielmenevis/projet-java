@@ -90,10 +90,11 @@ public class PNJ extends Personnage {
         return choix;
     }
 
-    public void parler(){
+    public boolean parler(){
         System.out.println();
         System.out.println(this.getNom() + " vous dit : '" + this.textePNJ + "'");
         System.out.println();
+        return false;
     }
 
     public boolean combattre(Personnage perso) throws IOException{

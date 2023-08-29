@@ -151,7 +151,13 @@ public class Salle {
         if(this.listePNJ.size() > 0){
             System.out.println("Vous regardez autour de vous. Vous voyez : ");
             for(PNJ p: this.listePNJ){
-                System.out.println(p.getNom() + " " + p.getArticle() + " " + p.getType());
+                if(p instanceof PNJSpecial || p instanceof Boss){
+                    System.out.println(p.getNom().toUpperCase() + " " + p.getArticle() + " " + p.getType());
+                }
+                else {
+                    System.out.println(p.getNom() + " " + p.getArticle() + " " + p.getType());
+                }
+                
             }
         }
         // sinon
@@ -356,7 +362,12 @@ public class Salle {
                 System.out.println("À qui voulez-vous parler ?");
                 for(PNJ pnj: this.listePNJ){
                     choixPNJ.put(String.valueOf(i), pnj); // dictionnaire de choix possibles
-                    System.out.println((i++) + " - " + pnj.getNom() + " " + pnj.getArticle() + " " + pnj.getType());
+                    if(pnj instanceof PNJSpecial || pnj instanceof Boss){
+                        System.out.println((i++) + " - " + pnj.getNom().toUpperCase() + " " + pnj.getArticle() + " " + pnj.getType());
+                    }
+                    else{
+                        System.out.println((i++) + " - " + pnj.getNom() + " " + pnj.getArticle() + " " + pnj.getType());
+                    }
                 }
                 // choix "Annuler" pour retourner null
                 choixPNJ.put(String.valueOf(i), null);
