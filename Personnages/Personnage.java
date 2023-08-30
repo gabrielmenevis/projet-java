@@ -250,9 +250,10 @@ public abstract class Personnage {
         System.out.println("Vous avez " + this.pv + "/" + this.max_pv + "PV, " + this.p_attaque + "PA et " + this.p_charisme + "PC.");
     }
 
+    /**
+     * Méthode abstraite définie dans les sous-classes
+     */
     public abstract void presentation();
-
-    public abstract void donnerIndice();
 }
 
 

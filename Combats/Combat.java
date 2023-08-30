@@ -85,11 +85,7 @@ public class Combat {
         } else if (combatant2.getPV() <= 0) {
             combatant2.setVaincu(true); // Le PNJ est vaincu
         }
-
-
-        if (combatant2.isSpecial()){
-            combatant2.donnerIndice();
-        }
+        
         return false;
     }
 

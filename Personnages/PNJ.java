@@ -10,7 +10,7 @@ import Objets.*;
 /**
  * Représentation d'un PNJ (personnage non joueur) dans le jeu. Hérite de Personnage. Possède en plus 
  * une réplique à affiche (textePNJ), un type et un article, une base de PA utilisée en combat, un indicateur
- * pour savoir s'il a déjà été vaincu et un booléen indiquant s'il est spécial ou non.
+ * pour savoir s'il a déjà été vaincu.
  * Ses méthodes lui permettent notamment de se présenter, de présenter un menu d'interaction, de dire sa réplique;
  * de combattre le joueur ou de l'attraper en train de fouiller et de recevoir un objet.
  */
@@ -21,7 +21,6 @@ public class PNJ extends Personnage {
     private String type;
     private int base_p_attaque;
     private boolean vaincu;
-    private boolean isSpecial = false; // un PNJ de base n'est pas spécials
 
     /**
      * Constructeur du PNJ. Prend les paramètres passés au constructeur de la classe parente et
@@ -75,23 +74,11 @@ public class PNJ extends Personnage {
         this.vaincu = vaincu;
     }
 
-    public boolean isSpecial(){
-        return this.isSpecial;
-    }
-
     /**
      * Le PNJ se présente en donnant son nom, son type et sa réplique.
      */
     public void presentation() {
         System.out.println("Je suis " + this.getNom() + " " + this.article + " " + this.type + ". " + this.textePNJ);
-    }
-
-    /**
-     * Le PNJ dit son indice. Ne fait rien pour les PNJ de base, implémenté dans PNJSpecial.
-     */
-    @Override
-    public void donnerIndice() {
-
     }
 
     /**

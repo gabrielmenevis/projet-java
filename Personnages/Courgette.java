@@ -40,11 +40,6 @@ public class Courgette extends Personnage {
         " point d'attaque et " + getPCharisme() + " points de charisme.");
         System.out.println();
     }
-
-    @Override
-    public void donnerIndice() {
-
-    }
     
 }
 

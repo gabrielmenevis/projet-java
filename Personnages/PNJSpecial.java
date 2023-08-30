@@ -12,14 +12,12 @@ import Objets.Objet;
  * En particulier, le PNJ spécial possède un attribut qui indique le nom de l'objet demandé, un autre qui indique
  * s'il est satisfait (il a obtenu l'objet demandé) et un indice à afficher au joueur quand il est vaincu ou
  * satisfait.
- * L'indicateur isSpecial est vrai pour cette classe.
  */
 public class PNJSpecial extends PNJ {
 
     private String indice;
     private String nomObjetDemande;
     private boolean satisfait;
-    private boolean isSpecial = true;
 
     /**
      * Constructeur de PNJSpecial. Prend les paramètres à passer au constructeur de PNJ, plus l'indice,
@@ -63,10 +61,6 @@ public class PNJSpecial extends PNJ {
 
     public void setSatisfait(boolean satisfait){
         this.satisfait = satisfait;
-    }
-
-    public boolean isSpecial(){
-        return this.isSpecial;
     }
 
     /**
@@ -148,6 +142,11 @@ public class PNJSpecial extends PNJ {
 
         else{ // sinon le combat se lance
             mourir = combat.lancerCombat();
+            if(this.getVaincu() || this.isCharme()){
+                System.out.println();
+                System.out.println("Incroyable ! Vous avez vaincu " + this.decrire());
+                this.donnerIndice();
+            }
         }
 
         return mourir;

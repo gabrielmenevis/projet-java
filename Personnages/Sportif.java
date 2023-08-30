@@ -43,11 +43,6 @@ public class Sportif extends Personnage {
 
     }
 
-    @Override
-    public void donnerIndice() {
-
-    }
-
 }
 
 

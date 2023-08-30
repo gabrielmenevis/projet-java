@@ -41,10 +41,5 @@ public class Artiste extends Personnage{
         " points d'attaque et " + getPCharisme() + " points de charisme.");
         System.out.println();
     }
-
-    @Override
-    public void donnerIndice() {
-
-    }
     
 }
