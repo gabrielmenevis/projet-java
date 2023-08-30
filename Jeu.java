@@ -72,10 +72,8 @@ public class Jeu {
     }
 
     /**
-     * Gère le réveil du joueur à l'infirmerie après un game over. Vide la liste des PNJ de la dernière salle
-     * où se trouvait le joueur, actualise la salle actuelle avec l'infirmerie, réinitialise les PV du joueur
-     * au maximum, oublie que les salles ont été fouillées.
-     * 
+     * Vérifie si le joueur a gagné la partie. Si oui, le texte de fin s'affiche
+     * @return true (pour rester dans la boucle) si le joueur n'a pas gagné, sinon false
      */
     public static boolean finDuJeu(){
         if(gagner == false){
@@ -102,6 +100,11 @@ public class Jeu {
         }
     }
     
+    /**
+     * Gère le réveil du joueur à l'infirmerie après un game over. Vide la liste des PNJ de la dernière salle
+     * où se trouvait le joueur, actualise la salle actuelle avec l'infirmerie, réinitialise les PV du joueur
+     * au maximum, oublie que les salles ont été fouillées.
+     */
     public static void reveilInfirmerie(){
 
         // message informatif
@@ -308,10 +311,10 @@ public class Jeu {
             case "6": 
                 ouvrirMap();
                 break;
+
+            // Quitter le club Med
             case "7":
                 return finDuJeu();
-                
-
 
             // arrêter le jeu
             case "10":
