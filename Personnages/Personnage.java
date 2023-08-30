@@ -5,6 +5,11 @@ import Objets.Objet;
 import Objets.ObjetConsommable;
 import Objets.ObjetUnique;
 
+/**
+ * Représentation d'un personnage dans le jeu. Le joueur est un Personnage. Les PNJ sont représentés par des
+ * classes héritées de Personnage (PNJ ou PNJSPecial ou Boss qui héritent elles-mêmes de PNJ).
+ * Un personnage a un nom, des statistiques (PV, PA, PC) et un inventaire.
+ */
 public abstract class Personnage {
 
     private String nom;
@@ -12,11 +17,18 @@ public abstract class Personnage {
     private int max_pv;
     private int p_attaque;
     private int p_charisme;
-    private boolean charme;
+    private boolean charme; // indique si le personnage est charmé au cours d'un combat
     private Inventaire inventaire;
 
-    public Personnage(String nom, int pv, int max_pv, int p_attaque, int p_charisme) {
-        super();
+    /**
+     * Constructeur de la classe Personnage. Crée un inventaire vide et initialise charme à false.
+     * @param nom : nom du personnage
+     * @param pv : nombre de PV initial du personnage
+     * @param max_pv : nombre max initial de PV du personnage
+     * @param p_attaque : nombre de PA initial du personnage
+     * @param p_charisme : nombre de PC initial du personnage
+     */
+    public Personnage(String nom, int max_pv, int p_attaque, int p_charisme) {
         this.nom = nom;
         this.max_pv = max_pv;
         this.pv = max_pv;
@@ -66,50 +78,81 @@ public abstract class Personnage {
         this.pv = PV;
     }
 
+    /**
+     * Réinitialise le nombre de PV au nombre max de PV du personnage.
+     */
     public void resetPV(){
         this.pv = this.max_pv;
     }
 
-    // méthode perte de PV à utiliser dans la fonction combats
+    /**
+     * Méthode perte de PV à utiliser dans les combats ou lors de l'utilisation d'un objet.
+     * Empêche que les PV tombent en-dessous de 0.
+     * @param degats : nombre de PV en moins
+     */
     public void perdrePV(int degats) {
         this.pv -= degats;
         if (this.pv <= 0) {
             this.pv = 0;
-            
-        }  // Assure que les PV ne tombent pas en dessous de 0
+        }
     }
-     public void perdrePA(int degats) {
+
+    /**
+     * Méthode perte de PA à utiliser dans les combats ou lors de l'utilisation d'un objet.
+     * Empêche que les PA tombent en-dessous de 0.
+     * @param degats : nombre de PA en moins
+     */
+    public void perdrePA(int degats) {
         this.p_attaque -= degats;
         if (this.p_attaque < 0) {
             this.p_attaque = 0;
-            System.out.println("vous n'avez plus de PA, il faut reprendre des forces...");
         }
 
-     }
-      public void perdrePC(int degats) {
+    }
+
+    /**
+     * Méthode perte de PC à utiliser dans les combats ou lors de l'utilisation d'un objet.
+     * Empêche que les PC tombent en-dessous de 0.
+     * @param degats : nombre de PC en moins
+     */
+    public void perdrePC(int degats) {
         this.p_charisme -= degats;
         if (this.p_charisme < 0){
             this.p_charisme = 0;
-            System.out.println("vous n'avez plus de PC...");
-
         } 
-      }
+    }
 
+    /**
+     * Méthode gain de PA à utiliser dans les combats ou lors de l'utilisation d'un objet.
+     * @param ajout_pa : nombre de PA en plus
+     */
     public void gagnerPA(int ajout_pa) {
         this.p_attaque += ajout_pa;
         
     }
 
+    /**
+     * Méthode gain de PV à utiliser dans les combats ou lors de l'utilisation d'un objet.
+     * Empêche que le nombre de PV dépasse le nombre max de PV
+     * @param ajout_pv : nombre de PV en plus
+     */
     public void gagnerPV(int ajout_pv) {
         this.pv += ajout_pv;
-        if (this.pv < 0) this.pv = 0;
+        if (this.pv > this.max_pv) this.pv = this.max_pv;
     }
 
+    /**
+     * Méthode gain de PC à utiliser dans les combats ou lors de l'utilisation d'un objet.
+     * @param ajout_pc : nombre de PC en plus
+     */
     public void gagnerPC(int ajout_pc) {
         this.p_charisme += ajout_pc;
-        if (this.p_charisme < 0) this.p_charisme = 0;
     }
 
+    /**
+     * Indique si le personnage est charmé.
+     * @return true si le personnage est charmé, sinon false
+     */
     public boolean isCharme() {
         return charme;
     }
@@ -118,6 +161,11 @@ public abstract class Personnage {
         this.charme = charme;
     }
 
+    /**
+     * Ouvre l'inventaire du personnage en appelant le menu inventaire et en utilisant l'objet choisi,
+     * puis en l'enlevant de l'inventaire ou en le plaçant dans la liste des objets uniques utilisés.
+     * @return true si le joueur meurt en utilisant l'objet, false sinon
+     */
     public boolean ouvrirInventaire(){
         Objet objetChoisi;
         boolean mourir = false;
@@ -146,6 +194,12 @@ public abstract class Personnage {
         return mourir;
     }
 
+    /**
+     * Menu pour donner un objet à un PNJ. Affiche des messages en fonction des choix effectués et gère 
+     * le stock de l'objet donné dans l'inventaire.
+     * @param pnj : le pnj auquel on veut donner un objet
+     * @return true si le pnj accepte l'objet, false sinon
+     */
     public boolean donnerObjet(PNJ pnj){
 
         Objet objet;
@@ -161,7 +215,7 @@ public abstract class Personnage {
             pnjAccepte = false;
         }
 
-        else{ //TODO: ce qui se passe quand on donne l'objet au PNJ
+        else{
             System.out.println("Vous proposez " + objet.getArticleDefini() + " " + objet.getNom());
             pnjAccepte = pnj.recevoirObjet(objet);
             if(pnjAccepte){
@@ -186,14 +240,17 @@ public abstract class Personnage {
         return pnjAccepte;
     }
 
+    /**
+     * Affiche un message informatif sur les stats du personnage.
+     */
     public void afficherStats(){
         System.out.println("Vous avez " + this.pv + "/" + this.max_pv + "PV, " + this.p_attaque + "PA et " + this.p_charisme + "PC.");
     }
 
+    /**
+     * Méthode abstraite définie dans les sous-classes
+     */
     public abstract void presentation();
-
-
-    public abstract void donnerIndice();
 }
 
 

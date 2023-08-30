@@ -75,7 +75,7 @@ public class Combat {
                     combatant2.setVaincu(true);
                 }
             } else { // "fuir"
-                System.out.println("Vous décidez que le combat n'en vaut pas la peine et bat en retraite. " + combatant2.getNom() + " est le vainqueur !");
+                System.out.println("Vous décidez que le combat n'en vaut pas la peine et battez en retraite. " + combatant2.getNom() + " est le vainqueur !");
                 return false; // Le PNJ ne peut pas fuir, seul le joueur peut fuir
             }
         }
@@ -85,11 +85,7 @@ public class Combat {
         } else if (combatant2.getPV() <= 0) {
             combatant2.setVaincu(true); // Le PNJ est vaincu
         }
-
-
-        if (combatant2.isSpecial()){
-            combatant2.donnerIndice();
-        }
+        
         return false;
     }
 
@@ -175,7 +171,7 @@ public class Combat {
             adversaire.setCharme(true);
         } else if (chance >= baseChance) { // Succès partiel
             System.out.println(adversaire.getNom() + " répond : " + chosenLine[2]);
-            adversaire.gagnerPA(-5);  // on ajoute le malus d'attaque
+            adversaire.perdrePA(5);  // on ajoute le malus d'attaque
         } else { // Échec
             System.out.println(adversaire.getNom() + " répond : " + chosenLine[1]);
             adversaire.gagnerPA(5); // bonus d'attaque
