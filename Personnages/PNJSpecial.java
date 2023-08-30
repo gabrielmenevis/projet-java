@@ -184,14 +184,36 @@ public class PNJSpecial extends PNJ {
     }
 
     /**
-     * Le PNJ spécial donne son indice au joueur.
+     * Le PNJ spécial donne son indice au joueur et attend confirmation que celui-ci l'a bien lu.
      */
     public void donnerIndice(){
+
+        Scanner sc = new Scanner(System.in);
+        String choix = "";
+
         System.out.println();
         System.out.println(this.decrire() + " vous dit :");
         System.out.println("Écoute attentivement ce que j'ai à te dire... Tu en auras besoin pour retrouver ce que tu cherches.");
         System.out.println(this.indice);
-        System.out.println();
+
+        while(!(choix.equals("1")) && !(choix.equals("2"))){
+            System.out.println();
+            System.out.println("Tu as bien compris ?");
+            System.out.println("1 - Oui");
+            System.out.println("2 - Non");
+            choix = sc.nextLine();
+        }
+
+        if(choix.equals("1")){
+            System.out.println();
+            System.out.println("Bien. N'hésite pas à revenir me voir...");
+            System.out.println();
+        }
+        else{
+            System.out.println();
+            System.out.println("Ne fais pas l'idiot. Mais tu peux toujours me parler si tu veux entendre mon indice à nouveau...");
+            System.out.println();
+        }
     }
     
 }
