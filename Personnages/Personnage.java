@@ -106,7 +106,6 @@ public abstract class Personnage {
         this.p_attaque -= degats;
         if (this.p_attaque < 0) {
             this.p_attaque = 0;
-            System.out.println("vous n'avez plus de PA, il faut reprendre des forces...");
         }
 
     }
@@ -120,8 +119,6 @@ public abstract class Personnage {
         this.p_charisme -= degats;
         if (this.p_charisme < 0){
             this.p_charisme = 0;
-            System.out.println("vous n'avez plus de PC...");
-
         } 
     }
 
