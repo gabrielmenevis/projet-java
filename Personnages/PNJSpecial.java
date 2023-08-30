@@ -163,7 +163,7 @@ public class PNJSpecial extends PNJ {
         boolean accepte;
 
         // si l'objet est l'objet demandé
-        if(o.getNom().equals(this.nomObjetDemande)){ // TODO: revoir messages
+        if(o.getNom().equals(this.nomObjetDemande)){
             accepte = true;
             this.satisfait = true; // le PNJ est maintenant satisfait
             System.out.println();

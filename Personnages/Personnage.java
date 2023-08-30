@@ -28,7 +28,7 @@ public abstract class Personnage {
      * @param p_attaque : nombre de PA initial du personnage
      * @param p_charisme : nombre de PC initial du personnage
      */
-    public Personnage(String nom, int pv, int max_pv, int p_attaque, int p_charisme) {
+    public Personnage(String nom, int max_pv, int p_attaque, int p_charisme) {
         this.nom = nom;
         this.max_pv = max_pv;
         this.pv = max_pv;
