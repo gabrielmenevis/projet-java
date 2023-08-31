@@ -17,21 +17,21 @@ import java.io.IOException;
  */
 public class Combat {
 
-    private Personnage combatant1; // Le combattant 1 est le joueur
-    private PNJ combatant2; // le combattant 2 est le PNJ
+    private Personnage combattant1; // Le combattant 1 est le joueur
+    private PNJ combattant2; // le combattant 2 est le PNJ
     private List<String[]> catchphrasesEtReponses; // Liste des catchphrases (chargées depuis le CSV)
 
     /**
      * Constructeur de la classe combats.
      * Initialise les combattants et lit les catchphrases du fichier CSV.
      *
-     * @param combatant1 Le personnage principal (joueur).
-     * @param combatant2 Le PNJ adversaire.
+     * @param combattant1 Le personnage principal (joueur).
+     * @param combattant2 Le PNJ adversaire.
      * @throws IOException Si une erreur se produit lors de la lecture du fichier.
      */
-    public Combat(Personnage combatant1, PNJ combatant2) throws IOException {
-        this.combatant1 = combatant1;
-        this.combatant2 = combatant2;
+    public Combat(Personnage combattant1, PNJ combattant2) throws IOException {
+        this.combattant1 = combattant1;
+        this.combattant2 = combattant2;
         catchphrasesEtReponses = new ArrayList<>(); // Initialisation de la liste des catchphrases
         List<String> lines = Files.readAllLines(Paths.get("files/catchphrases.csv"));
         for (String line : lines.subList(1, lines.size())) {  // Nous sautons la ligne d'en-tête pour lire le csv
@@ -47,43 +47,43 @@ public class Combat {
      */
     public boolean lancerCombat() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Le combat commence contre " + combatant2.getNom());
-        while (combatant1.getPV() > 0 && combatant2.getPV() > 0 && !combatant2.isCharme()) {
+        System.out.println("Le combat commence contre " + combattant2.getNom());
+        while (combattant1.getPV() > 0 && combattant2.getPV() > 0 && !combattant2.isCharme()) {
             // Tant que les deux combattants ont des PV et que le PNJ n'est pas charmé
             // Affiche les PV actuels de chaque combattant
-            System.out.println(combatant1.getNom() + " " + afficherBarreSante(combatant1.getPV(), combatant1.getMaxPV()) +
-                    "\n" + combatant2.getNom() + " " + afficherBarreSante(combatant2.getPV(), combatant2.getMaxPV()));
+            System.out.println(combattant1.getNom() + " " + afficherBarreSante(combattant1.getPV(), combattant1.getMaxPV()) +
+                    "\n" + combattant2.getNom() + " " + afficherBarreSante(combattant2.getPV(), combattant2.getMaxPV()));
 
             String action = joueurChoix(scanner);
             if ("attaquer".equals(action)) {
-                System.out.println("Vous lancez une attaque rapide et tranchante contre " + combatant2.getNom() + " ! *Slash!*");
-                attaquer(combatant1, combatant2);
-                if (combatant2.getPV() > 0) { // Si le PNJ n'est pas vaincu, il riposte
-                    System.out.println(combatant2.getNom() + " riposte avec fureur ! *Pow!*");
-                    attaquer(combatant2, combatant1);
+                System.out.println("Vous lancez une attaque rapide et tranchante contre " + combattant2.getNom() + " ! *Slash!*");
+                attaquer(combattant1, combattant2);
+                if (combattant2.getPV() > 0) { // Si le PNJ n'est pas vaincu, il riposte
+                    System.out.println(combattant2.getNom() + " riposte avec fureur ! *Pow!*");
+                    attaquer(combattant2, combattant1);
                 }
             } else if ("flirter".equals(action)) {
-                System.out.println("Vous essayez de charmer " + combatant2.getNom() + " avec vos mots doux...");
-                flirt(combatant1, combatant2);
-                if (!combatant2.isCharme() && combatant2.getPV() > 0) { // Si le PNJ n'est pas charmé, il riposte
-                    System.out.println(combatant2.getNom() + " n'est pas impressionné et lance une contre-attaque !");
-                    attaquer(combatant2, combatant1);
-                    combatant2.resetPAttaque(); // Le PNJ retrouve ses PA après avoir attaqué
+                System.out.println("Vous essayez de charmer " + combattant2.getNom() + " avec vos mots doux...");
+                flirt(combattant1, combattant2);
+                if (!combattant2.isCharme() && combattant2.getPV() > 0) { // Si le PNJ n'est pas charmé, il riposte
+                    System.out.println(combattant2.getNom() + " n'est pas impressionné et lance une contre-attaque !");
+                    attaquer(combattant2, combattant1);
+                    combattant2.resetPAttaque(); // Le PNJ retrouve ses PA après avoir attaqué
                     // car ils peuvent avoir été modifiés suite à un flirt partiellement réussi
                 }
                 else{
-                    combatant2.setVaincu(true);
+                    combattant2.setVaincu(true);
                 }
             } else { // "fuir"
-                System.out.println("Vous décidez que le combat n'en vaut pas la peine et battez en retraite. " + combatant2.getNom() + " est le vainqueur !");
+                System.out.println("Vous décidez que le combat n'en vaut pas la peine et battez en retraite. " + combattant2.getNom() + " est le vainqueur !");
                 return false; // Le PNJ ne peut pas fuir, seul le joueur peut fuir
             }
         }
-        System.out.println("Le combat est terminé. " + (combatant1.getPV() > 0 ? combatant1.getNom() : combatant2.getNom()) + " est le vainqueur !");
-        if (combatant1.getPV() <= 0) {
+        System.out.println("Le combat est terminé. " + (combattant1.getPV() > 0 ? combattant1.getNom() : combattant2.getNom()) + " est le vainqueur !");
+        if (combattant1.getPV() <= 0) {
             return true; // Le joueur est vaincu
-        } else if (combatant2.getPV() <= 0) {
-            combatant2.setVaincu(true); // Le PNJ est vaincu
+        } else if (combattant2.getPV() <= 0) {
+            combattant2.setVaincu(true); // Le PNJ est vaincu
         }
         
         return false;
